@@ -61,8 +61,14 @@ var app = cli.NewApp(
 
 		fmt.Println("Organizing project files...")
 		// 删除.git 等文件，保持文件目录结构整洁
-		if err = exec.Command("rm", "-rf", filepath.Join(pwd, name, ".git"),
-			filepath.Join(pwd, name, "log"), filepath.Join(pwd, name, "go.sum")).Run(); err != nil {
+		if err = exec.Command("rm", "-rf",
+			filepath.Join(pwd, name, "ddd"),
+			filepath.Join(pwd, name, ".git"),
+			filepath.Join(pwd, name, "log"),
+			filepath.Join(pwd, name, "go.sum"),
+			filepath.Join(pwd, name, "script", "init"),
+			filepath.Join(pwd, name, "script", "shell"),
+		).Run(); err != nil {
 			return errors.Wrap(err, "organizing files failed")
 		}
 

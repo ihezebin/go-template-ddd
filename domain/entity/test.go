@@ -23,7 +23,7 @@ func (t *Test) MD5Password() error {
 	if err != nil {
 		return err
 	}
-	m5.Write([]byte(constant.MD5_Salt))
+	_, err = m5.Write([]byte(constant.MD5_Salt))
 	if err != nil {
 		return err
 	}
