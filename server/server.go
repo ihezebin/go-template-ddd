@@ -37,10 +37,10 @@ func NewServer(port int) httpserver.Server {
 }
 
 type Handler interface {
-	Init(*gin.RouterGroup)
+	Init(gin.IRouter)
 }
 
-func initHandlers(router *gin.RouterGroup) {
+func initHandlers(router gin.IRouter) {
 	handlers := []Handler{
 		&handler.TestHandler{},
 		// ... other handlers

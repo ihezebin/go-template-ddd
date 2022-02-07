@@ -16,7 +16,7 @@ type TestHandler struct {
 }
 
 // Init implements handler.
-func (h *TestHandler) Init(router *gin.RouterGroup) {
+func (h *TestHandler) Init(router gin.IRouter) {
 	h.logger = logger.WithField("handler", "test")
 	h.application = application.NewTestApplication()
 
