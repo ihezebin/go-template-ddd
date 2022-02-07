@@ -131,3 +131,53 @@ DDD包含4层，将领域模型和业务逻辑分离出来，并减少对基础�
 
 ## 5.编码风格
 可以发现所有的包名都采用的单数形式，主要参考于该规范：https://rakyll.org/style-packages/
+
+## 6.生成项目
+下载可执行程序`ddd`，执行下述命令，自动拉去项目和初始化：
+```bash
+ddd [项目名]
+```
+Example：
+```bash
+hezebin@MacBookPro go-projects % ./ddd test-ddd
+
+Start to init project: test-ddd
+
+Wait for the project template to be pulled from Git...
+Cloning into '/Users/hezebin/Develop/go-projects/test-ddd'...
+
+Organizing project files...
+[Success]  test-ddd/README.md
+[Success]  test-ddd/application/test.go
+[Success]  test-ddd/cmd/root.go
+[Success]  test-ddd/component/cache/memory.go
+[Success]  test-ddd/component/cache/redis.go
+[Success]  test-ddd/component/constant/commom.go
+[Success]  test-ddd/component/doc/doc.go
+[Success]  test-ddd/component/doc/swagger.json
+[Success]  test-ddd/component/email/email.go
+[Success]  test-ddd/component/pubsub/pulsar.go
+[Success]  test-ddd/component/sms/sms.go
+[Success]  test-ddd/component/storage/mongo.go
+[Success]  test-ddd/component/storage/mysql.go
+[Success]  test-ddd/config/config.go
+[Success]  test-ddd/config/config.json
+[Success]  test-ddd/domain/entity/test.go
+[Success]  test-ddd/domain/repository/impl/mongo/base.go
+[Success]  test-ddd/domain/repository/impl/mongo/test.go
+[Success]  test-ddd/domain/repository/impl/redis/test.go
+[Success]  test-ddd/domain/repository/test.go
+[Success]  test-ddd/domain/service/test.go
+[Success]  test-ddd/go.mod
+[Success]  test-ddd/main.go
+[Success]  test-ddd/script/index.js
+[Success]  test-ddd/script/test.js
+[Success]  test-ddd/script/test.py
+[Success]  test-ddd/server/handler/test.go
+[Success]  test-ddd/server/middleware/cors.go
+[Success]  test-ddd/server/proto/test.go
+[Success]  test-ddd/server/server.go
+[Success]  test-ddd/worker/timer.go
+
+Init project success!
+```
