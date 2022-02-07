@@ -3,18 +3,21 @@ package application
 import (
 	"context"
 	"github.com/pkg/errors"
+	"github.com/whereabouts/sdk/logger"
 	"github.com/whereabouts/web-template-ddd/domain/repository"
 	"github.com/whereabouts/web-template-ddd/domain/service"
 	dto "github.com/whereabouts/web-template-ddd/server/dto/test"
 )
 
 type TestApplication struct {
+	logger         *logger.Entry
 	testRepository repository.TestRepository
 	testService    *service.TestService
 }
 
-func NewTestApplication() *TestApplication {
+func NewTestApplication(l *logger.Entry) *TestApplication {
 	return &TestApplication{
+		logger:         l,
 		testRepository: repository.GetTestRepository(),
 		testService:    service.NewTestService(),
 	}

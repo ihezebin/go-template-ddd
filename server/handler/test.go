@@ -18,7 +18,7 @@ type TestHandler struct {
 // Init implements handler.
 func (h *TestHandler) Init(router gin.IRouter) {
 	h.logger = logger.WithField("handler", "test")
-	h.application = application.NewTestApplication()
+	h.application = application.NewTestApplication(h.logger)
 
 	// registry http handler
 	if router != nil {
