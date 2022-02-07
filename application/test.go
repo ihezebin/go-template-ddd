@@ -5,7 +5,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/whereabouts/web-template-ddd/domain/repository"
 	"github.com/whereabouts/web-template-ddd/domain/service"
-	"github.com/whereabouts/web-template-ddd/server/proto"
+	dto "github.com/whereabouts/web-template-ddd/server/dto/test"
 )
 
 type TestApplication struct {
@@ -20,7 +20,7 @@ func NewTestApplication() *TestApplication {
 	}
 }
 
-func (app *TestApplication) TestRegister(ctx context.Context, req *proto.TestRegisterReq) (*proto.TestRegisterResp, error) {
+func (app *TestApplication) TestRegister(ctx context.Context, req *dto.RegisterReq) (*dto.RegisterResp, error) {
 	// application中通过调用各个service, 实现业务逻辑的编排；
 	// 若业务逻辑过于简单（如简单的增删查改），可越过domain层，在application中直接使用repository进行操作
 
@@ -29,7 +29,7 @@ func (app *TestApplication) TestRegister(ctx context.Context, req *proto.TestReg
 		return nil, errors.Wrap(err, "test post err")
 	}
 
-	return &proto.TestRegisterResp{
+	return &dto.RegisterResp{
 		Test: test,
 	}, nil
 }

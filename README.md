@@ -33,7 +33,7 @@ DDD包含4层，将领域模型和业务逻辑分离出来，并减少对基础�
 ├─server          # 用户接口层
 │  ├─handler      # 路由
 │  ├─middleware   # 中间件，如CROS，认证拦截器，过滤器等
-│  └─proto        # DTO数据传输对象
+│  └─dto        # DTO数据传输对象
 .
 ```
 
@@ -179,7 +179,7 @@ Organizing project files...
 [Success]  test-ddd/script/test.py
 [Success]  test-ddd/server/handler/test.go
 [Success]  test-ddd/server/middleware/cors.go
-[Success]  test-ddd/server/proto/test.go
+[Success]  test-ddd/server/dto/test.go
 [Success]  test-ddd/server/server.go
 [Success]  test-ddd/worker/timer.go
 

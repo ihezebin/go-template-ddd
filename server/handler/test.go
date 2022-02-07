@@ -7,7 +7,7 @@ import (
 	"github.com/whereabouts/sdk/httpserver/handler"
 	"github.com/whereabouts/sdk/logger"
 	"github.com/whereabouts/web-template-ddd/application"
-	"github.com/whereabouts/web-template-ddd/server/proto"
+	dto "github.com/whereabouts/web-template-ddd/server/dto/test"
 )
 
 type TestHandler struct {
@@ -34,7 +34,7 @@ func (h *TestHandler) Ping(ctx context.Context, _ *struct{}) (*string, error) {
 	return &resp, nil
 }
 
-func (h *TestHandler) TestRegister(ctx context.Context, req *proto.TestRegisterReq) (*proto.TestRegisterResp, error) {
+func (h *TestHandler) TestRegister(ctx context.Context, req *dto.RegisterReq) (*dto.RegisterResp, error) {
 	// handler中通常需要做的事情:
 	// 1.校验请求参数
 	// 2.调用application, 响应其返回的数据
