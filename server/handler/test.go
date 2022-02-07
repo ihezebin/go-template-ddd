@@ -47,12 +47,5 @@ func (h *TestHandler) TestRegister(ctx context.Context, req *proto.TestRegisterR
 		return nil, err
 	}
 
-	test, err := h.application.TestRegister(ctx, req.Name, req.Password)
-	if err != nil {
-		return nil, err
-	}
-
-	return &proto.TestRegisterResp{
-		Test: test,
-	}, nil
+	return h.application.TestRegister(ctx, req)
 }
