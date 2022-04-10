@@ -442,6 +442,8 @@ github.com/whereabouts/sdk v1.3.5 h1:G5qP7v0r/QrMvrPYGMIAbgV62RhyQQrhNJdAHPn88FQ
 github.com/whereabouts/sdk v1.3.5/go.mod h1:Xxmi+mITxVPDMiIJeahpuqLCTifwS6ZIw55U8I8bHB4=
 github.com/whereabouts/sdk v1.3.6 h1:ddFE/q88EuDxjlryF9vgUsuhovsmF5JDJnD56tsGjkI=
 github.com/whereabouts/sdk v1.3.6/go.mod h1:Xxmi+mITxVPDMiIJeahpuqLCTifwS6ZIw55U8I8bHB4=
+github.com/whereabouts/sdk v1.3.7 h1:ZrSCDB7fjh5FElSYx/26LcDZzQ1yeDg8kdYbEhfPc+w=
+github.com/whereabouts/sdk v1.3.7/go.mod h1:Xxmi+mITxVPDMiIJeahpuqLCTifwS6ZIw55U8I8bHB4=
 github.com/xdg-go/pbkdf2 v1.0.0 h1:Su7DPu48wXMwC3bs7MCNG+z4FhcyEuz5dlvchbq0B0c=
 github.com/xdg-go/pbkdf2 v1.0.0/go.mod h1:jrpuAogTd400dnrH08LKmI/xc1MbPOebTwRqcT5RDeI=
 github.com/xdg-go/scram v1.0.2 h1:akYIkZ28e6A96dkWNJQu3nmCzH3YfwMPQExUYDaRv7w=

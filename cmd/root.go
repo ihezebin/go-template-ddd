@@ -33,16 +33,16 @@ func Run() {
 
 		// load config
 		if conf, err = config.Load(path); err != nil {
-			logger.Fatalf("failed to load config path: %s", path)
+			logger.WithError(err).Fatalf("failed to load config path: %s", path)
 		}
 
 		// init components
 		if err = initComponents(ctx, conf); err != nil {
-			logger.Fatalf("failed to init components: %v", err)
+			logger.WithError(err).Fatalf("failed to init components")
 		}
 
 		if err = server.NewServer(conf.Port).Run(ctx); err != nil {
-			logger.Fatalf("failed to init components: %v", err)
+			logger.WithError(err).Fatalf("failed to init components")
 		}
 
 		return nil

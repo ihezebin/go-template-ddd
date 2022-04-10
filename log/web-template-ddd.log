@@ -36,3 +36,7 @@
 {"app":"web-template-ddd","file":"server.go:86","func":"httpserver.(*server).Run","level":"info","msg":"got signal interrupt, http server exit\n","time":"2022-02-08 01:00:32"}
 {"app":"web-template-ddd","file":"server.go:101","func":"httpserver.(*server).Close","level":"info","msg":"http server is closing...","time":"2022-02-08 01:00:32"}
 {"app":"web-template-ddd","file":"server.go:81","func":"httpserver.(*server).Run.func1","level":"info","msg":"http server closed","time":"2022-02-08 01:00:32"}
+{"app":"web-template-ddd","error":"failed to init email: 535 Error: authentication failed, system busy","file":"root.go:41","func":"cmd.Run.func1","level":"fatal","msg":"failed to init components","time":"2022-04-10 17:04:13"}
+{"app":"web-template-ddd","error":"failed to init email: 535 Error: authentication failed, system busy","file":"root.go:41","func":"cmd.Run.func1","level":"fatal","msg":"failed to init components","time":"2022-04-10 17:04:31"}
+{"app":"web-template-ddd","error":"failed to init email: 535 Error: authentication failed, system busy","file":"root.go:41","func":"cmd.Run.func1","level":"fatal","msg":"failed to init components","time":"2022-04-10 17:05:14"}
+{"app":"web-template-ddd","error":"failed to init email: 535 Error: authentication failed, system busy","file":"root.go:41","func":"cmd.Run.func1","level":"fatal","msg":"failed to init components","time":"2022-04-10 17:06:26"}
