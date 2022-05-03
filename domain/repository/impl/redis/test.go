@@ -9,11 +9,11 @@ import (
 )
 
 type testRepository struct {
-	*redisc.Base
+	redisc.Model
 }
 
 func NewTestRepository() *testRepository {
-	return &testRepository{redisc.NewBaseModel(cache.GetRedisCli(), "captcha")}
+	return &testRepository{Model: redisc.NewModel(cache.GetRedisCli(), "captcha")}
 }
 
 func (repo *testRepository) Register(ctx context.Context, test *entity.Test) error {
@@ -21,7 +21,7 @@ func (repo *testRepository) Register(ctx context.Context, test *entity.Test) err
 	if err != nil {
 		return err
 	}
-	err = repo.Set(repo.testKey(test.Name), data).Error()
+	err = repo.Set(ctx, repo.testKey(test.Name), data, 0).Err()
 	return err
 }
 
