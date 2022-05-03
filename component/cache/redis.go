@@ -5,13 +5,13 @@ import (
 	"github.com/whereabouts/sdk/db/redisc"
 )
 
-var gRedisCli redisc.Client
+var gRedisCli *redisc.Client
 
 func InitRedis(ctx context.Context, config redisc.Config) (err error) {
-	gRedisCli, err = redisc.NewClientWithConfig(config)
+	gRedisCli, err = redisc.NewClient(ctx, config)
 	return
 }
 
-func GetRedisCli() redisc.Client {
+func GetRedisCli() *redisc.Client {
 	return gRedisCli
 }
