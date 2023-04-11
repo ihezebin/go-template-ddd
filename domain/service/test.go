@@ -2,9 +2,9 @@ package service
 
 import (
 	"context"
+	"github.com/ihezebin/web-template-ddd/domain/entity"
+	"github.com/ihezebin/web-template-ddd/domain/repository"
 	"github.com/pkg/errors"
-	"github.com/whereabouts/web-template-ddd/domain/entity"
-	"github.com/whereabouts/web-template-ddd/domain/repository"
 )
 
 type TestService struct {

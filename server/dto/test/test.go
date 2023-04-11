@@ -1,6 +1,6 @@
 package test
 
-import "github.com/whereabouts/web-template-ddd/domain/entity"
+import "github.com/ihezebin/web-template-ddd/domain/entity"
 
 type RegisterReq struct {
 	Name     string `json:"name" form:"name"`

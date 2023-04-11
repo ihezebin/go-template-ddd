@@ -1,4 +1,4 @@
-module github.com/whereabouts/web-template-ddd
+module github.com/ihezebin/web-template-ddd
 
 go 1.15
 

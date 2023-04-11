@@ -40,6 +40,9 @@ func renameMod(dir string, name string) error {
 	}
 	for _, file := range files {
 		path := filepath.Join(dir, file.Name())
+		if file.Name() == ".git" {
+			continue
+		}
 		if file.IsDir() {
 			if err = renameMod(path, name); err != nil {
 				return err

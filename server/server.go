@@ -3,12 +3,12 @@ package server
 import (
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
+	"github.com/ihezebin/web-template-ddd/server/handler"
+	"github.com/ihezebin/web-template-ddd/server/middleware"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/whereabouts/sdk/httpserver"
 	"github.com/whereabouts/sdk/httpserver/handler/result"
 	middle "github.com/whereabouts/sdk/httpserver/middleware"
-	"github.com/whereabouts/web-template-ddd/server/handler"
-	"github.com/whereabouts/web-template-ddd/server/middleware"
 	"net/http"
 )
 

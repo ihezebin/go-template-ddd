@@ -143,12 +143,12 @@ git init
 ```
 Example：
 ```bash
-hezebin@ go-projects % ./ddd test-ddd
+hezebin@ go-projects % ./ddd github.com/ihezebin/test-ddd                                       
+Processing some initialization operations and validations
 
-Start to init project: test-ddd
+Start to init project, name: test-ddd, go.mod module name: github.com/ihezebin/test-ddd
 
-Wait for the project template to be pulled from Git...
-Cloning into '/Users/hezebin/Develop/go-projects/test-ddd'...
+Generating project Success!         
 
 Organizing project files...
 [Success]  test-ddd/README.md
@@ -167,21 +167,26 @@ Organizing project files...
 [Success]  test-ddd/config/config.go
 [Success]  test-ddd/config/config.json
 [Success]  test-ddd/domain/entity/test.go
-[Success]  test-ddd/domain/repository/impl/mongo/base.go
 [Success]  test-ddd/domain/repository/impl/mongo/test.go
 [Success]  test-ddd/domain/repository/impl/redis/test.go
 [Success]  test-ddd/domain/repository/test.go
 [Success]  test-ddd/domain/service/test.go
 [Success]  test-ddd/go.mod
-[Success]  test-ddd/ddd.go
-[Success]  test-ddd/script/index.js
+[Success]  test-ddd/main.go
 [Success]  test-ddd/script/test.js
 [Success]  test-ddd/script/test.py
+[Success]  test-ddd/server/dto/test/test.go
 [Success]  test-ddd/server/handler/test.go
 [Success]  test-ddd/server/middleware/cors.go
-[Success]  test-ddd/server/dto/test.go
 [Success]  test-ddd/server/server.go
+[Success]  test-ddd/static/img.png
 [Success]  test-ddd/worker/timer.go
 
 Init project success!
+
+```
+## 7.项目mod重命名
+执行子命令`rename-mod`，将自动修改项目中的所有`go.mod`文件的`module`名称和项目用引用的包的名称：
+```bash
+ddd rename-mod [新的项目mod名]
 ```

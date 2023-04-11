@@ -13,8 +13,8 @@ import (
 
 const (
 	giteeRepository  = "https://gitee.com/whereabouts-go/web-template-ddd.git"
-	githubRepository = "https://github.com/whereabouts/web-template-ddd.git"
-	templateName     = "github.com/whereabouts/web-template-ddd"
+	githubRepository = "https://github.com/ihezebin/web-template-ddd.git"
+	templateName     = "github.com/ihezebin/web-template-ddd"
 	defaultName      = "web-template-ddd"
 )
 
