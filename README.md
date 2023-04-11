@@ -4,7 +4,7 @@
 
 >DDD领域驱动设计是一个很宽泛的方法论，涉及到的概念也很多，DDD并没有给出标准的代码模型，不同的人可能会有不同理解。
 > 
->该模板项目尝试通过不断的理解领域驱动，结合DDD的思想和规范，构建出一个代码目录结构，将DDD落地。
+>该模板项目尝试通过不断的理解领域驱动，结合DDD的思想和规范，构建出一个Go代码项目目录结构，将DDD落地。
 
 ## 2.DDD分层架构
 分层架构有一个重要的原则：每层只能与位于其下方的层发生耦合。具体又可以分为：严格分层架构和松散分层架构。
@@ -16,8 +16,7 @@
 
 DDD包含4层，将领域模型和业务逻辑分离出来，并减少对基础设施、用户界面甚至应用层逻辑的依赖，因为它们不属业务逻辑。将一个复杂 的系统分为不同的层，每层都应该具有良好的内聚性，并且只依赖于比其自身更低的层。
 
-![img.png](https://img-blog.csdnimg.cn/1bdb7c94da80488db5b1af723675b665.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBATXJLb3JiaW4=,size_15,color_FFFFFF,t_70,g_se,x_16)
-
+![img.png](static/img.png)
 
 ### 2.1 用户接口层
 该层在基于Gin框架的实践中，我更偏向于将其命名为路由层，因为GIN处理了这层的绝大部分逻辑。这层一般包括如下内容：
@@ -25,7 +24,7 @@ DDD包含4层，将领域模型和业务逻辑分离出来，并减少对基础�
 - Web服务和中间件
 - 对外暴露的API接口，接受用户或者外部系统的请求，响应必要的数据信息
 - DTO数据传输对象，即请求和响应的数据对象
-- 数据安全性校验，比如：id不为空
+- 数据安全性校验，比如：id不为空，手机号为11位等
 
 用户接口层我将其命名为`server`，因为我觉得它包含了构建一个Web服务的大部分内容，以此命名更容易让人一看到就知道这是微服务的入口，目录结构如下：
 ```
@@ -33,7 +32,7 @@ DDD包含4层，将领域模型和业务逻辑分离出来，并减少对基础�
 ├─server          # 用户接口层
 │  ├─handler      # 路由
 │  ├─middleware   # 中间件，如CROS，认证拦截器，过滤器等
-│  └─dto        # DTO数据传输对象
+│  └─dto          # DTO数据传输对象，根据不同传输数据类型，还可以在dto下建子目录如：restful、protobuf 分别表示restful api 和 grpc 的传输数据对象等
 .
 ```
 
@@ -113,7 +112,7 @@ DDD包含4层，将领域模型和业务逻辑分离出来，并减少对基础�
 ├─server
 │  ├─handler
 │  ├─middleware
-│  └─proto
+│  └─dto
 └─worker
 ```
 除了领域驱动中常见的四层目录，对于一个完整的项目，和一些常见的项目，我又补充了一些专门用于描述这部分需求和逻辑的目录：
@@ -124,6 +123,7 @@ DDD包含4层，将领域模型和业务逻辑分离出来，并减少对基础�
 ├─config    # 配置文件
 ├─log       # 日志文件（通常只适用于本机调试时的日志输出）
 ├─script    # 脚本，如：数据库索引可以记录在一个index.js脚本文件中
+├─static    # 静态资源文件，如：图片、excel文档等
 └─worker    # 工作进程，包括独立部署的进程和集成在服务中的守护进程等，如：定期清理数据库软删除数据的定时器
 ```
 ## 4.实践简例
@@ -133,7 +133,7 @@ DDD包含4层，将领域模型和业务逻辑分离出来，并减少对基础�
 可以发现所有的包名都采用的单数形式，主要参考于该规范：https://rakyll.org/style-packages/
 
 ## 6.生成项目
-从`Release`中下载可执行程序`ddd`，执行下述命令，将自动拉去模版项目并初始化：
+从`Release`中下载可执行程序`ddd`，执行下述命令，将自动拉取模版项目并初始化：
 ```bash
 ddd [项目名]
 ```
@@ -143,7 +143,7 @@ git init
 ```
 Example：
 ```bash
-hezebin@MacBookPro go-projects % ./ddd test-ddd
+hezebin@ go-projects % ./ddd test-ddd
 
 Start to init project: test-ddd
 
@@ -173,7 +173,7 @@ Organizing project files...
 [Success]  test-ddd/domain/repository/test.go
 [Success]  test-ddd/domain/service/test.go
 [Success]  test-ddd/go.mod
-[Success]  test-ddd/main.go
+[Success]  test-ddd/ddd.go
 [Success]  test-ddd/script/index.js
 [Success]  test-ddd/script/test.js
 [Success]  test-ddd/script/test.py

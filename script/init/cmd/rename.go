@@ -11,10 +11,10 @@ import (
 )
 
 // 子命令：重命名项目名
-var renameCmd = command.NewCommand(
-	command.WithName("rename"),
-	command.WithUsage("Rename the mod of the project"),
-	command.WithArgsUsage("[new project name]"),
+var renameModCmd = command.NewCommand(
+	command.WithName("rename-mod"),
+	command.WithUsage("Rename the go.mod's module name of the project"),
+	command.WithArgsUsage("[new module name]"),
 ).WithAction(func(v command.Value) error {
 	if v.NArg() > 1 {
 		return errors.New("Args num must be 1")
@@ -23,9 +23,9 @@ var renameCmd = command.NewCommand(
 	if name == "" {
 		name = defaultName
 	}
-	fmt.Println("Start to rename project: ", name)
+	fmt.Println("Start to rename project go.mod module name: ", name)
 
-	if err := initDir(pwd, name); err != nil {
+	if err := renameMod(pwd, name); err != nil {
 		return err
 	}
 	fmt.Println("\nRename success!")
@@ -33,7 +33,7 @@ var renameCmd = command.NewCommand(
 	return nil
 })
 
-func initDir(dir string, name string) error {
+func renameMod(dir string, name string) error {
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
 		return err
@@ -41,7 +41,7 @@ func initDir(dir string, name string) error {
 	for _, file := range files {
 		path := filepath.Join(dir, file.Name())
 		if file.IsDir() {
-			if err = initDir(path, name); err != nil {
+			if err = renameMod(path, name); err != nil {
 				return err
 			}
 		} else {
