@@ -1,6 +1,6 @@
 {
   "name": "web-template-ddd",
-  "port": 8080,
+  "port": 8980,
   "logger": {
     "app_name": "web-template-ddd",
     "level": "info",
