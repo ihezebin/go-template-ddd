@@ -37,9 +37,9 @@ func Run() {
 		}
 
 		// init components
-		if err = initComponents(ctx, conf); err != nil {
-			logger.WithError(err).Fatalf("failed to init components")
-		}
+		//if err = initComponents(ctx, conf); err != nil {
+		//	logger.WithError(err).Fatalf("failed to init components")
+		//}
 
 		if err = server.NewServer(conf.Port).Run(ctx); err != nil {
 			logger.WithError(err).Fatalf("failed to init components")

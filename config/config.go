@@ -31,7 +31,7 @@ func GetConfig() Config {
 }
 
 func Load(path string) (*Config, error) {
-	if err := config.Load(path, &gConfig); err != nil {
+	if err := config.LoadWithFilePath(path, &gConfig); err != nil {
 		return nil, err
 	}
 	return &gConfig, nil
