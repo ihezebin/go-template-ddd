@@ -27,6 +27,7 @@ func init() {
 var app = cli.NewApp(
 	cli.WithName("ddd"),
 	cli.WithAuthor("Korbin"),
+	cli.WithVersion("v1.0.3"),
 	cli.WithUsage("A script to init go template project of ddd quickly"),
 	cli.WithDescription("This application relies on Git"),
 	cli.WithArgsUsage("[project name]"),
