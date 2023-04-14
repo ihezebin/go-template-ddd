@@ -2,7 +2,7 @@ package cache
 
 import (
 	"context"
-	"github.com/whereabouts/sdk/db/redisc"
+	"github.com/ihezebin/sdk/model/redisc"
 )
 
 var gRedisCli *redisc.Client

@@ -3,9 +3,9 @@ package redis
 import (
 	"context"
 	"fmt"
+	"github.com/ihezebin/sdk/model/redisc"
 	"github.com/ihezebin/web-template-ddd/component/cache"
 	"github.com/ihezebin/web-template-ddd/domain/entity"
-	"github.com/whereabouts/sdk/db/redisc"
 )
 
 type testRepository struct {

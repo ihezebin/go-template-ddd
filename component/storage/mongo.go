@@ -2,7 +2,7 @@ package storage
 
 import (
 	"context"
-	"github.com/whereabouts/sdk/db/mongoc"
+	"github.com/ihezebin/sdk/model/mongoc"
 )
 
 var gMongoCli *mongoc.Client

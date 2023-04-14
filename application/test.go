@@ -2,11 +2,11 @@ package application
 
 import (
 	"context"
+	"github.com/ihezebin/sdk/logger"
 	"github.com/ihezebin/web-template-ddd/domain/repository"
 	"github.com/ihezebin/web-template-ddd/domain/service"
 	dto "github.com/ihezebin/web-template-ddd/server/dto/test"
 	"github.com/pkg/errors"
-	"github.com/whereabouts/sdk/logger"
 )
 
 type TestApplication struct {

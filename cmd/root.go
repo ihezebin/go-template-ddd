@@ -2,6 +2,8 @@ package cmd
 
 import (
 	"context"
+	"github.com/ihezebin/sdk/cli"
+	"github.com/ihezebin/sdk/logger"
 	"github.com/ihezebin/web-template-ddd/component/cache"
 	"github.com/ihezebin/web-template-ddd/component/email"
 	"github.com/ihezebin/web-template-ddd/component/sms"
@@ -10,8 +12,6 @@ import (
 	"github.com/ihezebin/web-template-ddd/domain/repository"
 	"github.com/ihezebin/web-template-ddd/server"
 	"github.com/pkg/errors"
-	"github.com/whereabouts/sdk/cli"
-	"github.com/whereabouts/sdk/logger"
 	"time"
 )
 
@@ -22,7 +22,7 @@ func Run() {
 		cli.WithUsageText("Rapid construction template of Web service based on DDD architecture"),
 		cli.WithAuthor("whereabouts.icu"),
 	)
-	app = app.WithFlagString("config, c", "./config.json", "config file path (default: ./config/config.json)", false)
+	app = app.WithFlagString("config, c", "./config.toml", "config file path (default: ./config/config.json)", false)
 	app = app.WithAction(func(v cli.Value) error {
 		var (
 			err  error
@@ -36,13 +36,13 @@ func Run() {
 			logger.WithError(err).Fatalf("failed to load config path: %s", path)
 		}
 
-		// init components
-		//if err = initComponents(ctx, conf); err != nil {
-		//	logger.WithError(err).Fatalf("failed to init components")
-		//}
+		// ddd components
+		if err = initComponents(ctx, conf); err != nil {
+			logger.WithError(err).Fatalf("failed to ddd components")
+		}
 
 		if err = server.NewServer(conf.Port).Run(ctx); err != nil {
-			logger.WithError(err).Fatalf("failed to init components")
+			logger.WithError(err).Fatalf("failed to ddd components")
 		}
 
 		return nil
@@ -51,28 +51,28 @@ func Run() {
 }
 
 func initComponents(ctx context.Context, conf *config.Config) error {
-	// init logger
+	// ddd logger
 	logger.ResetStandardLoggerWithConfig(conf.Logger)
-	// init mongo
+	// ddd mongo
 	if err := storage.InitMongo(ctx, conf.Mongo); err != nil {
-		return errors.Wrap(err, "failed to init mongo")
+		return errors.Wrap(err, "failed to ddd mongo")
 	}
-	// init redis
+	// ddd redis
 	if err := cache.InitRedis(ctx, conf.Redis); err != nil {
-		return errors.Wrap(err, "failed to init redis")
+		return errors.Wrap(err, "failed to ddd redis")
 	}
-	// init memory
+	// ddd memory
 	cache.InitMemoryCache(5*time.Minute, time.Minute)
-	// init email
+	// ddd email
 	if err := email.Init(conf.Email); err != nil {
-		return errors.Wrap(err, "failed to init email")
+		return errors.Wrap(err, "failed to ddd email")
 	}
-	// init sms
+	// ddd sms
 	if err := sms.Init(conf.Sms.Config); err != nil {
-		return errors.Wrap(err, "failed to init sms")
+		return errors.Wrap(err, "failed to ddd sms")
 	}
 
-	// init repository
+	// ddd repository
 	repository.InitTestRepository()
 
 	return nil

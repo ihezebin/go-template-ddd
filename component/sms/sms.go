@@ -1,6 +1,6 @@
 package sms
 
-import smsc "github.com/whereabouts/sdk/smsc/tencent"
+import smsc "github.com/ihezebin/sdk/smsc/tencent"
 
 var gClient *smsc.Client
 

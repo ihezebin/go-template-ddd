@@ -1,6 +1,6 @@
 package email
 
-import "github.com/whereabouts/sdk/emailc"
+import "github.com/ihezebin/sdk/emailc"
 
 var gClient *emailc.Client
 

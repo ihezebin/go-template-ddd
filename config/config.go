@@ -1,12 +1,12 @@
 package config
 
 import (
-	"github.com/whereabouts/sdk/config"
-	"github.com/whereabouts/sdk/db/mongoc"
-	"github.com/whereabouts/sdk/db/redisc"
-	"github.com/whereabouts/sdk/emailc"
-	"github.com/whereabouts/sdk/logger"
-	smsc "github.com/whereabouts/sdk/smsc/tencent"
+	"github.com/ihezebin/sdk/config"
+	"github.com/ihezebin/sdk/emailc"
+	"github.com/ihezebin/sdk/logger"
+	"github.com/ihezebin/sdk/model/mongoc"
+	"github.com/ihezebin/sdk/model/redisc"
+	smsc "github.com/ihezebin/sdk/smsc/tencent"
 )
 
 type Config struct {
@@ -31,7 +31,7 @@ func GetConfig() Config {
 }
 
 func Load(path string) (*Config, error) {
-	if err := config.LoadWithFilePath(path, &gConfig); err != nil {
+	if err := config.NewWithFilePath(path).Load(&gConfig); err != nil {
 		return nil, err
 	}
 	return &gConfig, nil

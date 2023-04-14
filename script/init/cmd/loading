@@ -1,9 +1,0 @@
-#!/bin/bash
-
-spin='-\|/'
-i=0
-while true
-do
-    printf "\r%c " "${spin:i++%${#spin}:1}"
-    sleep 0.1
-done
