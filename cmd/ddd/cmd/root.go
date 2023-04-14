@@ -26,8 +26,8 @@ func init() {
 
 var app = cli.NewApp(
 	cli.WithName("ddd"),
-	cli.WithAuthor("Korbin"),
-	cli.WithVersion("v1.0.3"),
+	cli.WithAuthor("hezebin"),
+	cli.WithVersion("v1.0.4"),
 	cli.WithUsage("A script to init go template project of ddd quickly"),
 	cli.WithDescription("This application relies on Git"),
 	cli.WithArgsUsage("[project name]"),
@@ -93,7 +93,7 @@ var app = cli.NewApp(
 			filepath.Join(pwd, name, ".git"),
 			filepath.Join(pwd, name, "log"),
 			filepath.Join(pwd, name, "go.sum"),
-			filepath.Join(pwd, name, "script", "init"),
+			filepath.Join(pwd, name, "cmd", "ddd"),
 			filepath.Join(pwd, name, "script", "shell"),
 		).Run(); err != nil {
 			return errors.Wrap(err, "organizing files failed")
@@ -105,6 +105,7 @@ var app = cli.NewApp(
 		}
 
 		fmt.Print("\nInit project success!\n\n")
+		fmt.Printf("\ncd %s && git init\n\n", name)
 
 		return nil
 	}).AddCommand(renameModCmd)
