@@ -1,9 +1,9 @@
 package repository
 
-import "github.com/ihezebin/go-template-ddd/domain/repository/test"
+import testRepo "github.com/ihezebin/go-template-ddd/domain/repository/test"
 
 func Init(db string) {
-	test.SetRepository(test.NewRepoRedis(db))
-	test.SetRepository(test.NewRepoMemory(db))
-	test.SetRepository(test.NewRepoMongo(db))
+	testRepo.SetRepository(testRepo.NewRepoRedis(db))
+	testRepo.SetRepository(testRepo.NewRepoMemory(db))
+	testRepo.SetRepository(testRepo.NewRepoMongo(db))
 }
