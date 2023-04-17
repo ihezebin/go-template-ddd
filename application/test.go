@@ -3,7 +3,7 @@ package application
 import (
 	"context"
 	testRepo "github.com/ihezebin/go-template-ddd/domain/repository/test"
-	testService "github.com/ihezebin/go-template-ddd/domain/service"
+	"github.com/ihezebin/go-template-ddd/domain/service"
 	dto "github.com/ihezebin/go-template-ddd/server/dto/test"
 	"github.com/ihezebin/sdk/logger"
 	"github.com/pkg/errors"
@@ -12,14 +12,14 @@ import (
 type TestApplication struct {
 	logger         *logger.Entry
 	testRepository testRepo.Repository
-	testService    *testService.TestService
+	testService    *service.TestService
 }
 
 func NewTestApplication(l *logger.Entry) *TestApplication {
 	return &TestApplication{
 		logger:         l.WithField("application", "test"),
 		testRepository: testRepo.GetRepository(),
-		testService:    testService.NewTestService(),
+		testService:    service.NewTestService(),
 	}
 }
 
