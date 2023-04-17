@@ -1,4 +1,4 @@
-# web-template-ddd
+# go-template-ddd
 ## 1.简述
 基于DDD架构的Web服务快速构建模板。
 

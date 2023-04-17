@@ -1,0 +1,7 @@
+{"app":"go-template-ddd","file":"server.go:68","func":"httpserver.(*server).Run.func1","level":"info","msg":"http server is starting in port:8080","time":"2023-04-17 23:57:26"}
+{"app":"go-template-ddd","file":"server.go:79","func":"httpserver.(*server).Run","level":"info","msg":"got signal interrupt, http server exit\n","time":"2023-04-18 00:00:40"}
+{"app":"go-template-ddd","file":"server.go:94","func":"httpserver.(*server).Close","level":"info","msg":"http server is closing...","time":"2023-04-18 00:00:40"}
+{"app":"go-template-ddd","file":"server.go:68","func":"httpserver.(*server).Run.func1","level":"info","msg":"http server is starting in port:8080","time":"2023-04-18 00:04:28"}
+{"app":"go-template-ddd","file":"server.go:79","func":"httpserver.(*server).Run","level":"info","msg":"got signal interrupt, http server exit\n","time":"2023-04-18 00:04:35"}
+{"app":"go-template-ddd","file":"server.go:94","func":"httpserver.(*server).Close","level":"info","msg":"http server is closing...","time":"2023-04-18 00:04:35"}
+{"app":"go-template-ddd","file":"server.go:74","func":"httpserver.(*server).Run.func1","level":"info","msg":"http server closed","time":"2023-04-18 00:04:35"}

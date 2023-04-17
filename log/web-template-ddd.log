@@ -1,1 +1,0 @@
-{"app":"web-template-ddd","error":"failed to ddd redis: dial tcp 127.0.0.1:6379: connect: connection refused","file":"root.go:41","func":"cmd.Run.func1","level":"fatal","msg":"failed to ddd components","time":"2023-04-17 13:02:30"}

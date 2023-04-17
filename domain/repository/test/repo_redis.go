@@ -1,4 +1,4 @@
-package redis
+package test
 
 import (
 	"context"
@@ -8,15 +8,15 @@ import (
 	"github.com/ihezebin/sdk/model/redisc"
 )
 
-type testRepository struct {
+type repoRedis struct {
 	redisc.Model
 }
 
-func NewTestRepository() *testRepository {
-	return &testRepository{Model: redisc.NewModel(cache.GetRedisCli(), "captcha")}
+func NewRepoRedis(db string) *repoRedis {
+	return &repoRedis{Model: redisc.NewModel(cache.GetRedisCli(), "captcha")}
 }
 
-func (repo *testRepository) Register(ctx context.Context, test *entity.Test) error {
+func (repo *repoRedis) Register(ctx context.Context, test *entity.Test) error {
 	data, err := test.String()
 	if err != nil {
 		return err
@@ -25,7 +25,7 @@ func (repo *testRepository) Register(ctx context.Context, test *entity.Test) err
 	return err
 }
 
-func (repo *testRepository) testKey(name string) string {
+func (repo *repoRedis) testKey(name string) string {
 	return fmt.Sprintf("test.name.%s", name)
 
 }

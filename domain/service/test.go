@@ -3,17 +3,17 @@ package service
 import (
 	"context"
 	"github.com/ihezebin/go-template-ddd/domain/entity"
-	"github.com/ihezebin/go-template-ddd/domain/repository"
+	testRepo "github.com/ihezebin/go-template-ddd/domain/repository/test"
 	"github.com/pkg/errors"
 )
 
 type TestService struct {
-	repo repository.TestRepository
+	repo testRepo.Repository
 }
 
 func NewTestService() *TestService {
 	return &TestService{
-		repo: repository.GetTestRepository(),
+		repo: testRepo.GetRepository(),
 	}
 }
 

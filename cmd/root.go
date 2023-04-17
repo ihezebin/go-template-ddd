@@ -17,7 +17,7 @@ import (
 
 func Run() {
 	app := cli.NewApp(
-		cli.WithName("web-template-ddd"),
+		cli.WithName("go-template-ddd"),
 		cli.WithVersion("v1.0"),
 		cli.WithUsageText("Rapid construction template of Web service based on DDD architecture"),
 		cli.WithAuthor("whereabouts.icu"),
@@ -51,29 +51,31 @@ func Run() {
 }
 
 func initComponents(ctx context.Context, conf *config.Config) error {
-	// ddd logger
+	// init logger
 	logger.ResetStandardLoggerWithConfig(conf.Logger)
-	// ddd mongo
-	if err := storage.InitMongo(ctx, conf.Mongo); err != nil {
-		return errors.Wrap(err, "failed to ddd mongo")
-	}
-	// ddd redis
+	// init memory
+	cache.InitMemoryCache(5*time.Minute, time.Minute)
+	return nil // need some config in config.toml
+	// init redis
 	if err := cache.InitRedis(ctx, conf.Redis); err != nil {
 		return errors.Wrap(err, "failed to ddd redis")
 	}
-	// ddd memory
-	cache.InitMemoryCache(5*time.Minute, time.Minute)
-	// ddd email
+	// init mongo
+	if err := storage.InitMongo(ctx, conf.Mongo); err != nil {
+		return errors.Wrap(err, "failed to ddd mongo")
+	}
+
+	// init email
 	if err := email.Init(conf.Email); err != nil {
 		return errors.Wrap(err, "failed to ddd email")
 	}
-	// ddd sms
+	// init sms
 	if err := sms.Init(conf.Sms.Config); err != nil {
 		return errors.Wrap(err, "failed to ddd sms")
 	}
 
-	// ddd repository
-	repository.InitTestRepository()
+	// init repository
+	repository.Init("go-template-ddd")
 
 	return nil
 }

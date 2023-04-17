@@ -1,4 +1,4 @@
-package mongo
+package test
 
 import (
 	"context"
@@ -8,16 +8,18 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// 实现TestRepository接口
-type testRepository struct {
+// 实现Repository接口
+type repoMongo struct {
 	mongoc.Model
 }
 
-func NewTestRepository() *testRepository {
-	return &testRepository{Model: mongoc.NewAutoTimeModel(storage.GetMongoCli(), "ddd", "test").SetSoftDelete(true)}
+func NewRepoMongo(db string) *repoMongo {
+	return &repoMongo{
+		Model: mongoc.NewAutoTimeModel(storage.GetMongoCli(), db, "test").SetSoftDelete(true),
+	}
 }
 
-func (repo *testRepository) Register(ctx context.Context, test *entity.Test) error {
+func (repo *repoMongo) Register(ctx context.Context, test *entity.Test) error {
 	if test.Id.IsZero() {
 		test.Id = primitive.NewObjectID()
 	}

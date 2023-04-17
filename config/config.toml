@@ -1,41 +1,42 @@
-name = "web-template-ddd"
+name = "go-template-ddd"
 port = 8080
 
 [logger]
-app_name = "web-template-ddd"
-level = "info"
-format = "json"
-file = "log/web-template-ddd.log"
-err_file = "log/web-template-ddd.err.log"
+    app_name = "go-template-ddd"
+    level = "info"
+    format = "json"
+    file = "log/go-template-ddd.log"
+    err_file = "log/go-template-ddd.err.log"
 
 [mongo]
-addrs = ["127.0.0.1:27017"]
-app_name = "ddd"
-pool_limit = 50
-timeout = 3
-max_idle_time = 1800
-alias = "ddd"
-auth.username = "root"
-auth.password = "root"
-auth.source = "admin"
+    addrs = ["127.0.0.1:27017"]
+    app_name = "go-template-ddd"
+    pool_limit = 50
+    timeout = 3
+    max_idle_time = 1800
+    alias = "go-template-ddd"
+    [mongo.auth]
+        username = "root"
+        password = "root"
+        source = "admin"
 
 [redis]
-addr = "127.0.0.1:6379"
-password = ""
-max_idle = 10
-max_active = 50
+    addr = "127.0.0.1:6379"
+    password = ""
+    max_idle = 10
+    max_active = 50
 
 [email]
-username = "hezebin@whereabouts.icu"
-password = "HZB**183***318a**."
-host = "smtp.exmail.qq.com"
-port = 465
+    username = "test@hezebin.com"
+    password = "test_password"
+    host = "smtp.exmail.qq.com"
+    port = 465
 
 [sms.config]
-secret_id = "AKID**f9NM5XidHej**X4KJ1ScV**7TY4JODl22mFQ"
-secret_key = "vay5vVopZ2FBq***ELBk24pJVQ**6VeV6PRCh"
+    secret_id = "AKID**f9NM5XidHej**X4KJ1ScV**7TY4JODl22mFQ"
+    secret_key = "vay5vVopZ2FBq***ELBk24pJVQ**6VeV6PRCh"
 
 [sms.message]
-sms_sdk_app_id = "1400578890"
-sign_name = "whereabouts"
-template_id = "1147748"
+    sms_sdk_app_id = "123123"
+    sign_name = "go-template-ddd"
+    template_id = "234234"
