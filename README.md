@@ -133,9 +133,9 @@ DDD包含4层，将领域模型和业务逻辑分离出来，并减少对基础�
 可以发现所有的包名都采用的单数形式，主要参考于该规范：https://rakyll.org/style-packages/
 
 ## 6.生成项目
-从`Release`中下载可执行程序`ddd`，执行下述命令，将自动拉取模版项目并初始化：
+从`https://github.com/ihezebin/project-create-quickly.git`中下载可执行程序`pcq`，执行下述命令，将自动拉取模版项目并初始化：
 ```bash
-ddd [项目名]
+pcq -t go [项目名] 
 ```
 然后初始化为git仓库，并自行关联远程仓库即可：
 ```bash
@@ -143,50 +143,48 @@ git init
 ```
 Example：
 ```bash
-hezebin@ go-projects % ./ddd github.com/ihezebin/test-ddd                                       
-Processing some initialization operations and validations
+hezebin@ ~ go run main.go -t go github.com/ihezbien/test     
 
-Start to init project, name: test-ddd, go.mod module name: github.com/ihezebin/test-ddd
+Project name: test, Mod name: github.com/ihezbien/test
 
 Generating project Success!         
 
 Organizing project files...
-[Success]  test-ddd/README.md
-[Success]  test-ddd/application/test.go
-[Success]  test-ddd/cmd/root.go
-[Success]  test-ddd/component/cache/memory.go
-[Success]  test-ddd/component/cache/redis.go
-[Success]  test-ddd/component/constant/commom.go
-[Success]  test-ddd/component/doc/doc.go
-[Success]  test-ddd/component/doc/swagger.json
-[Success]  test-ddd/component/email/email.go
-[Success]  test-ddd/component/pubsub/pulsar.go
-[Success]  test-ddd/component/sms/sms.go
-[Success]  test-ddd/component/storage/mongo.go
-[Success]  test-ddd/component/storage/mysql.go
-[Success]  test-ddd/config/config.go
-[Success]  test-ddd/config/config.json
-[Success]  test-ddd/domain/entity/test.go
-[Success]  test-ddd/domain/repository/impl/mongo/test.go
-[Success]  test-ddd/domain/repository/impl/redis/test.go
-[Success]  test-ddd/domain/repository/test.go
-[Success]  test-ddd/domain/service/test.go
-[Success]  test-ddd/go.mod
-[Success]  test-ddd/main.go
-[Success]  test-ddd/script/test.js
-[Success]  test-ddd/script/test.py
-[Success]  test-ddd/server/dto/test/test.go
-[Success]  test-ddd/server/handler/test.go
-[Success]  test-ddd/server/middleware/cors.go
-[Success]  test-ddd/server/server.go
-[Success]  test-ddd/static/img.png
-[Success]  test-ddd/worker/timer.go
+[Success]  test/.gitignore
+[Success]  test/README.md
+[Success]  test/application/test.go
+[Success]  test/cmd/root.go
+[Success]  test/component/cache/memory.go
+[Success]  test/component/cache/redis.go
+[Success]  test/component/constant/commom.go
+[Success]  test/component/doc/doc.go
+[Success]  test/component/doc/swagger.json
+[Success]  test/component/email/email.go
+[Success]  test/component/pubsub/pulsar.go
+[Success]  test/component/sms/sms.go
+[Success]  test/component/storage/mongo.go
+[Success]  test/component/storage/mysql.go
+[Success]  test/config/config.go
+[Success]  test/config/config.json
+[Success]  test/config/config.toml
+[Success]  test/domain/entity/test.go
+[Success]  test/domain/repository/impl/mongo/test.go
+[Success]  test/domain/repository/impl/redis/test.go
+[Success]  test/domain/repository/test.go
+[Success]  test/domain/service/test.go
+[Success]  test/go.mod
+[Success]  test/main.go
+[Success]  test/script/test.js
+[Success]  test/script/test.py
+[Success]  test/server/dto/test/test.go
+[Success]  test/server/handler/test.go
+[Success]  test/server/middleware/cors.go
+[Success]  test/server/server.go
+[Success]  test/static/img.png
+[Success]  test/worker/timer.go
 
 Init project success!
 
-```
-## 7.项目mod重命名
-执行子命令`rename-mod`，将自动修改项目中的所有`go.mod`文件的`module`名称和项目用引用的包的名称：
-```bash
-ddd rename-mod [新的项目mod名]
+Now: cd test
+
 ```
