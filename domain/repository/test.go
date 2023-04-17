@@ -2,8 +2,8 @@ package repository
 
 import (
 	"context"
-	"github.com/ihezebin/web-template-ddd/domain/entity"
-	"github.com/ihezebin/web-template-ddd/domain/repository/impl/mongo"
+	"github.com/ihezebin/go-template-ddd/domain/entity"
+	"github.com/ihezebin/go-template-ddd/domain/repository/impl/mongo"
 )
 
 // TestRepository 只暴露接口, 具体实现在init中初始化, 如使用mongo

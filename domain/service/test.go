@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	"github.com/ihezebin/web-template-ddd/domain/entity"
-	"github.com/ihezebin/web-template-ddd/domain/repository"
+	"github.com/ihezebin/go-template-ddd/domain/entity"
+	"github.com/ihezebin/go-template-ddd/domain/repository"
 	"github.com/pkg/errors"
 )
 

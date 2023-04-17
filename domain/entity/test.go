@@ -4,7 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"encoding/json"
-	"github.com/ihezebin/web-template-ddd/component/constant"
+	"github.com/ihezebin/go-template-ddd/component/constant"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

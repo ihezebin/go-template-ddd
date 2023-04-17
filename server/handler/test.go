@@ -4,10 +4,10 @@ import (
 	"context"
 	"github.com/gin-gonic/gin"
 	valication "github.com/go-ozzo/ozzo-validation/v4"
+	"github.com/ihezebin/go-template-ddd/application"
+	dto "github.com/ihezebin/go-template-ddd/server/dto/test"
 	"github.com/ihezebin/sdk/httpserver/handler"
 	"github.com/ihezebin/sdk/logger"
-	"github.com/ihezebin/web-template-ddd/application"
-	dto "github.com/ihezebin/web-template-ddd/server/dto/test"
 )
 
 type TestHandler struct {

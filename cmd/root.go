@@ -2,15 +2,15 @@ package cmd
 
 import (
 	"context"
+	"github.com/ihezebin/go-template-ddd/component/cache"
+	"github.com/ihezebin/go-template-ddd/component/email"
+	"github.com/ihezebin/go-template-ddd/component/sms"
+	"github.com/ihezebin/go-template-ddd/component/storage"
+	"github.com/ihezebin/go-template-ddd/config"
+	"github.com/ihezebin/go-template-ddd/domain/repository"
+	"github.com/ihezebin/go-template-ddd/server"
 	"github.com/ihezebin/sdk/cli"
 	"github.com/ihezebin/sdk/logger"
-	"github.com/ihezebin/web-template-ddd/component/cache"
-	"github.com/ihezebin/web-template-ddd/component/email"
-	"github.com/ihezebin/web-template-ddd/component/sms"
-	"github.com/ihezebin/web-template-ddd/component/storage"
-	"github.com/ihezebin/web-template-ddd/config"
-	"github.com/ihezebin/web-template-ddd/domain/repository"
-	"github.com/ihezebin/web-template-ddd/server"
 	"github.com/pkg/errors"
 	"time"
 )

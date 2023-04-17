@@ -2,9 +2,9 @@ package mongo
 
 import (
 	"context"
+	"github.com/ihezebin/go-template-ddd/component/storage"
+	"github.com/ihezebin/go-template-ddd/domain/entity"
 	"github.com/ihezebin/sdk/model/mongoc"
-	"github.com/ihezebin/web-template-ddd/component/storage"
-	"github.com/ihezebin/web-template-ddd/domain/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

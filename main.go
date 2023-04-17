@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/ihezebin/web-template-ddd/cmd"
+	"github.com/ihezebin/go-template-ddd/cmd"
 )
 
 func main() {
