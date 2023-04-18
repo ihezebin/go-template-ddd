@@ -15,7 +15,7 @@ type repoMongo struct {
 
 func NewRepoMongo(db string) *repoMongo {
 	return &repoMongo{
-		Model: mongoc.NewAutoTimeModel(storage.GetMongoCli(), db, "test").SetSoftDelete(true),
+		Model: mongoc.NewModelAutoTime(storage.GetMongoCli(), db, "test").SetSoftDelete(true),
 	}
 }
 
