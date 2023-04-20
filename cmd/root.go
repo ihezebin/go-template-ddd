@@ -52,26 +52,36 @@ func Run() {
 
 func initComponents(ctx context.Context, conf *config.Config) error {
 	// init logger
-	logger.ResetStandardLoggerWithConfig(conf.Logger)
+	if conf.Logger != nil {
+		logger.ResetStandardLoggerWithConfig(*conf.Logger)
+	}
 	// init memory
 	cache.InitMemoryCache(5*time.Minute, time.Minute)
-	return nil // need some config in config.toml
 	// init redis
-	if err := cache.InitRedis(ctx, conf.Redis); err != nil {
-		return errors.Wrap(err, "failed to ddd redis")
+	if conf.Redis != nil {
+		if err := cache.InitRedis(ctx, *conf.Redis); err != nil {
+			return errors.Wrap(err, "failed to init redis")
+		}
 	}
 	// init mongo
-	if err := storage.InitMongo(ctx, conf.Mongo); err != nil {
-		return errors.Wrap(err, "failed to ddd mongo")
+	if conf.Mongo != nil {
+		if err := storage.InitMongo(ctx, *conf.Mongo); err != nil {
+			return errors.Wrap(err, "failed to init mongo")
+		}
 	}
 
-	// init email
-	if err := email.Init(conf.Email); err != nil {
-		return errors.Wrap(err, "failed to ddd email")
+	// init mail
+	if conf.Email != nil {
+		if err := email.Init(*conf.Email); err != nil {
+			return errors.Wrap(err, "failed to init mail")
+		}
 	}
+
 	// init sms
-	if err := sms.Init(conf.Sms.Config); err != nil {
-		return errors.Wrap(err, "failed to ddd sms")
+	if conf.Sms != nil {
+		if err := sms.Init(conf.Sms.Config, conf.Sms.Message); err != nil {
+			return errors.Wrap(err, "failed to init sms")
+		}
 	}
 
 	// init repository

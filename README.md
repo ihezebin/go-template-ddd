@@ -163,7 +163,7 @@ Organizing project files...
 [Success]  test/component/constant/commom.go
 [Success]  test/component/doc/doc.go
 [Success]  test/component/doc/swagger.json
-[Success]  test/component/email/email.go
+[Success]  test/component/mail/mail.go
 [Success]  test/component/pubsub/pulsar.go
 [Success]  test/component/sms/sms.go
 [Success]  test/component/storage/mongo.go

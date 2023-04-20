@@ -22,19 +22,19 @@ port = 8080
 
 [redis]
     addr = "127.0.0.1:6379"
-    password = ""
+    password = "root"
     max_idle = 10
     max_active = 50
 
-[email]
-    username = "test@hezebin.com"
-    password = "test_password"
-    host = "smtp.exmail.qq.com"
-    port = 465
+#[email]
+#    username = "test@hezebin.com"
+#    password = "test_password"
+#    host = "smtp.exmail.qq.com"
+#    port = 465
 
 [sms.config]
-    secret_id = "AKID**f9NM5XidHej**X4KJ1ScV**7TY4JODl22mFQ"
-    secret_key = "vay5vVopZ2FBq***ELBk24pJVQ**6VeV6PRCh"
+    secret_id = "xxxx"
+    secret_key = "xxxx"
 
 [sms.message]
     sms_sdk_app_id = "123123"

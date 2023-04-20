@@ -10,13 +10,13 @@ import (
 )
 
 type Config struct {
-	Name   string        `mapstructure:"name"`
-	Port   int           `mapstructure:"port"`
-	Logger logger.Config `mapstructure:"logger"`
-	Mongo  mongoc.Config `mapstructure:"mongo"`
-	Redis  redisc.Config `mapstructure:"redis"`
-	Email  emailc.Config `mapstructure:"email"`
-	Sms    Sms           `mapstructure:"sms"`
+	Name   string         `mapstructure:"name"`
+	Port   int            `mapstructure:"port"`
+	Logger *logger.Config `mapstructure:"logger"`
+	Mongo  *mongoc.Config `mapstructure:"mongo"`
+	Redis  *redisc.Config `mapstructure:"redis"`
+	Email  *emailc.Config `mapstructure:"email"`
+	Sms    *Sms           `mapstructure:"sms"`
 }
 
 type Sms struct {
