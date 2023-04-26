@@ -192,3 +192,8 @@ Init project success!
 Now: cd test
 
 ```
+
+## 7.编译打包
+```bash
+make package TAG=v1.0
+```

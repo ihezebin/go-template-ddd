@@ -10,7 +10,7 @@ DOCKER_TAG ?= $(DOCKER_REGISTRY)/hezebin/$(PROJECT_NAME):$(TAG)
 
 package: tag clean
 
-tag: init test build
+tag: build
 	docker login --username=$(DOCKER_USER) --password=$(DOCKER_PWD) $(DOCKER_REGISTRY)
 	docker build -t $(DOCKER_TAG) -f Dockerfile .
 	docker push $(DOCKER_TAG)
@@ -23,7 +23,7 @@ init:
 test:
 	go test -tags=unit -timeout 30s -short -v `go list ./...`
 
-build:
+build: init test
 	go build -o ./dist/$(PROJECT_NAME) $(PKG_ROOT)
 
 clean:
