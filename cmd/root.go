@@ -85,7 +85,9 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 	}
 
 	// init repository
-	repository.Init("go-template-ddd")
+	if conf.Mongo != nil && conf.Redis != nil {
+		repository.Init("hezebin")
+	}
 
 	return nil
 }
