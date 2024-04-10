@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS `example`
+(
+    `id`         VARCHAR(24)  NOT NULL,
+    `username`   VARCHAR(255) NOT NULL,
+    `password`   VARCHAR(255) NOT NULL,
+    `email`      VARCHAR(255) NOT NULL,
+    `salt`       VARCHAR(255) NOT NULL,
+    `created_at` DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `deleted_at` DATETIME     NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = INNODB
+  DEFAULT CHARSET = utf8mb4;

@@ -1,12 +1,12 @@
 package middleware
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/ihezebin/sdk/httpserver/middleware"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
-func Cors() middleware.Middleware {
+func Cors() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		method := context.Request.Method
 		// 必须，接受指定域的请求，可以使用*不加以限制，但不安全

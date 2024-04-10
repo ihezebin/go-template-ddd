@@ -1,49 +1,10 @@
 {
-  "name": "go-template-ddd",
+  "service_name": "go-template-ddd-json",
   "port": 8980,
   "logger": {
-    "app_name": "go-template-ddd",
     "level": "info",
-    "format": "json",
-    "file": "log/go-template-ddd.log",
-    "err_file": "log/go-template-ddd.err.log"
+    "file": "go-template-ddd.log"
   },
-  "mongo": {
-    "addrs": [
-      "127.0.0.1:27017"
-    ],
-    "auth": {
-      "username": "root",
-      "password": "root",
-      "source": "admin"
-    },
-    "app_name": "ddd",
-    "pool_limit": 50,
-    "timeout": 3,
-    "max_idle_time": 1800,
-    "alias": "ddd"
-  },
-  "redis": {
-    "addr": "127.0.0.1:6379",
-    "password": "",
-    "max_idle": 10,
-    "max_active": 50
-  },
-  "email": {
-    "username": "hezebin@whereabouts.icu",
-    "password": "HZB**183***318a**.",
-    "host": "smtp.exmail.qq.com",
-    "port": 465
-  },
-  "sms": {
-    "config": {
-      "secret_id": "AKID**f9NM5XidHej**X4KJ1ScV**7TY4JODl22mFQ",
-      "secret_key": "vay5vVopZ2FBq***ELBk24pJVQ**6VeV6PRCh"
-    },
-   "message": {
-     "sms_sdk_app_id": "1400578890",
-     "sign_name": "whereabouts",
-     "template_id": "1147748"
-   }
-  }
+  "mongo_dns": "mongodb://user:password@127.0.0.1:27017/example?authSource=admin",
+  "mysql_dns": "mysql://root:root@127.0.0.1:3306/go-template-ddd?charset=utf8mb4&parseTime=True&loc=Local"
 }

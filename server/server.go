@@ -1,51 +1,31 @@
 package server
 
 import (
+	"context"
+
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"github.com/ihezebin/go-template-ddd/server/handler"
 	"github.com/ihezebin/go-template-ddd/server/middleware"
-	"github.com/ihezebin/sdk/httpserver"
-	"github.com/ihezebin/sdk/httpserver/handler/result"
-	middle "github.com/ihezebin/sdk/httpserver/middleware"
+	"github.com/ihezebin/oneness/httpserver"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"net/http"
 )
 
-func NewServer(port int) httpserver.Server {
-	server := httpserver.NewServer(
-		httpserver.WithPort(port),
-		httpserver.WithMiddlewares(
-			middle.LoggingRequest(),
-			middle.LoggingResponse(),
-			middle.Recovery(),
-			middleware.Cors(),
+func Run(ctx context.Context, port uint) error {
+	serverHandler := httpserver.NewServerHandlerWithOptions(
+		httpserver.WithLoggingRequest(false),
+		httpserver.WithLoggingResponse(false),
+		httpserver.WithMiddlewares(middleware.Cors()),
+		httpserver.WithRouters("",
+			handler.NewExampleHandler(),
+			// ... other handlers
 		),
 	)
 
-	router := server.Kernel()
-	pprof.Register(router)
+	pprof.Register(serverHandler)
+	serverHandler.GET("/metrics", gin.WrapH(promhttp.Handler()))
 
-	router.GET("/metrics", gin.WrapH(promhttp.Handler()))
-	router.GET("/health", func(c *gin.Context) { c.JSON(http.StatusOK, result.Json{"status": "ok"}) })
+	httpserver.ResetServerHandler(serverHandler)
 
-	v1 := router.Group("v1")
-	// init handlers
-	initHandlers(v1)
-
-	return server
-}
-
-type Handler interface {
-	Init(gin.IRouter)
-}
-
-func initHandlers(router gin.IRouter) {
-	handlers := []Handler{
-		&handler.TestHandler{},
-		// ... other handlers
-	}
-	for _, hdl := range handlers {
-		hdl.Init(router)
-	}
+	return httpserver.Run(ctx, port)
 }

@@ -2,92 +2,90 @@ package cmd
 
 import (
 	"context"
-	"github.com/ihezebin/go-template-ddd/component/cache"
-	"github.com/ihezebin/go-template-ddd/component/email"
-	"github.com/ihezebin/go-template-ddd/component/sms"
+	"os"
+	"path/filepath"
+
 	"github.com/ihezebin/go-template-ddd/component/storage"
 	"github.com/ihezebin/go-template-ddd/config"
 	"github.com/ihezebin/go-template-ddd/domain/repository"
+	"github.com/ihezebin/go-template-ddd/domain/service"
 	"github.com/ihezebin/go-template-ddd/server"
-	"github.com/ihezebin/sdk/cli"
-	"github.com/ihezebin/sdk/logger"
+	"github.com/ihezebin/oneness/logger"
 	"github.com/pkg/errors"
-	"time"
+	"github.com/urfave/cli/v2"
 )
 
-func Run() {
-	app := cli.NewApp(
-		cli.WithName("go-template-ddd"),
-		cli.WithVersion("v1.0"),
-		cli.WithUsageText("Rapid construction template of Web service based on DDD architecture"),
-		cli.WithAuthor("whereabouts.icu"),
-	)
-	app = app.WithFlagString("config, c", "./config.toml", "config file path (default: ./config/config.json)", false)
-	app = app.WithAction(func(v cli.Value) error {
-		var (
-			err  error
-			conf *config.Config
-			ctx  = context.Background()
-			path = v.String("c")
-		)
+var (
+	configPath string
+)
 
-		// load config
-		if conf, err = config.Load(path); err != nil {
-			logger.WithError(err).Fatalf("failed to load config path: %s", path)
-		}
+func Run(ctx context.Context) error {
 
-		// ddd components
-		if err = initComponents(ctx, conf); err != nil {
-			logger.WithError(err).Fatalf("failed to ddd components")
-		}
+	app := &cli.App{
+		Name:    "go-template-ddd",
+		Version: "v1.0.0",
+		Usage:   "Rapid construction template of Web service based on DDD architecture",
+		Authors: []*cli.Author{
+			{Name: "hezebin", Email: "ihezebin@qq.com"},
+		},
+		Flags: []cli.Flag{
+			&cli.StringFlag{Destination: &configPath, Name: "config", Aliases: []string{"c"}, Value: "./config/config.toml", Usage: "config file path (default find file from pwd and exec dir"},
+		},
+		Before: func(c *cli.Context) error {
+			if configPath == "" {
+				return errors.New("config path is empty")
+			}
+			conf, err := config.Load(configPath)
+			if err != nil {
+				return errors.Wrapf(err, "load config error, path: %s", configPath)
+			}
+			logger.Infof(ctx, "config: %+v", *conf)
 
-		if err = server.NewServer(conf.Port).Run(ctx); err != nil {
-			logger.WithError(err).Fatalf("failed to ddd components")
-		}
+			if err = initComponents(ctx, nil); err != nil {
+				return errors.Wrap(err, "init components error")
+			}
 
-		return nil
-	})
-	_ = app.Run()
+			return nil
+		},
+		Action: func(c *cli.Context) error {
+			if err := server.Run(ctx, config.GetConfig().Port); err != nil {
+				logger.WithError(err).Fatalf(ctx, "server run error, port: %d", config.GetConfig().Port)
+			}
+
+			return nil
+		},
+	}
+
+	return app.Run(os.Args)
 }
 
 func initComponents(ctx context.Context, conf *config.Config) error {
 	// init logger
 	if conf.Logger != nil {
-		logger.ResetStandardLoggerWithConfig(*conf.Logger)
-	}
-	// init memory
-	cache.InitMemoryCache(5*time.Minute, time.Minute)
-	// init redis
-	if conf.Redis != nil {
-		if err := cache.InitRedis(ctx, *conf.Redis); err != nil {
-			return errors.Wrap(err, "failed to init redis")
-		}
-	}
-	// init mongo
-	if conf.Mongo != nil {
-		if err := storage.InitMongo(ctx, *conf.Mongo); err != nil {
-			return errors.Wrap(err, "failed to init mongo")
-		}
+		logger.ResetLoggerWithOptions(
+			logger.WithServiceName(conf.ServiceName),
+			logger.WithCallerHook(),
+			logger.WithTimestampHook(),
+			logger.WithLevel(conf.Logger.Level),
+			logger.WithLocalFsHook(filepath.Join(conf.Pwd, conf.Logger.Filename)),
+		)
 	}
 
-	// init mail
-	if conf.Email != nil {
-		if err := email.Init(*conf.Email); err != nil {
-			return errors.Wrap(err, "failed to init mail")
-		}
+	// init storage
+	if err := storage.InitMySQLStorageClient(ctx, conf.MysqlDsn); err != nil {
+		return errors.Wrap(err, "init mysql storage client error")
+	}
+	if err := storage.InitMongoStorageClient(ctx, conf.MongoDsn); err != nil {
+		return errors.Wrap(err, "init mongo storage client error")
 	}
 
-	// init sms
-	if conf.Sms != nil {
-		if err := sms.Init(conf.Sms.Config, conf.Sms.Message); err != nil {
-			return errors.Wrap(err, "failed to init sms")
-		}
-	}
+	// init cache
 
 	// init repository
-	if conf.Mongo != nil && conf.Redis != nil {
-		repository.Init("hezebin")
-	}
+	repository.Init()
+
+	// init service
+	service.Init()
 
 	return nil
 }

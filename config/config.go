@@ -1,38 +1,47 @@
 package config
 
 import (
-	"github.com/ihezebin/sdk/config"
-	"github.com/ihezebin/sdk/emailc"
-	"github.com/ihezebin/sdk/logger"
-	"github.com/ihezebin/sdk/model/mongoc"
-	"github.com/ihezebin/sdk/model/redisc"
-	smsc "github.com/ihezebin/sdk/smsc/tencent"
+	"os"
+
+	"github.com/ihezebin/oneness/config"
+	"github.com/ihezebin/oneness/logger"
+	"github.com/pkg/errors"
 )
 
 type Config struct {
-	Name   string         `mapstructure:"name"`
-	Port   int            `mapstructure:"port"`
-	Logger *logger.Config `mapstructure:"logger"`
-	Mongo  *mongoc.Config `mapstructure:"mongo"`
-	Redis  *redisc.Config `mapstructure:"redis"`
-	Email  *emailc.Config `mapstructure:"email"`
-	Sms    *Sms           `mapstructure:"sms"`
+	ServiceName string        `json:"service_name" mapstructure:"service_name"`
+	Port        uint          `json:"port" mapstructure:"port"`
+	Logger      *LoggerConfig `json:"logger" mapstructure:"logger"`
+	MongoDsn    string        `json:"mongo_dsn" mapstructure:"mongo_dns"`
+	MysqlDsn    string        `json:"mysql_dsn" mapstructure:"mysql_dns"`
+	Pwd         string        `json:"-" mapstructure:"-"`
 }
 
-type Sms struct {
-	Config  smsc.Config  `mapstructure:"config"`
-	Message smsc.Message `mapstructure:"message"`
+type LoggerConfig struct {
+	Level    logger.Level `json:"level" mapstructure:"level"`
+	Filename string       `json:"filename" mapstructure:"filename"`
 }
 
-var gConfig Config
+var gConfig *Config
 
-func GetConfig() Config {
+func GetConfig() *Config {
+	if gConfig == nil {
+		gConfig = &Config{}
+	}
 	return gConfig
 }
 
 func Load(path string) (*Config, error) {
-	if err := config.NewWithFilePath(path).Load(&gConfig); err != nil {
-		return nil, err
+	pwd, err := os.Getwd()
+	if err != nil {
+		return nil, errors.Wrap(err, "get pwd error")
 	}
-	return &gConfig, nil
+
+	if err = config.NewWithFilePath(path).Load(&gConfig); err != nil {
+		return nil, errors.Wrap(err, "load config error")
+	}
+
+	gConfig.Pwd = pwd
+
+	return gConfig, nil
 }
