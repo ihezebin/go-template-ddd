@@ -34,7 +34,7 @@ func (h *ExampleHandler) Init(router gin.IRouter) {
 
 }
 
-// Login
+// Login https://github.com/swaggo/swag/blob/master/README_zh-CN.md#api%E6%93%8D%E4%BD%9C
 // @Summary 示例登录功能
 // @Description 通过账号和密码登录，生成 Token
 // @Tags example
@@ -56,7 +56,7 @@ func (h *ExampleHandler) Login(ctx context.Context, req *dto.ExampleLoginReq) (*
 
 }
 
-// Register
+// Register https://github.com/swaggo/swag/blob/master/README_zh-CN.md#api%E6%93%8D%E4%BD%9C
 // @Summary 示例注册功能
 // @Description 录入账号、密码和邮箱地址
 // @Tags example

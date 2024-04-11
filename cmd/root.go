@@ -10,6 +10,7 @@ import (
 	"github.com/ihezebin/go-template-ddd/component/email"
 	"github.com/ihezebin/go-template-ddd/component/storage"
 	"github.com/ihezebin/go-template-ddd/config"
+	"github.com/ihezebin/go-template-ddd/cron"
 	"github.com/ihezebin/go-template-ddd/domain/repository"
 	"github.com/ihezebin/go-template-ddd/domain/service"
 	"github.com/ihezebin/go-template-ddd/server"
@@ -53,6 +54,10 @@ func Run(ctx context.Context) error {
 			return nil
 		},
 		Action: func(c *cli.Context) error {
+			if err := cron.Run(ctx); err != nil {
+				logger.WithError(err).Fatalf(ctx, "cron run error")
+			}
+
 			if err := server.Run(ctx, config.GetConfig().Port); err != nil {
 				logger.WithError(err).Fatalf(ctx, "server run error, port: %d", config.GetConfig().Port)
 			}
