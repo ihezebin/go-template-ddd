@@ -34,6 +34,15 @@ func (h *ExampleHandler) Init(router gin.IRouter) {
 
 }
 
+// Login
+// @Summary 示例登录功能
+// @Description 通过账号和密码登录，生成 Token
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {object} server.Body{data=dto.ExampleLoginResp} "成功时如下结构；错误时 code 非 0, message 包含错误信息, 不包含 data"
+// @Param req body dto.ExampleLoginReq true "登录参数"
+// @Router /example/login [post]
 func (h *ExampleHandler) Login(ctx context.Context, req *dto.ExampleLoginReq) (*dto.ExampleLoginResp, error) {
 	if err := valication.ValidateStruct(req,
 		valication.Field(&req.Username, valication.Required),
@@ -47,6 +56,15 @@ func (h *ExampleHandler) Login(ctx context.Context, req *dto.ExampleLoginReq) (*
 
 }
 
+// Register
+// @Summary 示例注册功能
+// @Description 录入账号、密码和邮箱地址
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {object} server.Body{data=dto.ExampleRegisterResp} "成功时如下结构；错误时 code 非 0, message 包含错误信息, 不包含 data"
+// @Param req body dto.ExampleRegisterReq true "注册表单"
+// @Router /example/register [post]
 func (h *ExampleHandler) Register(c *gin.Context, req *dto.ExampleRegisterReq) (*dto.ExampleRegisterResp, error) {
 	ctx := c.Request.Context()
 

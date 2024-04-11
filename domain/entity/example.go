@@ -12,10 +12,11 @@ import (
 
 type Example struct {
 	Id       string `json:"id" bson:"id" gorm:"id"`
-	Username string `json:"username" bson:"username" gorm:"username"`
-	Password string `json:"password" bson:"password" gorm:"password"`
-	Email    string `json:"email" bson:"email" gorm:"email"`
-	Salt     string `json:"salt,omitempty" bson:"salt" gorm:"salt"`
+	Username string `json:"username" bson:"username" gorm:"column:username"`
+	Password string `json:"password" bson:"password" gorm:"column:password"`
+	Email    string `json:"email" bson:"email" gorm:"column:email"`
+	Salt     string `json:"salt,omitempty" bson:"salt" gorm:"column:salt"`
+	//DeletedAt gorm.DeletedAt `json:"deleted_at,omitempty" bson:"deleted_at" gorm:"column:deleted_at"`
 }
 
 func (e *Example) UnmarshalBinary(data []byte) error {

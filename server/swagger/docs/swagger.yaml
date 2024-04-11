@@ -1,0 +1,111 @@
+basePath: /
+definitions:
+  dto.ExampleLoginReq:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.ExampleLoginResp:
+    properties:
+      token:
+        type: string
+    type: object
+  dto.ExampleRegisterReq:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.ExampleRegisterResp:
+    properties:
+      example:
+        $ref: '#/definitions/entity.Example'
+    type: object
+  entity.Example:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      password:
+        type: string
+      salt:
+        type: string
+      username:
+        type: string
+    type: object
+  server.Body:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: 这是一个使用 Gin 和 Swagger 生成 API 文档的示例。
+  title: Go Template DDD 示例 API 文档
+  version: "1.0"
+paths:
+  /example/login:
+    post:
+      consumes:
+      - application/json
+      description: 通过账号和密码登录，生成 Token
+      parameters:
+      - description: 登录参数
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ExampleLoginReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功时如下结构；错误时 code 非 0, message 包含错误信息, 不包含 data
+          schema:
+            allOf:
+            - $ref: '#/definitions/server.Body'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.ExampleLoginResp'
+              type: object
+      summary: 示例登录功能
+      tags:
+      - example
+  /example/register:
+    post:
+      consumes:
+      - application/json
+      description: 录入账号、密码和邮箱地址
+      parameters:
+      - description: 注册表单
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ExampleRegisterReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功时如下结构；错误时 code 非 0, message 包含错误信息, 不包含 data
+          schema:
+            allOf:
+            - $ref: '#/definitions/server.Body'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.ExampleRegisterResp'
+              type: object
+      summary: 示例注册功能
+      tags:
+      - example
+swagger: "2.0"

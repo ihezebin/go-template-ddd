@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"path/filepath"
 	"strings"
+	"time"
 
 	driverMysql "github.com/go-sql-driver/mysql"
 	"github.com/golang-migrate/migrate/v4"
@@ -39,6 +40,16 @@ func InitMySQLStorageClient(ctx context.Context, dsn string) error {
 	if err != nil {
 		return errors.Wrap(err, "mysql connect error")
 	}
+
+	// https://gorm.io/docs/generic_interface.html#Connection-Pool
+	sqlDB, err := db.DB()
+	if err != nil {
+		return errors.Wrap(err, "mysql get sql db error")
+	}
+
+	sqlDB.SetConnMaxIdleTime(time.Minute * 30)
+	sqlDB.SetMaxIdleConns(10)
+	sqlDB.SetMaxOpenConns(50)
 
 	mysqlDatabase = db
 	return nil
