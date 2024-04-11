@@ -62,11 +62,12 @@ func (svc *ExampleApplicationService) Login(ctx context.Context, req *dto.Exampl
 func (svc *ExampleApplicationService) Register(ctx context.Context, req *dto.ExampleRegisterReq) (*dto.ExampleRegisterResp, error) {
 	// application service中通过调用各个 domain 中的 service 或 repository, 实现业务逻辑的编排；
 
-	if ok, errMsg := svc.exampleDomainService.ValidateExample(&entity.Example{
+	newExample := &entity.Example{
 		Username: req.Username,
 		Password: req.Password,
 		Email:    req.Email,
-	}); !ok {
+	}
+	if ok, errMsg := svc.exampleDomainService.ValidateExample(newExample); !ok {
 		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, errMsg)
 	}
 
@@ -87,18 +88,18 @@ func (svc *ExampleApplicationService) Register(ctx context.Context, req *dto.Exa
 		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, "邮箱已绑定账号")
 	}
 
-	example.Salt = "xxxx"
-	example.Password = example.MD5PasswordWithSalt()
+	newExample.Salt = "xxxx"
+	newExample.Password = newExample.MD5PasswordWithSalt()
 
-	if err := svc.exampleRepository.InsertOne(ctx, example); err != nil {
-		svc.logger.WithError(err).Errorf(ctx, "insert example err, example: %+v", example)
+	if err := svc.exampleRepository.InsertOne(ctx, newExample); err != nil {
+		svc.logger.WithError(err).Errorf(ctx, "insert example err, example: %+v", newExample)
 		return nil, httpserver.ErrorWithInternalServer()
 	}
 
 	// 将敏感信息置空
-	example = example.Sensitive()
+	newExample = newExample.Sensitive()
 
 	return &dto.ExampleRegisterResp{
-		Example: example,
+		Example: newExample,
 	}, nil
 }

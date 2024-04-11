@@ -3,6 +3,11 @@ package cache
 import (
 	"context"
 	"testing"
+	"time"
+
+	"github.com/go-redis/redis/v8"
+	"github.com/ihezebin/go-template-ddd/domain/entity"
+	"github.com/pkg/errors"
 )
 
 func TestRedis(t *testing.T) {
@@ -12,15 +17,22 @@ func TestRedis(t *testing.T) {
 	}
 
 	client := RedisCacheClient()
-	if err := client.Do(ctx, "SET", "key", "value").Err(); err != nil {
+
+	example := &entity.Example{
+		Username: "hezebin",
+		Email:    "ihezebin@qq.com",
+	}
+
+	if err := client.Set(ctx, "key", example, time.Minute*5).Err(); err != nil {
 		t.Fatal(err)
 	}
 
-	val, err := client.Get(ctx, "key").Result()
-	if err != nil {
+	example = &entity.Example{}
+	err := client.Get(ctx, "key").Scan(example)
+	if err != nil && !errors.Is(err, redis.Nil) {
 		t.Fatal(err)
 	}
 
-	t.Log(val)
+	t.Log(example)
 
 }

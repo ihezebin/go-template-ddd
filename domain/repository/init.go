@@ -1,5 +1,7 @@
 package repository
 
 func Init() {
-	SetExampleRepository(nil)
+	// 二级缓存实现
+	SetExampleRepository(NewExampleMemoryRepository(NewExampleRedisRepository(NewExampleMongoRepository())))
+	//SetExampleRepository(NewExampleMysqlRepository())
 }

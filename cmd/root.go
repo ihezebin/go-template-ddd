@@ -4,7 +4,9 @@ import (
 	"context"
 	"os"
 	"path/filepath"
+	"time"
 
+	"github.com/ihezebin/go-template-ddd/component/cache"
 	"github.com/ihezebin/go-template-ddd/component/storage"
 	"github.com/ihezebin/go-template-ddd/config"
 	"github.com/ihezebin/go-template-ddd/domain/repository"
@@ -35,15 +37,17 @@ func Run(ctx context.Context) error {
 			if configPath == "" {
 				return errors.New("config path is empty")
 			}
+
 			conf, err := config.Load(configPath)
 			if err != nil {
 				return errors.Wrapf(err, "load config error, path: %s", configPath)
 			}
-			logger.Infof(ctx, "config: %+v", *conf)
 
-			if err = initComponents(ctx, nil); err != nil {
+			if err = initComponents(ctx, conf); err != nil {
 				return errors.Wrap(err, "init components error")
 			}
+
+			logger.Infof(ctx, "component init success, config: %+v", *conf)
 
 			return nil
 		},
@@ -80,6 +84,10 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 	}
 
 	// init cache
+	cache.InitMemoryCache(time.Minute*5, time.Minute)
+	if err := cache.InitRedisCache(ctx, conf.Redis.Addr, conf.Redis.Password); err != nil {
+		return errors.Wrap(err, "init redis cache client error")
+	}
 
 	// init repository
 	repository.Init()

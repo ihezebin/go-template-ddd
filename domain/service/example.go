@@ -9,12 +9,12 @@ type ExampleDomainService interface {
 	GenerateToken(example *entity.Example) (string, error)
 }
 
-var exampleDomainService ExampleDomainService
+var exampleDomainSvc ExampleDomainService
 
 func GetExampleDomainService() ExampleDomainService {
-	return exampleDomainService
+	return exampleDomainSvc
 }
 
 func SetExampleDomainService(service ExampleDomainService) {
-	exampleDomainService = service
+	exampleDomainSvc = service
 }

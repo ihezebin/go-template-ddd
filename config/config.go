@@ -11,10 +11,16 @@ import (
 type Config struct {
 	ServiceName string        `json:"service_name" mapstructure:"service_name"`
 	Port        uint          `json:"port" mapstructure:"port"`
+	MongoDsn    string        `json:"mongo_dsn" mapstructure:"mongo_dsn"`
+	MysqlDsn    string        `json:"mysql_dsn" mapstructure:"mysql_dsn"`
 	Logger      *LoggerConfig `json:"logger" mapstructure:"logger"`
-	MongoDsn    string        `json:"mongo_dsn" mapstructure:"mongo_dns"`
-	MysqlDsn    string        `json:"mysql_dsn" mapstructure:"mysql_dns"`
+	Redis       *RedisConfig  `json:"redis" mapstructure:"redis"`
 	Pwd         string        `json:"-" mapstructure:"-"`
+}
+
+type RedisConfig struct {
+	Addr     string `json:"addr" mapstructure:"addr"`
+	Password string `json:"password" mapstructure:"password"`
 }
 
 type LoggerConfig struct {

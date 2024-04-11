@@ -1,4 +1,4 @@
-package impl
+package service
 
 import (
 	"time"
@@ -6,17 +6,14 @@ import (
 	"github.com/ihezebin/go-template-ddd/component/constant"
 	"github.com/ihezebin/go-template-ddd/domain/entity"
 	"github.com/ihezebin/go-template-ddd/domain/repository"
-	"github.com/ihezebin/go-template-ddd/domain/service"
 	"github.com/ihezebin/jwt"
 )
 
-var _ service.ExampleDomainService = (*exampleDomainService)(nil)
-
-type exampleDomainService struct {
+type exampleDomainServiceImpl struct {
 	exampleRepository repository.ExampleRepository
 }
 
-func (svc *exampleDomainService) ValidateExample(example *entity.Example) (bool, string) {
+func (svc *exampleDomainServiceImpl) ValidateExample(example *entity.Example) (bool, string) {
 	if example.Username != "" && !example.ValidateUsernameRule() {
 		return false, "账号格式不正确"
 	}
@@ -30,7 +27,7 @@ func (svc *exampleDomainService) ValidateExample(example *entity.Example) (bool,
 	return true, ""
 }
 
-func (svc *exampleDomainService) GenerateToken(example *entity.Example) (string, error) {
+func (svc *exampleDomainServiceImpl) GenerateToken(example *entity.Example) (string, error) {
 	token := jwt.Default(jwt.WithOwner(example.Id), jwt.WithExpire(time.Hour))
 	tokenStr, err := token.Signed(constant.TokenSecret)
 	if err != nil {
@@ -40,6 +37,8 @@ func (svc *exampleDomainService) GenerateToken(example *entity.Example) (string,
 	return tokenStr, nil
 }
 
-func NewExampleService() *exampleDomainService {
-	return &exampleDomainService{}
+func NewExampleService() ExampleDomainService {
+	return &exampleDomainServiceImpl{}
 }
+
+var _ ExampleDomainService = (*exampleDomainServiceImpl)(nil)

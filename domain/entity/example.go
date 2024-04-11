@@ -2,8 +2,12 @@ package entity
 
 import (
 	"crypto/md5"
+	"encoding"
 	"encoding/hex"
+	"encoding/json"
 	"regexp"
+
+	"gorm.io/gorm/schema"
 )
 
 type Example struct {
@@ -13,6 +17,18 @@ type Example struct {
 	Email    string `json:"email" bson:"email" gorm:"email"`
 	Salt     string `json:"salt,omitempty" bson:"salt" gorm:"salt"`
 }
+
+func (e *Example) UnmarshalBinary(data []byte) error {
+	return json.Unmarshal(data, e)
+}
+
+func (e *Example) MarshalBinary() (data []byte, err error) {
+	return json.Marshal(e)
+}
+
+var _ schema.Tabler = (*Example)(nil)
+var _ encoding.BinaryMarshaler = (*Example)(nil)
+var _ encoding.BinaryUnmarshaler = (*Example)(nil)
 
 func (e *Example) TableName() string {
 	return "example"
