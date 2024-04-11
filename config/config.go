@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/ihezebin/oneness/config"
+	"github.com/ihezebin/oneness/email"
 	"github.com/ihezebin/oneness/logger"
 	"github.com/pkg/errors"
 )
@@ -15,6 +16,7 @@ type Config struct {
 	MysqlDsn    string        `json:"mysql_dsn" mapstructure:"mysql_dsn"`
 	Logger      *LoggerConfig `json:"logger" mapstructure:"logger"`
 	Redis       *RedisConfig  `json:"redis" mapstructure:"redis"`
+	Email       *email.Config `json:"email" mapstructure:"email"`
 	Pwd         string        `json:"-" mapstructure:"-"`
 }
 

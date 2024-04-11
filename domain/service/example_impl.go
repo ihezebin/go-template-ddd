@@ -37,8 +37,10 @@ func (svc *exampleDomainServiceImpl) GenerateToken(example *entity.Example) (str
 	return tokenStr, nil
 }
 
-func NewExampleService() ExampleDomainService {
-	return &exampleDomainServiceImpl{}
+func NewExampleServiceImpl() ExampleDomainService {
+	return &exampleDomainServiceImpl{
+		exampleRepository: repository.GetExampleRepository(),
+	}
 }
 
 var _ ExampleDomainService = (*exampleDomainServiceImpl)(nil)

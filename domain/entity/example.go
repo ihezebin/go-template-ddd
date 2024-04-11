@@ -35,9 +35,10 @@ func (e *Example) TableName() string {
 }
 
 func (e *Example) Sensitive() *Example {
-	e.Password = ""
-	e.Salt = ""
-	return e
+	temp := *e
+	temp.Password = ""
+	temp.Salt = ""
+	return &temp
 }
 
 func (e *Example) MD5PasswordWithSalt() string {
