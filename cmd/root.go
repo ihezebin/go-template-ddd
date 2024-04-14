@@ -8,6 +8,7 @@ import (
 
 	"github.com/ihezebin/go-template-ddd/component/cache"
 	"github.com/ihezebin/go-template-ddd/component/email"
+	"github.com/ihezebin/go-template-ddd/component/pubsub"
 	"github.com/ihezebin/go-template-ddd/component/storage"
 	"github.com/ihezebin/go-template-ddd/config"
 	"github.com/ihezebin/go-template-ddd/cron"
@@ -82,21 +83,39 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 	}
 
 	// init storage
-	if err := storage.InitMySQLStorageClient(ctx, conf.MysqlDsn); err != nil {
-		return errors.Wrap(err, "init mysql storage client error")
+	if conf.MysqlDsn != "" {
+		if err := storage.InitMySQLStorageClient(ctx, conf.MysqlDsn); err != nil {
+			return errors.Wrap(err, "init mysql storage client error")
+		}
 	}
-	if err := storage.InitMongoStorageClient(ctx, conf.MongoDsn); err != nil {
-		return errors.Wrap(err, "init mongo storage client error")
+	if conf.MongoDsn != "" {
+		if err := storage.InitMongoStorageClient(ctx, conf.MongoDsn); err != nil {
+			return errors.Wrap(err, "init mongo storage client error")
+		}
 	}
 
 	// init cache
 	cache.InitMemoryCache(time.Minute*5, time.Minute)
-	if err := cache.InitRedisCache(ctx, conf.Redis.Addr, conf.Redis.Password); err != nil {
-		return errors.Wrap(err, "init redis cache client error")
+	if conf.Redis != nil {
+		if err := cache.InitRedisCache(ctx, conf.Redis.Addr, conf.Redis.Password); err != nil {
+			return errors.Wrap(err, "init redis cache client error")
+		}
 	}
 
 	// init repository
 	repository.Init()
+
+	// init pubsub
+	if conf.Pulsar != nil {
+		if err := pubsub.InitPulsarClient(conf.Pulsar.Url); err != nil {
+			return errors.Wrap(err, "init pulsar client error")
+		}
+	}
+	if conf.Kafka != nil {
+		if err := pubsub.InitKafkaConn(ctx, conf.Kafka.Address, conf.Kafka.Topic, conf.Kafka.Partition); err != nil {
+			return errors.Wrap(err, "init kafka client error")
+		}
+	}
 
 	// init service
 	service.Init()

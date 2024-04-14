@@ -14,10 +14,24 @@ type Config struct {
 	Port        uint          `json:"port" mapstructure:"port"`
 	MongoDsn    string        `json:"mongo_dsn" mapstructure:"mongo_dsn"`
 	MysqlDsn    string        `json:"mysql_dsn" mapstructure:"mysql_dsn"`
+	Pwd         string        `json:"-" mapstructure:"-"`
 	Logger      *LoggerConfig `json:"logger" mapstructure:"logger"`
 	Redis       *RedisConfig  `json:"redis" mapstructure:"redis"`
 	Email       *email.Config `json:"email" mapstructure:"email"`
-	Pwd         string        `json:"-" mapstructure:"-"`
+	Pulsar      *PulsarConfig `json:"pulsar" mapstructure:"pulsar"`
+	Kafka       *KafkaConfig  `json:"kafka" mapstructure:"kafka"`
+}
+
+type PulsarConfig struct {
+	Url          string `json:"url" mapstructure:"url"`
+	Topic        string `json:"topic" mapstructure:"topic"`
+	Subscription string `json:"subscription" mapstructure:"subscription"`
+}
+
+type KafkaConfig struct {
+	Address   string `json:"address" mapstructure:"address"`
+	Topic     string `json:"topic" mapstructure:"topic"`
+	Partition int    `json:"partition" mapstructure:"partition"`
 }
 
 type RedisConfig struct {
