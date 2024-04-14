@@ -15,6 +15,8 @@ import (
 	"github.com/ihezebin/go-template-ddd/domain/repository"
 	"github.com/ihezebin/go-template-ddd/domain/service"
 	"github.com/ihezebin/go-template-ddd/server"
+	"github.com/ihezebin/go-template-ddd/worker"
+	"github.com/ihezebin/go-template-ddd/worker/example"
 	"github.com/ihezebin/oneness/logger"
 	"github.com/pkg/errors"
 	"github.com/urfave/cli/v2"
@@ -55,6 +57,10 @@ func Run(ctx context.Context) error {
 			return nil
 		},
 		Action: func(c *cli.Context) error {
+			worker.Register(example.NewExampleWorker())
+			worker.Run(ctx)
+			defer worker.Wait(ctx)
+
 			if err := cron.Run(ctx); err != nil {
 				logger.WithError(err).Fatalf(ctx, "cron run error")
 			}

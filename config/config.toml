@@ -12,12 +12,12 @@ mysql_dsn = "mysql://root:root@127.0.0.1:3306/go-template-ddd?charset=utf8mb4&pa
     addr = "127.0.0.1:6379"
     password = "root"
 
-[pulsar]
-    url = "pulsar://localhost:6650"
-    topic = "persistent://public/default/go-template-ddd"
-    subscription = "go-template-ddd"
+#[pulsar]
+#    url = "pulsar://localhost:6650"
+#    topic = "persistent://public/default/go-template-ddd"
+#    subscription = "go-template-ddd"
 
-[kafka]
-    address = "127.0.0.1:9092"
-    topic = "go-template-ddd"
-    partition = 0
+#[kafka]
+#    address = "127.0.0.1:9092"
+#    topic = "go-template-ddd"
+#    partition = 0
