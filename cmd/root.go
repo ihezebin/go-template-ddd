@@ -36,7 +36,12 @@ func Run(ctx context.Context) error {
 			{Name: "hezebin", Email: "ihezebin@qq.com"},
 		},
 		Flags: []cli.Flag{
-			&cli.StringFlag{Destination: &configPath, Name: "config", Aliases: []string{"c"}, Value: "./config/config.toml", Usage: "config file path (default find file from pwd and exec dir"},
+			&cli.StringFlag{
+				Destination: &configPath,
+				Name:        "config", Aliases: []string{"c"},
+				Value: "./config/config.toml",
+				Usage: "config file path (default find file from pwd and exec dir",
+			},
 		},
 		Before: func(c *cli.Context) error {
 			if configPath == "" {

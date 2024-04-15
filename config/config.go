@@ -44,12 +44,9 @@ type LoggerConfig struct {
 	Filename string       `json:"filename" mapstructure:"filename"`
 }
 
-var gConfig *Config
+var gConfig *Config = &Config{}
 
 func GetConfig() *Config {
-	if gConfig == nil {
-		gConfig = &Config{}
-	}
 	return gConfig
 }
 
@@ -59,7 +56,7 @@ func Load(path string) (*Config, error) {
 		return nil, errors.Wrap(err, "get pwd error")
 	}
 
-	if err = config.NewWithFilePath(path).Load(&gConfig); err != nil {
+	if err = config.NewWithFilePath(path).Load(gConfig); err != nil {
 		return nil, errors.Wrap(err, "load config error")
 	}
 

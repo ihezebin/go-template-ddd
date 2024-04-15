@@ -52,7 +52,7 @@ func (worker *exampleWorker) handle() {
 		default:
 			// do something here
 			fmt.Printf("%s do something here, %s\n", worker.Name(), time.Now().Format(time.DateTime))
-			time.Sleep(time.Second)
+			time.Sleep(time.Hour)
 		}
 	}
 }
