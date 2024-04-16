@@ -45,15 +45,19 @@ func (worker *exampleWorker) Cancel() {
 }
 
 func (worker *exampleWorker) handle() {
+	index := 0
 	for {
 		select {
 		case <-worker.ctx.Done():
 			return
 		default:
 			// do something here
-			fmt.Printf("%s do something here, %s\n", worker.Name(), time.Now().Format(time.DateTime))
-			time.Sleep(time.Hour)
+			if index%60*60 == 0 {
+				fmt.Printf("%s do something here, %s\n", worker.Name(), time.Now().Format(time.DateTime))
+			}
+			time.Sleep(time.Second)
 		}
+		index++
 	}
 }
 
