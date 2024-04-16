@@ -34,7 +34,6 @@ DDD包含4层，将领域模型和业务逻辑分离出来，并减少对基础�
 │  └─swagger      # API 文档 
 .
 ```
-另外我顺便把
 
 
 ### 2.2 应用层
@@ -157,7 +156,7 @@ pcq -t go [项目名]
 ```
 脚本已同时发布到npm，在安装有nodejs的环境下，可以通过npx使用:
 ```bash
-npx pqc -t react test
+npx pqc -t go test
 ```
 然后初始化为git仓库，并自行关联远程仓库即可：
 ```bash
