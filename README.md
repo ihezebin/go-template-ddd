@@ -165,7 +165,7 @@ git init
 ```
 Example：
 ```bash
-hezebin@ ~ go run main.go -t go github.com/ihezbien/test     
+hezebin@ ~ pcq -t go github.com/ihezbien/test     
 
 Project name: test, Mod name: github.com/ihezbien/test
 
