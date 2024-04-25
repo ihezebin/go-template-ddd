@@ -1,6 +1,6 @@
 module github.com/ihezebin/go-template-ddd
 
-go 1.21.5
+go 1.22.2
 
 require (
 	github.com/apache/pulsar-client-go v0.12.1
@@ -65,7 +65,6 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/jonboulle/clockwork v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.17.8 // indirect
@@ -130,7 +129,7 @@ require (
 	github.com/fatih/camelcase v1.0.0 // indirect
 	github.com/fatih/structtag v1.2.0 // indirect
 	github.com/golang/protobuf v1.5.4
-	github.com/ihezebin/oneness v1.0.16
+	github.com/ihezebin/oneness v1.0.20
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible // indirect
 	github.com/lestrrat-go/strftime v1.0.4 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect

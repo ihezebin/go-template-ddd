@@ -30,7 +30,7 @@ func Run(ctx context.Context) error {
 
 	app := &cli.App{
 		Name:    "go-template-ddd",
-		Version: "v1.0.0",
+		Version: "v1.0.1",
 		Usage:   "Rapid construction template of Web service based on DDD architecture",
 		Authors: []*cli.Author{
 			{Name: "hezebin", Email: "ihezebin@qq.com"},
@@ -114,7 +114,9 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 	}
 
 	// init repository
-	repository.Init()
+	if conf.MysqlDsn != "" || conf.MongoDsn != "" {
+		repository.Init()
+	}
 
 	// init pubsub
 	if conf.Pulsar != nil {

@@ -1,16 +1,16 @@
 service_name = "go-template-ddd-toml"
 port = 8080
 
-mongo_dsn = "mongodb://root:root@127.0.0.1:27017/go-template-ddd?authSource=admin"
-mysql_dsn = "mysql://root:root@127.0.0.1:3306/go-template-ddd?charset=utf8mb4&parseTime=True&loc=Local"
+#mongo_dsn = "mongodb://root:root@127.0.0.1:27017/go-template-ddd?authSource=admin"
+#mysql_dsn = "mysql://root:root@127.0.0.1:3306/go-template-ddd?charset=utf8mb4&parseTime=True&loc=Local"
 
 [logger]
     level = "info"
     filename = "go-template-ddd.log"
 
-[redis]
-    addr = "127.0.0.1:6379"
-    password = "root"
+#[redis]
+#    addr = "127.0.0.1:6379"
+#    password = "root"
 
 #[pulsar]
 #    url = "pulsar://localhost:6650"

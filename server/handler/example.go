@@ -48,7 +48,7 @@ func (h *ExampleHandler) Login(ctx context.Context, req *dto.ExampleLoginReq) (*
 		valication.Field(&req.Username, valication.Required),
 		valication.Field(&req.Password, valication.Required),
 	); err != nil {
-		h.logger.WithError(err).Error(ctx, "validate struct error, req: %v", req)
+		h.logger.WithError(err).Errorf(ctx, "validate struct error, req: %v", req)
 		return nil, httpserver.ErrorWithBadRequest()
 	}
 
@@ -73,7 +73,7 @@ func (h *ExampleHandler) Register(c *gin.Context, req *dto.ExampleRegisterReq) (
 		valication.Field(&req.Password, valication.Required),
 		valication.Field(&req.Email, valication.Required),
 	); err != nil {
-		h.logger.WithError(err).Error(ctx, "validate struct error, req: %v", req)
+		h.logger.WithError(err).Errorf(ctx, "validate struct error, req: %v", req)
 		return nil, httpserver.ErrorWithBadRequest()
 	}
 

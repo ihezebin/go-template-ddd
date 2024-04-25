@@ -27,6 +27,7 @@ func TestPulsar(t *testing.T) {
 		})
 		if err != nil {
 			t.Fatal(err)
+			return
 		}
 		defer consumer.Close()
 		defer consumer.Unsubscribe()

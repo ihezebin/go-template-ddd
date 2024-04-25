@@ -1,4 +1,8 @@
-FROM scratch
-WORKDIR /app
-COPY dist/go-template-ddd /app/
-ENTRYPOINT ["/app/go-template-ddd"]
+FROM alpine
+
+WORKDIR /root
+
+COPY build/${PROJECT_NAME} /root/
+COPY config/config.toml /root/
+
+CMD ["/root/go-template-ddd", "-c", "/root/config.toml"]
