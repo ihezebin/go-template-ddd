@@ -130,15 +130,15 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 		}
 	}
 
-	// init service
-	service.Init()
-
 	// init email
 	if conf.Email != nil {
 		if err := email.Init(*conf.Email); err != nil {
 			return errors.Wrap(err, "init email client error")
 		}
 	}
+
+	// init service
+	service.Init()
 
 	return nil
 }
