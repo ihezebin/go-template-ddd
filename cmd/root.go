@@ -8,6 +8,7 @@ import (
 
 	"github.com/ihezebin/go-template-ddd/component/cache"
 	"github.com/ihezebin/go-template-ddd/component/email"
+	"github.com/ihezebin/go-template-ddd/component/oss"
 	"github.com/ihezebin/go-template-ddd/component/pubsub"
 	"github.com/ihezebin/go-template-ddd/component/storage"
 	"github.com/ihezebin/go-template-ddd/config"
@@ -102,6 +103,13 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 	if conf.MongoDsn != "" {
 		if err := storage.InitMongoStorageClient(ctx, conf.MongoDsn); err != nil {
 			return errors.Wrap(err, "init mongo storage client error")
+		}
+	}
+
+	// init oss
+	if conf.OSSDsn != "" {
+		if err := oss.Init(conf.OSSDsn); err != nil {
+			return errors.Wrap(err, "init oss client error")
 		}
 	}
 

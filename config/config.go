@@ -14,6 +14,7 @@ type Config struct {
 	Port        uint          `json:"port" mapstructure:"port"`
 	MongoDsn    string        `json:"mongo_dsn" mapstructure:"mongo_dsn"`
 	MysqlDsn    string        `json:"mysql_dsn" mapstructure:"mysql_dsn"`
+	OSSDsn      string        `json:"oss_dsn" mapstructure:"oss_dsn"`
 	Pwd         string        `json:"-" mapstructure:"-"`
 	Logger      *LoggerConfig `json:"logger" mapstructure:"logger"`
 	Redis       *RedisConfig  `json:"redis" mapstructure:"redis"`

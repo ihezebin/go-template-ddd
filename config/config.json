@@ -7,6 +7,7 @@
   },
   "mongo_dsn": "mongodb://user:password@127.0.0.1:27017/example?authSource=admin",
   "mysql_dsn": "mysql://root:root@127.0.0.1:3306/go-template-ddd?charset=utf8mb4&parseTime=True&loc=Local",
+  "oss_dsn": "minio://CscaPrbfoRO0EapeM56m:RNxYKk9XtdIAyFnCHNLnyYei2tmX4L59ACeDe0Ap@127.0.0.1:9000/test",
   "redis": {
     "addr": "127.0.0.1:6379",
     "password": "root"
