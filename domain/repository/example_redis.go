@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/go-redis/redis/v8"
 	"github.com/ihezebin/go-template-ddd/component/cache"
 	"github.com/ihezebin/go-template-ddd/domain/entity"
 	"github.com/pkg/errors"
+	"github.com/redis/go-redis/v9"
 )
 
 type exampleRedisRepository struct {

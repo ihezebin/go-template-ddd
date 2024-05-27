@@ -36,8 +36,8 @@ type KafkaConfig struct {
 }
 
 type RedisConfig struct {
-	Addr     string `json:"addr" mapstructure:"addr"`
-	Password string `json:"password" mapstructure:"password"`
+	Addrs    []string `json:"addrs" mapstructure:"addrs"`
+	Password string   `json:"password" mapstructure:"password"`
 }
 
 type LoggerConfig struct {

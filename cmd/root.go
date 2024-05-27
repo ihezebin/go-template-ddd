@@ -116,7 +116,7 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 	// init cache
 	cache.InitMemoryCache(time.Minute*5, time.Minute)
 	if conf.Redis != nil {
-		if err := cache.InitRedisCache(ctx, conf.Redis.Addr, conf.Redis.Password); err != nil {
+		if err := cache.InitRedisCache(ctx, conf.Redis.Addrs, conf.Redis.Password); err != nil {
 			return errors.Wrap(err, "init redis cache client error")
 		}
 	}
