@@ -3,7 +3,7 @@
   "port": 8980,
   "logger": {
     "level": "info",
-    "filename": "go-template-ddd.log"
+    "filename": "log/go-template-ddd.log"
   },
   "mongo_dsn": "mongodb://user:password@127.0.0.1:27017/example?authSource=admin",
   "mysql_dsn": "mysql://root:root@127.0.0.1:3306/go-template-ddd?charset=utf8mb4&parseTime=True&loc=Local",

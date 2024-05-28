@@ -8,7 +8,7 @@ port = 8080
 
 [logger]
     level = "info"
-    filename = "go-template-ddd.log"
+    filename = "log/go-template-ddd.log"
 
 #[redis]
 #    addrs = ["127.0.0.1:6379"]
