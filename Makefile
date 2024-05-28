@@ -16,7 +16,7 @@ package: tag clean
 .PHONY: build
 tag: build
 	docker login --username=$(DOCKER_USER) --password=$(DOCKER_PWD) $(DOCKER_REGISTRY)
-	docker build --build-arg PROJECT_NAME=$(PROJECT_NAME) --build-arg TAG=$(TAG) -t $(DOCKER_TAG) -f Dockerfile .
+	docker build --platform linux/amd64 --build-arg PROJECT_NAME=$(PROJECT_NAME) --build-arg TAG=$(TAG) -t $(DOCKER_TAG) -f Dockerfile .
 	docker push $(DOCKER_TAG)
 	echo $(DOCKER_TAG)
 
