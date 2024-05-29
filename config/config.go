@@ -1,6 +1,7 @@
 package config
 
 import (
+	"encoding/json"
 	"os"
 
 	"github.com/ihezebin/oneness/config"
@@ -46,6 +47,11 @@ type LoggerConfig struct {
 }
 
 var gConfig *Config = &Config{}
+
+func (c *Config) String() string {
+	data, _ := json.Marshal(c)
+	return string(data)
+}
 
 func GetConfig() *Config {
 	return gConfig

@@ -58,7 +58,7 @@ func Run(ctx context.Context) error {
 				return errors.Wrap(err, "init components error")
 			}
 
-			logger.Debugf(ctx, "component init success, config: %+v", *conf)
+			logger.Debugf(ctx, "component init success, config: %+v", conf.String())
 
 			return nil
 		},
