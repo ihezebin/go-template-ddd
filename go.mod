@@ -145,7 +145,7 @@ require (
 	github.com/fatih/camelcase v1.0.0 // indirect
 	github.com/fatih/structtag v1.2.0 // indirect
 	github.com/golang/protobuf v1.5.4
-	github.com/ihezebin/oneness v1.0.21
+	github.com/ihezebin/oneness v1.0.25
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible // indirect
 	github.com/lestrrat-go/strftime v1.0.4 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
