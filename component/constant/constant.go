@@ -7,4 +7,6 @@ const (
 	HeaderKeyUid   = "H-Uid"
 
 	QueryKeyUid = "h_uid"
+
+	UsernameAdmin = "hezebin"
 )
