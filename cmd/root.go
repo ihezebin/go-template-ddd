@@ -86,7 +86,7 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 	if conf.Logger != nil {
 		logger.ResetLoggerWithOptions(
 			logger.WithServiceName(conf.ServiceName),
-			logger.WithCallerHook(),
+			logger.WithPrettyCallerHook(),
 			logger.WithTimestampHook(),
 			logger.WithLevel(conf.Logger.Level),
 			logger.WithLocalFsHook(filepath.Join(conf.Pwd, conf.Logger.Filename)),
