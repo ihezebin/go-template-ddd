@@ -53,7 +53,7 @@ func Run(ctx context.Context) error {
 			if err != nil {
 				return errors.Wrapf(err, "load config error, path: %s", configPath)
 			}
-			logger.Debugf(ctx, "component init success, config: %+v", *conf)
+			logger.Debugf(ctx, "load config: %+v", conf.String())
 
 			if err = initComponents(ctx, conf); err != nil {
 				return errors.Wrap(err, "init components error")
