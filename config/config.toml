@@ -10,12 +10,18 @@ port = 8080
     level = "info"
     filename = "log/go-template-ddd.log"
 
+#[email]
+#    host="smtp.qq.com"
+#    port=587
+#    username="xxx@qq.com"
+#    password="xxxxx"
+
 #[redis]
 #    addrs = ["127.0.0.1:6379"]
 #    password = "root"
 #[redis]
-#addrs = ["redis-sts-0.redis.default:7000", "redis-sts-1.redis.default:7000", "redis-sts-2.redis.default:7000"]
-#password = "root"
+#   addrs = ["redis-sts-0.redis.default:7000", "redis-sts-1.redis.default:7000", "redis-sts-2.redis.default:7000"]
+#   password = "root"
 
 #[pulsar]
 #    url = "pulsar://localhost:6650"
