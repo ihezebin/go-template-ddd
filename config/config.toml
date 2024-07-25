@@ -2,7 +2,7 @@ service_name = "go-template-ddd-toml"
 port = 8080
 
 #mongo_dsn = "mongodb://root:root@127.0.0.1:27017/go-template-ddd?authSource=admin"
-#mongo_dsn = "mongodb://hezebin:root@mongo-sts-0.mongo.default:27017,mongo-sts-1.mongo.default:27017/blog?authSource=admin"
+#mongo_dsn = "mongodb://hezebin:root@mongo-sts-0.mongo.default:27017,mongo-sts-1.mongo.default:27017/blog?authSource=admin&replicaSet=hezebins
 #mysql_dsn = "mysql://root:root@127.0.0.1:3306/go-template-ddd?charset=utf8mb4&parseTime=True&loc=Local"
 #oss_dsn = "minio://CscaPrbfoRO0EapeM56m:RNxYKk9XtdIAyFnCHNLnyYei2tmX4L59ACeDe0Ap@127.0.0.1:9000/test"
 
