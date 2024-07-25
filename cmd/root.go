@@ -18,6 +18,7 @@ import (
 	"github.com/ihezebin/go-template-ddd/server"
 	"github.com/ihezebin/go-template-ddd/worker"
 	"github.com/ihezebin/go-template-ddd/worker/example"
+	_ "github.com/ihezebin/oneness"
 	"github.com/ihezebin/oneness/logger"
 	"github.com/pkg/errors"
 	"github.com/urfave/cli/v2"
@@ -89,7 +90,9 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 			logger.WithPrettyCallerHook(),
 			logger.WithTimestampHook(),
 			logger.WithLevel(conf.Logger.Level),
-			logger.WithLocalFsHook(filepath.Join(conf.Pwd, conf.Logger.Filename)),
+			//logger.WithLocalFsHook(filepath.Join(conf.Pwd, conf.Logger.Filename)),
+			// 每天切割，保留 3 天的日志
+			logger.WithRotateLogsHook(filepath.Join(conf.Pwd, conf.Logger.Filename), time.Hour*24, time.Hour*24*3),
 		)
 	}
 

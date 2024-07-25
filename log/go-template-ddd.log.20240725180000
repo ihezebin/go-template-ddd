@@ -1,0 +1,4 @@
+{"file":"server.go:42","func":"github.com/ihezebin/oneness/httpserver.Run.func1","level":"info","msg":"http server is starting in port: 8080","service":"go-template-ddd-toml","time":"2024-07-25 18:56:57","timestamp":1721905017}
+{"file":"server.go:57","func":"github.com/ihezebin/oneness/httpserver.Run","level":"info","msg":"got signal interrupt, http server exit","service":"go-template-ddd-toml","time":"2024-07-25 18:56:58","timestamp":1721905018}
+{"file":"server.go:52","func":"github.com/ihezebin/oneness/httpserver.Run.func1","level":"info","msg":"http server shutdown","service":"go-template-ddd-toml","time":"2024-07-25 18:56:58","timestamp":1721905018}
+{"file":"worker.go:48","func":"github.com/ihezebin/go-template-ddd/worker.Wait","level":"info","msg":"all workers closed","service":"go-template-ddd-toml","time":"2024-07-25 18:56:59","timestamp":1721905019}

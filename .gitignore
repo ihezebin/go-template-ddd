@@ -1,4 +1,6 @@
 .idea
 
-*.log
-*.err.log
+log/*
+
+config/config.toml
+config/config.json

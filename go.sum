@@ -190,6 +190,12 @@ github.com/ihezebin/oneness v1.0.26 h1:sKBFCekTePeClfiaNePng/bAi7JIgf/y07FSLdqEX
 github.com/ihezebin/oneness v1.0.26/go.mod h1:CqMInorrnIaEKOzzAnEmISRBggNdDns8CeKg002wXoM=
 github.com/ihezebin/oneness v1.0.27 h1:fD1T5VFi8TOn1mMlskJkgldooLRTTVEvJN2a4B6HpEs=
 github.com/ihezebin/oneness v1.0.27/go.mod h1:CqMInorrnIaEKOzzAnEmISRBggNdDns8CeKg002wXoM=
+github.com/ihezebin/oneness v1.0.28 h1:NA/n90L6la3IGm32GbqrQUR8h+VN2X7iEZRpbkH6Up0=
+github.com/ihezebin/oneness v1.0.28/go.mod h1:CqMInorrnIaEKOzzAnEmISRBggNdDns8CeKg002wXoM=
+github.com/ihezebin/oneness v1.0.29 h1:V3h/o78zagABQi6JA1cqYSagNCHioewynzK3l79k3i0=
+github.com/ihezebin/oneness v1.0.29/go.mod h1:CqMInorrnIaEKOzzAnEmISRBggNdDns8CeKg002wXoM=
+github.com/ihezebin/oneness v1.0.30 h1:sq5cVDGAuQmVBKcKukOe8sDC504W3P1aMTmtm1xYWjs=
+github.com/ihezebin/oneness v1.0.30/go.mod h1:CqMInorrnIaEKOzzAnEmISRBggNdDns8CeKg002wXoM=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=
 github.com/jinzhu/inflection v1.0.0/go.mod h1:h+uFLlag+Qp1Va5pdKtLDYj+kHp5pxUVkryuEj+Srlc=
 github.com/jinzhu/now v1.1.5 h1:/o9tlHleP7gOFmsnYNz3RGnqzefHA47wQpKrrdTIwXQ=
