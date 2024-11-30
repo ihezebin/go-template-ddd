@@ -1,4 +1,4 @@
-package email
+package emailc
 
 import (
 	"github.com/ihezebin/oneness/email"

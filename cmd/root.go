@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/ihezebin/go-template-ddd/component/cache"
-	"github.com/ihezebin/go-template-ddd/component/email"
+	"github.com/ihezebin/go-template-ddd/component/emailc"
 	"github.com/ihezebin/go-template-ddd/component/oss"
 	"github.com/ihezebin/go-template-ddd/component/pubsub"
 	"github.com/ihezebin/go-template-ddd/component/storage"
@@ -142,7 +142,7 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 
 	// init email
 	if conf.Email != nil {
-		if err := email.Init(*conf.Email); err != nil {
+		if err := emailc.Init(*conf.Email); err != nil {
 			return errors.Wrap(err, "init email client error")
 		}
 	}
