@@ -1,4 +1,14 @@
 # go-template-ddd
+
+参考：
+- [美团DDD实践](https://tech.meituan.com/2017/12/22/ddd-in-practice.html)
+- [DDD靠谱吗](https://www.zhihu.com/question/328870859)
+- [一文看懂DDD领域驱动设计](https://zhuanlan.zhihu.com/p/347603268)
+- [DDD领域驱动设计实战-分层架构及代码目录结构](https://blog.csdn.net/qq_33589510/article/details/108991348?utm_source=app&app_version=4.15.0&code=app_1562916241&uLinkId=usr1mkqgl919blen)
+- [DDD（领域驱动设计）总结](https://blog.csdn.net/woshihyykk/article/details/108538608?utm_source=app&app_version=4.15.0&code=app_1562916241&uLinkId=usr1mkqgl919blen)
+- [聊聊golang的DDD项目结构
+  ](https://segmentfault.com/a/1190000039397677)
+
 ## 1.简述
 基于DDD架构的Web服务快速构建模板。
 
