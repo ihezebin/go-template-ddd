@@ -162,11 +162,11 @@ DDD包含4层，将领域模型和业务逻辑分离出来，并减少对基础�
 ## 6.生成项目
 从`https://github.com/ihezebin/project-create-quickly.git`中下载可执行程序`pcq`，执行下述命令，将自动拉取模版项目并初始化:
 ```bash
-pcq -t go [项目名] 
+pcq -t go-ddd [项目名] 
 ```
 脚本已同时发布到npm，在安装有nodejs的环境下，可以通过npx使用:
 ```bash
-npx pqc -t go test
+npx pqc -t go-ddd test
 ```
 然后初始化为git仓库，并自行关联远程仓库即可：
 ```bash
