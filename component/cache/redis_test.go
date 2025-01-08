@@ -5,14 +5,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ihezebin/go-template-ddd/domain/entity"
 	"github.com/pkg/errors"
 	"github.com/redis/go-redis/v9"
+
+	"github.com/ihezebin/go-template-ddd/domain/entity"
 )
 
 func TestRedis(t *testing.T) {
 	ctx := context.Background()
-	if err := InitRedisCache(ctx, "127.0.0.1:6379", "root"); err != nil {
+	if err := InitRedisCache(ctx, []string{"127.0.0.1:6379"}, "root"); err != nil {
 		t.Fatal(err)
 	}
 
