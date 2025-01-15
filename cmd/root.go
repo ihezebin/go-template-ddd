@@ -6,6 +6,11 @@ import (
 	"path/filepath"
 	"time"
 
+	_ "github.com/ihezebin/oneness"
+	"github.com/ihezebin/oneness/logger"
+	"github.com/pkg/errors"
+	"github.com/urfave/cli/v2"
+
 	"github.com/ihezebin/go-template-ddd/component/cache"
 	"github.com/ihezebin/go-template-ddd/component/emailc"
 	"github.com/ihezebin/go-template-ddd/component/oss"
@@ -18,10 +23,6 @@ import (
 	"github.com/ihezebin/go-template-ddd/server"
 	"github.com/ihezebin/go-template-ddd/worker"
 	"github.com/ihezebin/go-template-ddd/worker/example"
-	_ "github.com/ihezebin/oneness"
-	"github.com/ihezebin/oneness/logger"
-	"github.com/pkg/errors"
-	"github.com/urfave/cli/v2"
 )
 
 var (
@@ -144,6 +145,13 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 	if conf.Email != nil {
 		if err := emailc.Init(*conf.Email); err != nil {
 			return errors.Wrap(err, "init email client error")
+		}
+	}
+
+	// init clickhouse
+	if conf.ClickhouseDsn != "" {
+		if err := storage.InitClickhouseStorageDatabase(ctx, conf.ClickhouseDsn); err != nil {
+			return errors.Wrap(err, "init clickhouse storage database error")
 		}
 	}
 
