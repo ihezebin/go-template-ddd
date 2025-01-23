@@ -6,9 +6,10 @@ import (
 	"path/filepath"
 	"testing"
 
+	"go.mongodb.org/mongo-driver/bson/primitive"
+
 	"github.com/ihezebin/go-template-ddd/config"
 	"github.com/ihezebin/go-template-ddd/domain/entity"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func init() {
@@ -18,12 +19,12 @@ func init() {
 
 func TestTransaction(t *testing.T) {
 	ctx := context.Background()
-	err := InitMySQLStorageClient(ctx, "mysql://root:root@127.0.0.1:3306/go-template-ddd?charset=utf8mb4&parseTime=True&loc=Local")
+	err := InitMySQLClient(ctx, "mysql://root:root@127.0.0.1:3306/go-template-ddd?charset=utf8mb4&parseTime=True&loc=Local")
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	db := MySQLStorageDatabase()
+	db := MySQLDatabase()
 	tx := db.Begin()
 	// 执行一系列数据库操作
 	// 如果出现错误，可以回滚事务

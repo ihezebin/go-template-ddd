@@ -3,10 +3,11 @@ package repository
 import (
 	"context"
 
-	"github.com/ihezebin/go-template-ddd/component/storage"
-	"github.com/ihezebin/go-template-ddd/domain/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"gorm.io/gorm"
+
+	"github.com/ihezebin/go-template-ddd/component/storage"
+	"github.com/ihezebin/go-template-ddd/domain/entity"
 )
 
 type exampleMysqlRepository struct {
@@ -45,7 +46,7 @@ func (e *exampleMysqlRepository) FindByEmail(ctx context.Context, email string) 
 
 func NewExampleMysqlRepository() ExampleRepository {
 	return &exampleMysqlRepository{
-		db: storage.MySQLStorageDatabase(),
+		db: storage.MySQLDatabase(),
 	}
 }
 

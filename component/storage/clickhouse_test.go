@@ -6,15 +6,15 @@ import (
 	"testing"
 )
 
-func TestClickhouseStorageDatabase(t *testing.T) {
+func TestClickhouseDatabase(t *testing.T) {
 	ctx := context.Background()
 	dsn := "clickhouse://localhost:9000/default"
-	err := InitClickhouseStorageDatabase(ctx, dsn)
+	err := InitClickhouseDatabase(ctx, dsn)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	conn := ClickhouseStorageConn()
+	conn := ClickhouseConn()
 	// 从 t_order_rmt 表查询id = testId 的数据
 	testId := 101
 	rows, err := conn.QueryContext(ctx, "SELECT id, sku_id FROM `t_order_rmt` WHERE id = ?", testId)

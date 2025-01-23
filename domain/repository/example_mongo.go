@@ -3,12 +3,13 @@ package repository
 import (
 	"context"
 
-	"github.com/ihezebin/go-template-ddd/component/storage"
-	"github.com/ihezebin/go-template-ddd/domain/entity"
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+
+	"github.com/ihezebin/go-template-ddd/component/storage"
+	"github.com/ihezebin/go-template-ddd/domain/entity"
 )
 
 type exampleMongoRepository struct {
@@ -19,7 +20,7 @@ const exampleCollectionName = "example"
 
 func NewExampleMongoRepository() ExampleRepository {
 	return &exampleMongoRepository{
-		coll: storage.MongoStorageDatabase().Collection(exampleCollectionName),
+		coll: storage.MongoDatabase().Collection(exampleCollectionName),
 	}
 }
 

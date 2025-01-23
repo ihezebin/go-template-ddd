@@ -99,12 +99,12 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 
 	// init storage
 	if conf.MysqlDsn != "" {
-		if err := storage.InitMySQLStorageClient(ctx, conf.MysqlDsn); err != nil {
+		if err := storage.InitMySQLClient(ctx, conf.MysqlDsn); err != nil {
 			return errors.Wrap(err, "init mysql storage client error")
 		}
 	}
 	if conf.MongoDsn != "" {
-		if err := storage.InitMongoStorageClient(ctx, conf.MongoDsn); err != nil {
+		if err := storage.InitMongoClient(ctx, conf.MongoDsn); err != nil {
 			return errors.Wrap(err, "init mongo storage client error")
 		}
 	}
@@ -150,8 +150,15 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 
 	// init clickhouse
 	if conf.ClickhouseDsn != "" {
-		if err := storage.InitClickhouseStorageDatabase(ctx, conf.ClickhouseDsn); err != nil {
+		if err := storage.InitClickhouseDatabase(ctx, conf.ClickhouseDsn); err != nil {
 			return errors.Wrap(err, "init clickhouse storage database error")
+		}
+	}
+
+	// init elasticsearch
+	if conf.ElasticsearchUrl != "" {
+		if err := storage.InitElasticsearchClient(ctx, conf.ElasticsearchUrl); err != nil {
+			return errors.Wrap(err, "init elasticsearch client error")
 		}
 	}
 

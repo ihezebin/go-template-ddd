@@ -13,15 +13,15 @@ var clickhouseDatabase *sql.DB
 
 var clickhouseConn *sql.Conn
 
-func ClickhouseStorageDatabase() *sql.DB {
+func ClickhouseDatabase() *sql.DB {
 	return clickhouseDatabase
 }
 
-func ClickhouseStorageConn() *sql.Conn {
+func ClickhouseConn() *sql.Conn {
 	return clickhouseConn
 }
 
-func InitClickhouseStorageDatabase(ctx context.Context, dsn string) error {
+func InitClickhouseDatabase(ctx context.Context, dsn string) error {
 	opt, err := clickhouse.ParseDSN(dsn)
 	if err != nil {
 		return errors.Wrap(err, "clickhouse parse dsn error")

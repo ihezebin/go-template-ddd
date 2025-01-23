@@ -13,15 +13,15 @@ import (
 var mongoClient *mongo.Client
 var mongoDatabase *mongo.Database
 
-func MongoStorageClient() *mongo.Client {
+func MongoClient() *mongo.Client {
 	return mongoClient
 }
 
-func MongoStorageDatabase() *mongo.Database {
+func MongoDatabase() *mongo.Database {
 	return mongoDatabase
 }
 
-func InitMongoStorageClient(ctx context.Context, dsn string) error {
+func InitMongoClient(ctx context.Context, dsn string) error {
 	u, err := url.Parse(dsn)
 	if err != nil {
 		return errors.Wrap(err, "mongo dsn parse error")

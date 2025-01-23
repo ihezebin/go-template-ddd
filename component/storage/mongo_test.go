@@ -4,19 +4,20 @@ import (
 	"context"
 	"testing"
 
-	"github.com/ihezebin/go-template-ddd/domain/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+
+	"github.com/ihezebin/go-template-ddd/domain/entity"
 )
 
 func TestMongo(t *testing.T) {
 	ctx := context.Background()
-	err := InitMongoStorageClient(ctx, "mongodb://root:root@localhost:27017/go-template-ddd?authSource=admin")
+	err := InitMongoClient(ctx, "mongodb://root:root@localhost:27017/go-template-ddd?authSource=admin")
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	collection := MongoStorageDatabase().Collection("example")
+	collection := MongoDatabase().Collection("example")
 	_, err = collection.InsertOne(ctx, &entity.Example{
 		Id:       primitive.NewObjectID().Hex(),
 		Username: "admin",

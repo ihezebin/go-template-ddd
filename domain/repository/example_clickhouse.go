@@ -21,7 +21,7 @@ func (e *exampleClickhouseRepository) InsertOne(ctx context.Context, example *en
 		INSERT INTO examples (id, username, password, email, salt)
 		VALUES (?, ?, ?, ?, ?, ?, ?)
 	`
-	_, err := storage.ClickhouseStorageConn().ExecContext(ctx, query,
+	_, err := storage.ClickhouseConn().ExecContext(ctx, query,
 		example.Id,
 		example.Username,
 		example.Password,
@@ -40,7 +40,7 @@ func (e *exampleClickhouseRepository) FindByUsername(ctx context.Context, userna
 	`
 
 	example := &entity.Example{}
-	err := storage.ClickhouseStorageConn().QueryRowContext(ctx, query, username).Scan(
+	err := storage.ClickhouseConn().QueryRowContext(ctx, query, username).Scan(
 		&example.Id,
 		&example.Username,
 		&example.Password,
@@ -63,7 +63,7 @@ func (e *exampleClickhouseRepository) FindByEmail(ctx context.Context, email str
 	`
 
 	example := &entity.Example{}
-	err := storage.ClickhouseStorageConn().QueryRowContext(ctx, query, email).Scan(
+	err := storage.ClickhouseConn().QueryRowContext(ctx, query, email).Scan(
 		&example.Id,
 		&example.Username,
 		&example.Password,

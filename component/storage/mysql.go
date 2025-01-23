@@ -13,21 +13,22 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/mysql"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
-	"github.com/ihezebin/go-template-ddd/config"
 	"github.com/pkg/errors"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+
+	"github.com/ihezebin/go-template-ddd/config"
 )
 
 var mysqlDatabase *gorm.DB
 
-func MySQLStorageDatabase() *gorm.DB {
+func MySQLDatabase() *gorm.DB {
 	return mysqlDatabase
 }
 
-// InitMySQLStorageClient init mysql storage client
+// InitMySQLClient init mysql storage client
 // dsn: "user:password@tcp(host:port)/dbname?charset=utf8&parseTime=True&loc=Local"
-func InitMySQLStorageClient(ctx context.Context, dsn string) error {
+func InitMySQLClient(ctx context.Context, dsn string) error {
 	mysqlDsn, err := parseMysqlDSN(dsn)
 	if err != nil {
 		return errors.Wrap(err, "mysql parse dsn error")

@@ -11,18 +11,19 @@ import (
 )
 
 type Config struct {
-	ServiceName   string        `json:"service_name" mapstructure:"service_name"`
-	Port          uint          `json:"port" mapstructure:"port"`
-	MongoDsn      string        `json:"mongo_dsn" mapstructure:"mongo_dsn"`
-	MysqlDsn      string        `json:"mysql_dsn" mapstructure:"mysql_dsn"`
-	ClickhouseDsn string        `json:"clickhouse_dsn" mapstructure:"clickhouse_dsn"`
-	OSSDsn        string        `json:"oss_dsn" mapstructure:"oss_dsn"`
-	Pwd           string        `json:"-" mapstructure:"-"`
-	Logger        *LoggerConfig `json:"logger" mapstructure:"logger"`
-	Redis         *RedisConfig  `json:"redis" mapstructure:"redis"`
-	Email         *email.Config `json:"email" mapstructure:"email"`
-	Pulsar        *PulsarConfig `json:"pulsar" mapstructure:"pulsar"`
-	Kafka         *KafkaConfig  `json:"kafka" mapstructure:"kafka"`
+	ServiceName      string        `json:"service_name" mapstructure:"service_name"`
+	Port             uint          `json:"port" mapstructure:"port"`
+	MongoDsn         string        `json:"mongo_dsn" mapstructure:"mongo_dsn"`
+	MysqlDsn         string        `json:"mysql_dsn" mapstructure:"mysql_dsn"`
+	ClickhouseDsn    string        `json:"clickhouse_dsn" mapstructure:"clickhouse_dsn"`
+	OSSDsn           string        `json:"oss_dsn" mapstructure:"oss_dsn"`
+	ElasticsearchUrl string        `json:"elasticsearch_url" mapstructure:"elasticsearch_url"`
+	Pwd              string        `json:"-" mapstructure:"-"`
+	Logger           *LoggerConfig `json:"logger" mapstructure:"logger"`
+	Redis            *RedisConfig  `json:"redis" mapstructure:"redis"`
+	Email            *email.Config `json:"email" mapstructure:"email"`
+	Pulsar           *PulsarConfig `json:"pulsar" mapstructure:"pulsar"`
+	Kafka            *KafkaConfig  `json:"kafka" mapstructure:"kafka"`
 }
 
 type PulsarConfig struct {
