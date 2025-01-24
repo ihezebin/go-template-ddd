@@ -12,7 +12,7 @@ import (
 
 func TestMongo(t *testing.T) {
 	ctx := context.Background()
-	err := InitMongoClient(ctx, "mongodb://root:root@localhost:27017/go-template-ddd?authSource=admin")
+	err := InitMongoClient(ctx, "mongodb://root:root@localhost:27017/go-template-ddd?authSource=admin&replicaSet=rs0")
 	if err != nil {
 		t.Fatal(err)
 	}
