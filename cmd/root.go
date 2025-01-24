@@ -8,6 +8,7 @@ import (
 
 	_ "github.com/ihezebin/oneness"
 	"github.com/ihezebin/oneness/logger"
+	"github.com/ihezebin/oneness/runner"
 	"github.com/pkg/errors"
 	"github.com/urfave/cli/v2"
 
@@ -64,17 +65,12 @@ func Run(ctx context.Context) error {
 			return nil
 		},
 		Action: func(c *cli.Context) error {
-			worker.Register(example.NewExampleWorker())
-			worker.Run(ctx)
-			defer worker.Wait(ctx)
+			tasks := make([]runner.Task, 0)
+			tasks = append(tasks, worker.NewWorKeeper(example.NewExampleWorker()))
+			tasks = append(tasks, cron.NewCron())
+			tasks = append(tasks, server.NewServer(ctx, config.GetConfig().Port))
 
-			if err := cron.Run(ctx); err != nil {
-				logger.WithError(err).Fatalf(ctx, "cron run error")
-			}
-
-			if err := server.Run(ctx, config.GetConfig().Port); err != nil {
-				logger.WithError(err).Fatalf(ctx, "server run error, port: %d", config.GetConfig().Port)
-			}
+			runner.NewRunner(tasks...).Run(ctx)
 
 			return nil
 		},

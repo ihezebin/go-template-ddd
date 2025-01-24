@@ -7,18 +7,35 @@ import (
 	"github.com/ihezebin/oneness/logger"
 )
 
-type workerKeeper struct {
+type worKeeper struct {
 	wg      *sync.WaitGroup
 	workers []Worker
 }
 
-var keeper *workerKeeper
+func (k *worKeeper) Name() string {
+	return "worker_keeper"
+}
 
-func init() {
-	keeper = &workerKeeper{
-		wg:      new(sync.WaitGroup),
-		workers: make([]Worker, 0),
+func (k *worKeeper) Run(ctx context.Context) error {
+	for _, worker := range k.workers {
+		k.wg.Add(1)
+		go func(worker Worker) {
+			if err := worker.Run(ctx); err != nil {
+				logger.WithError(err).Errorf(ctx, "worker [%s] run err", worker.Name())
+			}
+		}(worker)
 	}
+	k.wg.Wait()
+	return nil
+}
+
+func (k *worKeeper) Close(ctx context.Context) error {
+	for _, worker := range k.workers {
+		worker.Cancel()
+		k.wg.Done()
+	}
+	logger.Info(ctx, "all workers closed")
+	return nil
 }
 
 type Worker interface {
@@ -28,27 +45,9 @@ type Worker interface {
 	Cancel()
 }
 
-func Run(ctx context.Context) {
-	for _, worker := range keeper.workers {
-		keeper.wg.Add(1)
-		go func(worker Worker) {
-			if err := worker.Run(ctx); err != nil {
-				logger.WithError(err).Errorf(ctx, "worker [%s] run err", worker.Name())
-			}
-		}(worker)
+func NewWorKeeper(workers ...Worker) *worKeeper {
+	return &worKeeper{
+		wg:      new(sync.WaitGroup),
+		workers: workers,
 	}
-}
-
-// Wait 等待 worker 依次平滑退出
-func Wait(ctx context.Context) {
-	for _, worker := range keeper.workers {
-		worker.Cancel()
-		keeper.wg.Done()
-	}
-	logger.Info(ctx, "all workers closed")
-	keeper.wg.Wait()
-}
-
-func Register(workers ...Worker) {
-	keeper.workers = append(keeper.workers, workers...)
 }

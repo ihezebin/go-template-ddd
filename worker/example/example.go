@@ -6,8 +6,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ihezebin/go-template-ddd/worker"
 	"github.com/pkg/errors"
+
+	"github.com/ihezebin/go-template-ddd/worker"
 )
 
 type exampleWorker struct {
