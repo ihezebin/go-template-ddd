@@ -7,6 +7,8 @@ import (
 	"time"
 
 	"github.com/apache/pulsar-client-go/pulsar"
+	"github.com/ihezebin/oneness/pubsub"
+	pubsubPulsar "github.com/ihezebin/oneness/pubsub/pulsar"
 )
 
 func TestPulsar(t *testing.T) {
@@ -64,4 +66,57 @@ func TestPulsar(t *testing.T) {
 	}
 
 	time.Sleep(time.Second * 10)
+}
+
+func TestPulsarSubscribe(t *testing.T) {
+	if err := InitPulsarSubscribe(pubsubPulsar.SubOptions{
+		ClientOptions: pulsar.ClientOptions{
+			URL: "pulsar://localhost:6650",
+		},
+		ConsumerOptions: pulsar.ConsumerOptions{
+			Topic:            "persistent://public/default/test",
+			SubscriptionName: "test",
+			Type:             pulsar.Exclusive,
+		},
+	}); err != nil {
+		t.Fatal(err)
+	}
+
+	consumer := PulsarSubscriber()
+	go func() {
+		time.Sleep(time.Second * 30)
+		consumer.Close()
+	}()
+
+	ctx := context.Background()
+
+	consumer.Receive(ctx, func(ctx context.Context, msg pubsub.ConsumerMessage) error {
+		t.Log(string(msg.Payload()))
+		return nil
+	})
+
+	t.Log("receive success")
+}
+
+func TestPulsarPublish(t *testing.T) {
+	if err := InitPulsarPublish(pubsubPulsar.PubOptions{
+		ClientOptions: pulsar.ClientOptions{
+			URL: "pulsar://localhost:6650",
+		},
+		ProducerOptions: pulsar.ProducerOptions{
+			Topic: "persistent://public/default/test",
+		},
+	}); err != nil {
+		t.Fatal(err)
+	}
+
+	publisher := PulsarPublisher()
+	ctx := context.Background()
+	err := publisher.Send(ctx, pubsub.ProducerMessage{
+		Payload: []byte("hello"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log("send success")
 }
