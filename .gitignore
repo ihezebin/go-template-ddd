@@ -3,3 +3,12 @@
 log/**
 
 .DS_Store
+
+.idea
+
+log/**
+
+.DS_Store
+
+.vscode/**
+__debug_bin**
