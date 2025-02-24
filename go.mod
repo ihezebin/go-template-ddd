@@ -9,6 +9,7 @@ require (
 	github.com/apache/pulsar-client-go v0.14.0
 	github.com/elastic/go-elasticsearch/v8 v8.17.0
 	github.com/fatih/gomodifytags v1.16.0
+	github.com/getkin/kin-openapi v0.124.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
 	github.com/go-sql-driver/mysql v1.7.0
@@ -21,7 +22,6 @@ require (
 	github.com/redis/go-redis/v9 v9.7.0
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/segmentio/kafka-go v0.4.47
-	github.com/swaggo/swag v1.16.3
 	go.mongodb.org/mongo-driver v1.14.0
 	gorm.io/driver/mysql v1.5.6
 	gorm.io/gorm v1.25.9
@@ -34,7 +34,6 @@ require (
 	github.com/BurntSushi/toml v1.3.2 // indirect
 	github.com/ClickHouse/ch-go v0.63.1 // indirect
 	github.com/DataDog/zstd v1.5.5 // indirect
-	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/alex-ant/gomath v0.0.0-20160516115720-89013a210a82 // indirect
 	github.com/aliyun/aliyun-oss-go-sdk v3.0.2+incompatible // indirect
 	github.com/andybalholm/brotli v1.1.1 // indirect
@@ -54,7 +53,6 @@ require (
 	github.com/elastic/elastic-transport-go/v8 v8.6.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.7 // indirect
-	github.com/getkin/kin-openapi v0.124.0 // indirect
 	github.com/gin-contrib/pprof v1.5.2 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-faster/city v1.0.1 // indirect
@@ -62,8 +60,6 @@ require (
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-openapi/jsonpointer v0.21.0 // indirect
-	github.com/go-openapi/jsonreference v0.21.0 // indirect
-	github.com/go-openapi/spec v0.21.0 // indirect
 	github.com/go-openapi/swag v0.23.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
@@ -181,5 +177,4 @@ require (
 	golang.org/x/tools v0.22.0 // indirect
 	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.1.0
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	sigs.k8s.io/yaml v1.3.0 // indirect
 )
