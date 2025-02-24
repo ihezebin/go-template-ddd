@@ -19,14 +19,16 @@ func TestExampleService(t *testing.T) {
 
 	ctx := context.Background()
 
-	registerResp, err := svc.Register(ctx, &dto.ExampleRegisterReq{Username: "hezebin", Password: "123123123", Email: "hezebin@qq.com"})
+	registerReq := dto.ExampleRegisterReq{Username: "hezebin", Password: "123123123", Email: "hezebin@qq.com"}
+	registerResp, err := svc.Register(ctx, registerReq)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	t.Logf("%+v", registerResp.Example)
 
-	loginResp, err := svc.Login(ctx, &dto.ExampleLoginReq{Username: "hezebin", Password: "123123123"})
+	loginReq := dto.ExampleLoginReq{Username: "hezebin", Password: "123123123"}
+	loginResp, err := svc.Login(ctx, loginReq)
 	if err != nil {
 		t.Fatal(err)
 	}

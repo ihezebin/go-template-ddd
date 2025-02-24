@@ -6,12 +6,6 @@ import (
 	"path/filepath"
 	"time"
 
-	_ "github.com/ihezebin/oneness"
-	"github.com/ihezebin/oneness/logger"
-	"github.com/ihezebin/oneness/runner"
-	"github.com/pkg/errors"
-	"github.com/urfave/cli/v2"
-
 	"github.com/ihezebin/go-template-ddd/component/cache"
 	"github.com/ihezebin/go-template-ddd/component/emailc"
 	"github.com/ihezebin/go-template-ddd/component/oss"
@@ -24,6 +18,11 @@ import (
 	"github.com/ihezebin/go-template-ddd/server"
 	"github.com/ihezebin/go-template-ddd/worker"
 	"github.com/ihezebin/go-template-ddd/worker/example"
+	_ "github.com/ihezebin/soup"
+	"github.com/ihezebin/soup/logger"
+	"github.com/ihezebin/soup/runner"
+	"github.com/pkg/errors"
+	"github.com/urfave/cli/v2"
 )
 
 var (
@@ -65,10 +64,15 @@ func Run(ctx context.Context) error {
 			return nil
 		},
 		Action: func(c *cli.Context) error {
+			httpServer, err := server.NewServer(ctx, config.GetConfig())
+			if err != nil {
+				return errors.Wrap(err, "new http server err")
+			}
+
 			tasks := make([]runner.Task, 0)
 			tasks = append(tasks, worker.NewWorKeeper(example.NewExampleWorker()))
 			tasks = append(tasks, cron.NewCron())
-			tasks = append(tasks, server.NewServer(ctx, config.GetConfig().Port))
+			tasks = append(tasks, httpServer)
 
 			runner.NewRunner(tasks...).Run(ctx)
 

@@ -3,7 +3,7 @@ package dto
 import "github.com/ihezebin/go-template-ddd/domain/entity"
 
 type ExampleLoginReq struct {
-	Username string `json:"username"`
+	Username string `json:"username" openapi:"username"`
 	Password string `json:"password"`
 }
 

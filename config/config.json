@@ -1,5 +1,5 @@
 {
-  "service_name": "go-template-ddd-json",
+  "service_name": "go-template-ddd",
   "port": 8980,
   "logger": {
     "level": "info",

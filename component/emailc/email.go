@@ -1,7 +1,7 @@
 package emailc
 
 import (
-	"github.com/ihezebin/oneness/email"
+	"github.com/ihezebin/soup/email"
 )
 
 var client *email.Client

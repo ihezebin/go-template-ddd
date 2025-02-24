@@ -1,4 +1,4 @@
-service_name = "go-template-ddd-toml"
+service_name = "go-template-ddd"
 port = 8080
 
 #mongo_dsn = "mongodb://root:root@127.0.0.1:27017/go-template-ddd?authSource=admin&replicaSet=rs0"

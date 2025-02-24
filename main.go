@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/ihezebin/go-template-ddd/cmd"
-	"github.com/ihezebin/oneness/logger"
+	"github.com/ihezebin/soup/logger"
 )
 
 func main() {

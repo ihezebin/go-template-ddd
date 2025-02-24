@@ -3,12 +3,13 @@ package service
 import (
 	"context"
 
+	"github.com/ihezebin/soup/httpserver"
+	"github.com/ihezebin/soup/logger"
+
 	"github.com/ihezebin/go-template-ddd/application/dto"
 	"github.com/ihezebin/go-template-ddd/domain/entity"
 	"github.com/ihezebin/go-template-ddd/domain/repository"
 	"github.com/ihezebin/go-template-ddd/domain/service"
-	"github.com/ihezebin/oneness/httpserver"
-	"github.com/ihezebin/oneness/logger"
 )
 
 type ExampleApplicationService struct {
@@ -25,7 +26,7 @@ func NewExampleApplicationService(l *logger.Entry) *ExampleApplicationService {
 	}
 }
 
-func (svc *ExampleApplicationService) Login(ctx context.Context, req *dto.ExampleLoginReq) (*dto.ExampleLoginResp, error) {
+func (svc *ExampleApplicationService) Login(ctx context.Context, req dto.ExampleLoginReq) (*dto.ExampleLoginResp, error) {
 	// application service中通过调用各个 domain 中的 service 或 repository, 实现业务逻辑的编排；
 	if ok, errMsg := svc.exampleDomainService.ValidateExample(&entity.Example{
 		Username: req.Username,
@@ -59,7 +60,7 @@ func (svc *ExampleApplicationService) Login(ctx context.Context, req *dto.Exampl
 	}, nil
 }
 
-func (svc *ExampleApplicationService) Register(ctx context.Context, req *dto.ExampleRegisterReq) (*dto.ExampleRegisterResp, error) {
+func (svc *ExampleApplicationService) Register(ctx context.Context, req dto.ExampleRegisterReq) (*dto.ExampleRegisterResp, error) {
 	// application service中通过调用各个 domain 中的 service 或 repository, 实现业务逻辑的编排；
 
 	newExample := &entity.Example{

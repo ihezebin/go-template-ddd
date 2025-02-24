@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ihezebin/oneness/email"
+	"github.com/ihezebin/soup/email"
 )
 
 func TestEmail(t *testing.T) {

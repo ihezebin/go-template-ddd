@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/ihezebin/oneness/config"
-	"github.com/ihezebin/oneness/email"
-	"github.com/ihezebin/oneness/logger"
+	"github.com/ihezebin/soup/config"
+	"github.com/ihezebin/soup/email"
+	"github.com/ihezebin/soup/logger"
 	"github.com/pkg/errors"
 )
 

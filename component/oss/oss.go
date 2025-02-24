@@ -1,7 +1,7 @@
 package oss
 
 import (
-	"github.com/ihezebin/oneness/oss"
+	"github.com/ihezebin/soup/oss"
 )
 
 var client oss.Client
