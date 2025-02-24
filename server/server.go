@@ -42,7 +42,6 @@ func NewServer(ctx context.Context, conf *config.Config) (runner.Task, error) {
 				Email: "ihezebin@gmail.com",
 			},
 		}),
-
 		httpserver.WithOpenAPIServer(openapi3.Server{
 			URL:         fmt.Sprintf("http://localhost:%d", conf.Port),
 			Description: "本地开发环境",

@@ -16,7 +16,7 @@ require (
 	github.com/golang-migrate/migrate/v4 v4.17.0
 	github.com/ihezebin/jwt v1.0.0
 	github.com/ihezebin/openapi v1.0.5
-	github.com/ihezebin/soup v0.0.0-20250224101521-e11bc73cdd04
+	github.com/ihezebin/soup v0.0.0-20250224104643-67f3a1ab7639
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.7.0
