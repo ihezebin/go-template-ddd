@@ -211,8 +211,6 @@ github.com/ihezebin/openapi v1.0.5 h1:+ebff6LLDVmNDGynm/rSEujuhvXiMrS/x9rG5SIP9+
 github.com/ihezebin/openapi v1.0.5/go.mod h1:XYYr1Iu7Ayt70XhcXvNRZPoieE4uAJmqkq27FRSVFiI=
 github.com/ihezebin/soup v0.0.0-20250224103227-eb9a05359431 h1:xYo8v8cZoUUekvk0BtlwnGs/jpn4h+WgDiJAJRBWGNQ=
 github.com/ihezebin/soup v0.0.0-20250224103227-eb9a05359431/go.mod h1:emgnq+w6i81b89iMWGY5KVFi1FCFZQ1m2qRVZeq1+1E=
-github.com/ihezebin/soup v0.0.0-20250224104643-67f3a1ab7639 h1:dAkIyGOwfvm7U6xNCWYLrRB4ewxPz+8wumiwXcE/ARg=
-github.com/ihezebin/soup v0.0.0-20250224104643-67f3a1ab7639/go.mod h1:emgnq+w6i81b89iMWGY5KVFi1FCFZQ1m2qRVZeq1+1E=
 github.com/invopop/yaml v0.3.1 h1:f0+ZpmhfBSS4MhG+4HYseMdJhoeeopbSKbq5Rpeelso=
 github.com/invopop/yaml v0.3.1/go.mod h1:PMOp3nn4/12yEZUFfmOuNHJsZToEEOwoWsT+D81KkeA=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=
