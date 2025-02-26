@@ -15,24 +15,33 @@ import (
 type ExampleApplicationService struct {
 	logger               *logger.Entry
 	exampleRepository    repository.ExampleRepository
+	exampleEsRepository  repository.ExampleRepository
 	exampleDomainService service.ExampleDomainService
+	passwordEncoder      service.PasswordEncoder
 }
 
 func NewExampleApplicationService(l *logger.Entry) *ExampleApplicationService {
 	return &ExampleApplicationService{
 		logger:               l.WithField("application", "example"),
 		exampleRepository:    repository.GetExampleRepository(),
+		exampleEsRepository:  repository.GetExampleEsRepository(),
 		exampleDomainService: service.GetExampleDomainService(),
+		passwordEncoder:      service.NewMd5WithSaltPasswordEncoder(),
 	}
 }
 
 func (svc *ExampleApplicationService) Login(ctx context.Context, req dto.ExampleLoginReq) (*dto.ExampleLoginResp, error) {
 	// application service中通过调用各个 domain 中的 service 或 repository, 实现业务逻辑的编排；
-	if ok, errMsg := svc.exampleDomainService.ValidateExample(&entity.Example{
+	example := &entity.Example{
 		Username: req.Username,
 		Password: req.Password,
-	}); !ok {
-		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, errMsg)
+	}
+
+	if !example.ValidateUsernameRule() {
+		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, "账号格式不正确")
+	}
+	if !example.ValidatePasswordRule() {
+		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, "密码格式不正确")
 	}
 
 	example, err := svc.exampleRepository.FindByUsername(ctx, req.Username)
@@ -45,7 +54,12 @@ func (svc *ExampleApplicationService) Login(ctx context.Context, req dto.Example
 		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, "账号不存在")
 	}
 
-	if !example.CheckPasswordMatch(req.Password) {
+	ok, err := svc.passwordEncoder.Verify(req.Password, example.Salt, example.Password)
+	if err != nil {
+		svc.logger.WithError(err).Errorf(ctx, "verify password err, example: %+v", example)
+		return nil, httpserver.ErrorWithInternalServer()
+	}
+	if !ok {
 		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, "密码不正确")
 	}
 
@@ -68,29 +82,41 @@ func (svc *ExampleApplicationService) Register(ctx context.Context, req dto.Exam
 		Password: req.Password,
 		Email:    req.Email,
 	}
-	if ok, errMsg := svc.exampleDomainService.ValidateExample(newExample); !ok {
-		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, errMsg)
+
+	if !newExample.ValidateUsernameRule() {
+		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, "账号格式不正确")
+	}
+	if !newExample.ValidatePasswordRule() {
+		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, "密码格式不正确")
+	}
+	if !newExample.ValidateEmailRule() {
+		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, "邮箱格式不正确")
 	}
 
-	example, err := svc.exampleRepository.FindByUsername(ctx, req.Username)
+	ok, err := svc.exampleDomainService.IsEmailAlreadyExists(ctx, newExample)
 	if err != nil {
-		svc.logger.WithError(err).Errorf(ctx, "find example by username err, example: %+v", example)
+		svc.logger.WithError(err).Errorf(ctx, "is email already exists err, example: %+v", newExample)
 		return nil, httpserver.ErrorWithInternalServer()
 	}
-	if example != nil {
-		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, "账号已存在")
-	}
-
-	example, err = svc.exampleRepository.FindByEmail(ctx, req.Email)
-	if err != nil {
-		svc.logger.WithError(err).Errorf(ctx, "find example by email err, example: %+v", example)
-	}
-	if example != nil {
+	if ok {
 		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, "邮箱已绑定账号")
 	}
 
+	ok, err = svc.exampleDomainService.IsUsernameAlreadyExists(ctx, newExample)
+	if err != nil {
+		svc.logger.WithError(err).Errorf(ctx, "is username already exists err, example: %+v", newExample)
+		return nil, httpserver.ErrorWithInternalServer()
+	}
+	if ok {
+		return nil, httpserver.NewError(httpserver.CodeValidateRuleFailed, "账号已存在")
+	}
+
 	newExample.Salt = "xxxx"
-	newExample.Password = newExample.MD5PasswordWithSalt()
+	newExample.Password, err = svc.passwordEncoder.Encode(newExample.Password, newExample.Salt)
+	if err != nil {
+		svc.logger.WithError(err).Errorf(ctx, "encode password err, example: %+v", newExample)
+		return nil, httpserver.ErrorWithInternalServer()
+	}
 
 	if err := svc.exampleRepository.InsertOne(ctx, newExample); err != nil {
 		svc.logger.WithError(err).Errorf(ctx, "insert example err, example: %+v", newExample)

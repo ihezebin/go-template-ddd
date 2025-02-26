@@ -21,3 +21,13 @@ func GetExampleRepository() ExampleRepository {
 func SetExampleRepository(repo ExampleRepository) {
 	exampleRepo = repo
 }
+
+var exampleEsRepo ExampleRepository
+
+func GetExampleEsRepository() ExampleRepository {
+	return exampleEsRepo
+}
+
+func SetExampleEsRepository(repo ExampleRepository) {
+	exampleEsRepo = repo
+}

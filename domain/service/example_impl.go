@@ -1,30 +1,37 @@
 package service
 
 import (
+	"context"
 	"time"
+
+	"github.com/ihezebin/jwt"
 
 	"github.com/ihezebin/go-template-ddd/component/constant"
 	"github.com/ihezebin/go-template-ddd/domain/entity"
 	"github.com/ihezebin/go-template-ddd/domain/repository"
-	"github.com/ihezebin/jwt"
 )
 
 type exampleDomainServiceImpl struct {
 	exampleRepository repository.ExampleRepository
 }
 
-func (svc *exampleDomainServiceImpl) ValidateExample(example *entity.Example) (bool, string) {
-	if example.Username != "" && !example.ValidateUsernameRule() {
-		return false, "账号格式不正确"
-	}
-	if example.Password != "" && !example.ValidatePasswordRule() {
-		return false, "密码格式不正确"
-	}
-	if example.Email != "" && !example.ValidateEmailRule() {
-		return false, "邮箱格式不正确"
+func (svc *exampleDomainServiceImpl) IsEmailAlreadyExists(ctx context.Context, example *entity.Example) (bool, error) {
+
+	example, err := svc.exampleRepository.FindByEmail(ctx, example.Email)
+	if err != nil {
+		return false, err
 	}
 
-	return true, ""
+	return example != nil, nil
+}
+
+func (svc *exampleDomainServiceImpl) IsUsernameAlreadyExists(ctx context.Context, example *entity.Example) (bool, error) {
+	example, err := svc.exampleRepository.FindByUsername(ctx, example.Username)
+	if err != nil {
+		return false, err
+	}
+
+	return example != nil, nil
 }
 
 func (svc *exampleDomainServiceImpl) GenerateToken(example *entity.Example) (string, error) {

@@ -1,9 +1,7 @@
 package entity
 
 import (
-	"crypto/md5"
 	"encoding"
-	"encoding/hex"
 	"encoding/json"
 	"regexp"
 
@@ -19,18 +17,23 @@ type Example struct {
 	//DeletedAt gorm.DeletedAt `json:"deleted_at,omitempty" bson:"deleted_at" gorm:"column:deleted_at"`
 }
 
+var _ encoding.BinaryUnmarshaler = (*Example)(nil)
+
+// UnmarshalBinary Reids Scan use
 func (e *Example) UnmarshalBinary(data []byte) error {
 	return json.Unmarshal(data, e)
 }
 
+var _ encoding.BinaryMarshaler = (*Example)(nil)
+
+// MarshalBinary Reids Set use
 func (e *Example) MarshalBinary() (data []byte, err error) {
 	return json.Marshal(e)
 }
 
 var _ schema.Tabler = (*Example)(nil)
-var _ encoding.BinaryMarshaler = (*Example)(nil)
-var _ encoding.BinaryUnmarshaler = (*Example)(nil)
 
+// TableName Gorm use
 func (e *Example) TableName() string {
 	return "example"
 }
@@ -40,30 +43,6 @@ func (e *Example) Sensitive() *Example {
 	temp.Password = ""
 	temp.Salt = ""
 	return &temp
-}
-
-func (e *Example) MD5PasswordWithSalt() string {
-	m5 := md5.New()
-	_, err := m5.Write([]byte(e.Password))
-	if err != nil {
-		return ""
-	}
-	m5.Write([]byte(e.Salt))
-	if err != nil {
-		return e.Password
-	}
-	return hex.EncodeToString(m5.Sum(nil))
-}
-
-func (e *Example) CheckPasswordMatch(password string) bool {
-	temp := &Example{
-		Password: password,
-		Salt:     e.Salt,
-	}
-	if e.Password == temp.MD5PasswordWithSalt() {
-		return true
-	}
-	return false
 }
 
 func (e *Example) ValidateUsernameRule() bool {

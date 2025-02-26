@@ -1,11 +1,15 @@
 package service
 
 import (
+	"context"
+
 	"github.com/ihezebin/go-template-ddd/domain/entity"
 )
 
 type ExampleDomainService interface {
-	ValidateExample(example *entity.Example) (bool, string)
+	IsEmailAlreadyExists(ctx context.Context, example *entity.Example) (bool, error)
+	IsUsernameAlreadyExists(ctx context.Context, example *entity.Example) (bool, error)
+	// 可拆为单独的 token 生成器放于 domain service
 	GenerateToken(example *entity.Example) (string, error)
 }
 
