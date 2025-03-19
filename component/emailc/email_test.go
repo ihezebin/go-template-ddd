@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ihezebin/soup/email"
+	"github.com/ihezebin/olympus/email"
 )
 
 func TestEmail(t *testing.T) {

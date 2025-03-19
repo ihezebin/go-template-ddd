@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 
+	"github.com/ihezebin/olympus/logger"
+
 	"github.com/ihezebin/go-template-ddd/cmd"
-	"github.com/ihezebin/soup/logger"
 )
 
 func main() {

@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/ihezebin/soup/config"
-	"github.com/ihezebin/soup/email"
-	"github.com/ihezebin/soup/logger"
+	"github.com/ihezebin/olympus/config"
+	"github.com/ihezebin/olympus/email"
+	"github.com/ihezebin/olympus/logger"
 	"github.com/pkg/errors"
 )
 

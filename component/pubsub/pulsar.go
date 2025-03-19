@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/apache/pulsar-client-go/pulsar"
-	"github.com/ihezebin/soup/pubsub"
-	pubsubPulsar "github.com/ihezebin/soup/pubsub/pulsar"
+	"github.com/ihezebin/olympus/pubsub"
+	pubsubPulsar "github.com/ihezebin/olympus/pubsub/pulsar"
 )
 
 var pulsarClient pulsar.Client

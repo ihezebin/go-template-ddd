@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com/ihezebin/soup/httpserver"
-	"github.com/ihezebin/soup/logger"
+	"github.com/ihezebin/olympus/httpserver"
+	"github.com/ihezebin/olympus/logger"
 
 	"github.com/ihezebin/go-template-ddd/application/dto"
 	"github.com/ihezebin/go-template-ddd/domain/entity"
@@ -13,14 +13,14 @@ import (
 )
 
 type ExampleApplicationService struct {
-	logger               *logger.Entry
+	logger               logger.Logger
 	exampleRepository    repository.ExampleRepository
 	exampleEsRepository  repository.ExampleRepository
 	exampleDomainService service.ExampleDomainService
 	passwordEncoder      service.PasswordEncoder
 }
 
-func NewExampleApplicationService(l *logger.Entry) *ExampleApplicationService {
+func NewExampleApplicationService(l logger.Logger) *ExampleApplicationService {
 	return &ExampleApplicationService{
 		logger:               l.WithField("application", "example"),
 		exampleRepository:    repository.GetExampleRepository(),

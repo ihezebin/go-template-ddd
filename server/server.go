@@ -7,9 +7,9 @@ import (
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/ihezebin/go-template-ddd/config"
 	"github.com/ihezebin/go-template-ddd/server/router"
-	"github.com/ihezebin/soup/httpserver"
-	"github.com/ihezebin/soup/httpserver/middleware"
-	"github.com/ihezebin/soup/runner"
+	"github.com/ihezebin/olympus/httpserver"
+	"github.com/ihezebin/olympus/httpserver/middleware"
+	"github.com/ihezebin/olympus/runner"
 )
 
 type Body struct {

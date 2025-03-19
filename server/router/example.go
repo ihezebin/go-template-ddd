@@ -5,16 +5,16 @@ import (
 
 	"github.com/gin-gonic/gin"
 	valication "github.com/go-ozzo/ozzo-validation/v4"
+	"github.com/ihezebin/olympus/httpserver"
+	"github.com/ihezebin/olympus/logger"
 	"github.com/ihezebin/openapi"
-	"github.com/ihezebin/soup/httpserver"
-	"github.com/ihezebin/soup/logger"
 
 	"github.com/ihezebin/go-template-ddd/application/dto"
 	"github.com/ihezebin/go-template-ddd/application/service"
 )
 
 type ExampleRouter struct {
-	logger  *logger.Entry
+	logger  logger.Logger
 	service *service.ExampleApplicationService
 }
 

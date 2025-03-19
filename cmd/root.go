@@ -6,6 +6,12 @@ import (
 	"path/filepath"
 	"time"
 
+	_ "github.com/ihezebin/olympus"
+	"github.com/ihezebin/olympus/logger"
+	"github.com/ihezebin/olympus/runner"
+	"github.com/pkg/errors"
+	"github.com/urfave/cli/v2"
+
 	"github.com/ihezebin/go-template-ddd/component/cache"
 	"github.com/ihezebin/go-template-ddd/component/emailc"
 	"github.com/ihezebin/go-template-ddd/component/oss"
@@ -18,11 +24,6 @@ import (
 	"github.com/ihezebin/go-template-ddd/server"
 	"github.com/ihezebin/go-template-ddd/worker"
 	"github.com/ihezebin/go-template-ddd/worker/example"
-	_ "github.com/ihezebin/soup"
-	"github.com/ihezebin/soup/logger"
-	"github.com/ihezebin/soup/runner"
-	"github.com/pkg/errors"
-	"github.com/urfave/cli/v2"
 )
 
 var (
@@ -87,13 +88,20 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 	// init logger
 	if conf.Logger != nil {
 		logger.ResetLoggerWithOptions(
+			logger.WithLoggerType(logger.LoggerTypeZap),
 			logger.WithServiceName(conf.ServiceName),
-			logger.WithPrettyCallerHook(),
-			logger.WithTimestampHook(),
+			logger.WithCaller(),
+			logger.WithTimestamp(),
 			logger.WithLevel(conf.Logger.Level),
 			//logger.WithLocalFsHook(filepath.Join(conf.Pwd, conf.Logger.Filename)),
 			// 每天切割，保留 3 天的日志
-			logger.WithRotateLogsHook(filepath.Join(conf.Pwd, conf.Logger.Filename), time.Hour*24, time.Hour*24*3),
+			logger.WithRotate(logger.RotateConfig{
+				Path:               filepath.Join(conf.Pwd, conf.Logger.Filename),
+				MaxSizeKB:          1024 * 500, // 500 MB
+				MaxAge:             time.Hour * 24 * 7,
+				MaxRetainFileCount: 3,
+				Compress:           true,
+			}),
 		)
 	}
 

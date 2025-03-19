@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/ihezebin/soup/logger"
+	"github.com/ihezebin/olympus/logger"
 )
 
 type worKeeper struct {

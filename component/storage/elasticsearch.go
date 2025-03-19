@@ -5,7 +5,7 @@ import (
 
 	"github.com/elastic/go-elasticsearch/v8"
 	"github.com/elastic/go-elasticsearch/v8/esapi"
-	"github.com/ihezebin/soup/logger"
+	"github.com/ihezebin/olympus/logger"
 	"github.com/pkg/errors"
 )
 
