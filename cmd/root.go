@@ -94,7 +94,6 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 			logger.WithTimestamp(),
 			logger.WithLevel(conf.Logger.Level),
 			//logger.WithLocalFsHook(filepath.Join(conf.Pwd, conf.Logger.Filename)),
-			// 每天切割，保留 3 天的日志
 			logger.WithRotate(logger.RotateConfig{
 				Path:               filepath.Join(conf.Pwd, conf.Logger.Filename),
 				MaxSizeKB:          1024 * 500, // 500 MB
