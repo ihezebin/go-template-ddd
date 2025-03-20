@@ -4,6 +4,6 @@ WORKDIR /root
 
 COPY build/${PROJECT_NAME} /root/
 COPY config/config.toml /root/config/
-COPY migrations /root/migrations
+COPY migration /root/migration
 
 CMD ["/root/go-template-ddd", "-c", "/root/config/config.toml"]
