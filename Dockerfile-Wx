@@ -1,3 +1,4 @@
+# docker build -f Dockerfile-Wx -t ccr.ccs.tencentyun.com/tcb-******-yhmi/ca-ohbsqtpw_go-template-ddd:go-template-ddd-001-20250402185627 ./
 FROM golang:1.22-alpine as builder
 
 WORKDIR /app
@@ -7,6 +8,9 @@ COPY . /app/
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./build/go-template-ddd
 
 FROM alpine
+
+# 使用 HTTPS 协议访问容器云调用证书安装
+RUN apk add ca-certificates
 
 WORKDIR /root
 
