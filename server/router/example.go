@@ -56,15 +56,6 @@ func (r *ExampleRouter) Login(c *gin.Context, req dto.ExampleLoginReq) (*dto.Exa
 
 }
 
-// Register https://github.com/swaggo/swag/blob/master/README_zh-CN.md#api%E6%93%8D%E4%BD%9C
-// @Summary 示例注册功能
-// @Description 录入账号、密码和邮箱地址
-// @Tags example
-// @Accept json
-// @Produce json
-// @Param req body dto.ExampleRegisterReq true "注册表单"
-// @Success 200 {object} server.Body{data=dto.ExampleRegisterResp} "成功时如下结构；错误时 code 非 0, message 包含错误信息, 不包含 data"
-// @Router /example/register [post]
 func (r *ExampleRouter) Register(c *gin.Context, req dto.ExampleRegisterReq) (*dto.ExampleRegisterResp, error) {
 	ctx := c.Request.Context()
 

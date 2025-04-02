@@ -5,11 +5,12 @@ import (
 	"fmt"
 
 	"github.com/getkin/kin-openapi/openapi3"
-	"github.com/ihezebin/go-template-ddd/config"
-	"github.com/ihezebin/go-template-ddd/server/router"
 	"github.com/ihezebin/olympus/httpserver"
 	"github.com/ihezebin/olympus/httpserver/middleware"
 	"github.com/ihezebin/olympus/runner"
+
+	"github.com/ihezebin/go-template-ddd/config"
+	"github.com/ihezebin/go-template-ddd/server/router"
 )
 
 type Body struct {
@@ -18,12 +19,6 @@ type Body struct {
 	Data    interface{} `json:"data,omitempty"`
 }
 
-// NewServer server
-// @title Go Template DDD 示例 API 文档
-// @version 1.0
-// @description 这是一个使用 Gin 和 Swagger 生成 API 文档的示例。
-// @host localhost:8080
-// @BasePath /
 func NewServer(ctx context.Context, conf *config.Config) (runner.Task, error) {
 	server := httpserver.NewServer(
 		httpserver.WithPort(conf.Port),

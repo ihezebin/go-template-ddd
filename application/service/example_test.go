@@ -15,6 +15,7 @@ func TestExampleService(t *testing.T) {
 	svc := &ExampleApplicationService{
 		exampleDomainService: service.NewExampleServiceMock(exampleRepository),
 		exampleRepository:    exampleRepository,
+		passwordEncoder:      service.NewMd5WithSaltPasswordEncoder(),
 	}
 
 	ctx := context.Background()

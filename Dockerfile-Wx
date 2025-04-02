@@ -1,0 +1,17 @@
+FROM golang:1.22.7-alpine3.14 as builder
+
+WORKDIR /app
+
+COPY . /app/
+
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./build/go-template-ddd
+
+FROM alpine
+
+WORKDIR /root
+
+COPY --from=builder /app/build/go-template-ddd /root/
+COPY --from=builder /app/config/config.toml /root/config/
+COPY --from=builder /app/migration /root/migration
+
+CMD ["/root/go-template-ddd", "-c", "/root/config/config.toml"]
