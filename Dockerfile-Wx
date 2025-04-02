@@ -9,9 +9,6 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./build/go-template-ddd
 
 FROM alpine
 
-# 使用 HTTPS 协议访问容器云调用证书安装
-RUN apk add ca-certificates
-
 WORKDIR /root
 
 COPY --from=builder /app/build/go-template-ddd /root/

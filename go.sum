@@ -208,10 +208,10 @@ github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T
 github.com/iancoleman/strcase v0.3.0/go.mod h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho=
 github.com/ihezebin/jwt v1.0.0 h1:0xebfM8yc92rRiJJq2cN+er6H0SM3TyXluqTv0OIcbY=
 github.com/ihezebin/jwt v1.0.0/go.mod h1:rXxHl6li03J6MrM0Vi0rmx/kqiK6gsr/SLp+Q/y4M6Y=
-github.com/ihezebin/olympus v1.0.0 h1:srU4anPXNpgwjUyhyWdA1Z5q+WzJWbOkL3C6AZUOcYk=
-github.com/ihezebin/olympus v1.0.0/go.mod h1:wRLYugqMystSuDwvhPv0z/tYD/dx0WMN0vthRyLa14s=
-github.com/ihezebin/openapi v1.0.5 h1:+ebff6LLDVmNDGynm/rSEujuhvXiMrS/x9rG5SIP9+g=
-github.com/ihezebin/openapi v1.0.5/go.mod h1:XYYr1Iu7Ayt70XhcXvNRZPoieE4uAJmqkq27FRSVFiI=
+github.com/ihezebin/olympus v1.0.1 h1:hrv64lh4Iw+Vk2WchaX/Rz+U5ExBRmPC6xFVVllVdEo=
+github.com/ihezebin/olympus v1.0.1/go.mod h1:z9T86SKgiU3+DgToO0XAgYyZvyMx/oQm/GfZFimYsBo=
+github.com/ihezebin/openapi v1.0.6 h1:tGWeTu8iMpXUmdAsouUVoOxC026h0zHeCmXwNFiZFyg=
+github.com/ihezebin/openapi v1.0.6/go.mod h1:XYYr1Iu7Ayt70XhcXvNRZPoieE4uAJmqkq27FRSVFiI=
 github.com/ihezebin/rotatelog v1.0.3 h1:CK9oKgi26IpqrUfQJVPjjh5rn1q4c1VlNdXUNJDa+84=
 github.com/ihezebin/rotatelog v1.0.3/go.mod h1:CZHF1ffbNQySev4DdKoYImISzbANxDIL5eLI7rwc5mg=
 github.com/invopop/yaml v0.3.1 h1:f0+ZpmhfBSS4MhG+4HYseMdJhoeeopbSKbq5Rpeelso=
