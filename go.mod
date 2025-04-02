@@ -15,7 +15,7 @@ require (
 	github.com/go-sql-driver/mysql v1.7.0
 	github.com/golang-migrate/migrate/v4 v4.17.0
 	github.com/ihezebin/jwt v1.0.0
-	github.com/ihezebin/olympus v1.0.2
+	github.com/ihezebin/olympus v1.0.3
 	github.com/ihezebin/openapi v1.0.7
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pkg/errors v0.9.1
