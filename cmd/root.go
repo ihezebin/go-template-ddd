@@ -16,6 +16,7 @@ import (
 	"github.com/ihezebin/go-template-ddd/component/emailc"
 	"github.com/ihezebin/go-template-ddd/component/oss"
 	"github.com/ihezebin/go-template-ddd/component/pubsub"
+	"github.com/ihezebin/go-template-ddd/component/remote"
 	"github.com/ihezebin/go-template-ddd/component/storage"
 	"github.com/ihezebin/go-template-ddd/config"
 	"github.com/ihezebin/go-template-ddd/cron"
@@ -171,6 +172,15 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 
 	// init service
 	service.Init()
+
+	// init remote
+	if remoteConfig := conf.Remote; remoteConfig != nil {
+		if remoteConfig.UserCenterHost != "" {
+			if err := remote.InitUserCenter(remoteConfig.UserCenterHost); err != nil {
+				return errors.Wrap(err, "init user center client error")
+			}
+		}
+	}
 
 	return nil
 }

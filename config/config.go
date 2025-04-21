@@ -24,6 +24,7 @@ type Config struct {
 	Email            *email.Config `json:"email" mapstructure:"email"`
 	Pulsar           *PulsarConfig `json:"pulsar" mapstructure:"pulsar"`
 	Kafka            *KafkaConfig  `json:"kafka" mapstructure:"kafka"`
+	Remote           *RemoteConfig `json:"remote" mapstructure:"remote"`
 }
 
 type PulsarConfig struct {
@@ -46,6 +47,10 @@ type RedisConfig struct {
 type LoggerConfig struct {
 	Level    logger.Level `json:"level" mapstructure:"level"`
 	Filename string       `json:"filename" mapstructure:"filename"`
+}
+
+type RemoteConfig struct {
+	UserCenterHost string `json:"user_center_host" mapstructure:"user_center_host"`
 }
 
 var gConfig *Config = &Config{}

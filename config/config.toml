@@ -11,6 +11,9 @@ port = 8080
     level = "info"
     filename = "log/go-template-ddd.log"
 
+[remote]
+    user_center_host = "http://localhost:8081"
+
 #[email]
 #    host="smtp.qq.com"
 #    port=587
