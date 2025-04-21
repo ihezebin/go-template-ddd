@@ -18,15 +18,18 @@ type ExampleRouter struct {
 	service *service.ExampleApplicationService
 }
 
+var _ httpserver.Routes = &ExampleRouter{}
+
 func NewExampleRouter() *ExampleRouter {
-	return &ExampleRouter{}
+	return &ExampleRouter{
+		logger: logger.WithField("router", "example"),
+	}
 }
 
 func (r *ExampleRouter) RegisterRoutes(router httpserver.Router) {
-	r.logger = logger.WithField("handler", "example")
 	r.service = service.NewExampleApplicationService(r.logger)
 
-	// registry http handler
+	// registry http routes
 	example := router.Group("example")
 	example.POST("/login", httpserver.NewHandler(r.Login),
 		httpserver.WithOpenAPISummary("示例登录"),
