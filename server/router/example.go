@@ -18,7 +18,7 @@ type ExampleRouter struct {
 	service *service.ExampleApplicationService
 }
 
-var _ httpserver.Routes = &ExampleRouter{}
+var _ httpserver.RegisterRoutes = &ExampleRouter{}
 
 func NewExampleRouter() *ExampleRouter {
 	return &ExampleRouter{
