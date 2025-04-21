@@ -9,16 +9,5 @@
             "program": "${workspaceFolder}",
             "cwd": "${workspaceFolder}"
         },
-        {
-            "name": "TestExampleService",
-            "type": "go",
-            "request": "launch",
-            "mode": "test", 
-            "program": "${workspaceFolder}/application/service/example_test.go",
-            "cwd": "${workspaceFolder}",
-            "args": [
-                "-test.v"
-            ]
-        }
     ]
 }
