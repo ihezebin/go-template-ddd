@@ -6,32 +6,27 @@ port = 8080
 #mysql_dsn = "mysql://root:root@127.0.0.1:3306/go-template-ddd?charset=utf8mb4&parseTime=True&loc=Local"
 #oss_dsn = "minio://CscaPrbfoRO0EapeM56m:RNxYKk9XtdIAyFnCHNLnyYei2tmX4L59ACeDe0Ap@127.0.0.1:9000/test"
 #elasticsearch_url = "http://localhost:9200"
-
 [logger]
-    level = "info"
-    filename = "log/go-template-ddd.log"
+level = "info"
+filename = "log/go-template-ddd.log"
 
 [remote]
-    user_center_host = "http://localhost:8081"
-
+#user_center_host = "http://localhost:8081"
 #[email]
 #    host="smtp.qq.com"
 #    port=587
 #    username="xxx@qq.com"
 #    password="xxxxx"
-
 #[redis]
 #    addrs = ["127.0.0.1:6379"]
 #    password = "root"
 #[redis]
 #   addrs = ["redis-sts-0.redis.default:7000", "redis-sts-1.redis.default:7000", "redis-sts-2.redis.default:7000"]
 #   password = "root"
-
 #[pulsar]
 #    url = "pulsar://localhost:6650"
 #    topic = "persistent://public/default/go-template-ddd"
 #    subscription = "go-template-ddd"
-
 #[kafka]
 #    address = "127.0.0.1:9092"
 #    topic = "go-template-ddd"
