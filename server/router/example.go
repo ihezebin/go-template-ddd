@@ -8,6 +8,9 @@ import (
 	"github.com/ihezebin/olympus/httpserver"
 	"github.com/ihezebin/olympus/logger"
 	"github.com/ihezebin/openapi"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/trace"
 
 	"github.com/ihezebin/go-template-ddd/application/dto"
 	"github.com/ihezebin/go-template-ddd/application/service"
@@ -16,6 +19,7 @@ import (
 type ExampleRouter struct {
 	logger  logger.Logger
 	service *service.ExampleApplicationService
+	tracer  trace.Tracer
 }
 
 var _ httpserver.RegisterRoutes = &ExampleRouter{}
@@ -23,6 +27,7 @@ var _ httpserver.RegisterRoutes = &ExampleRouter{}
 func NewExampleRouter() *ExampleRouter {
 	return &ExampleRouter{
 		logger: logger.WithField("router", "example"),
+		tracer: otel.Tracer("example-router"),
 	}
 }
 
@@ -54,6 +59,23 @@ func (r *ExampleRouter) Login(c *gin.Context, req dto.ExampleLoginReq) (*dto.Exa
 		r.logger.WithError(err).Errorf(ctx, "validate struct error, req: %v", req)
 		return nil, httpserver.ErrorWithBadRequest()
 	}
+
+	ctx, span := r.tracer.Start(c.Request.Context(), "hello")
+	defer span.End()
+
+	// 记录请求头信息
+	span.SetAttributes(
+		attribute.String("http.referer", c.GetHeader("Referer")),
+	)
+
+	// 记录请求参数
+	span.SetAttributes(
+		attribute.String("request.body.username", req.Username),
+		attribute.String("request.body.password", req.Password),
+	)
+
+	// 记录业务事件
+	span.AddEvent("开始处理请求")
 
 	return r.service.Login(ctx, req)
 
