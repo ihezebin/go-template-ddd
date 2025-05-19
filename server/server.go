@@ -48,6 +48,22 @@ func NewServer(ctx context.Context, conf *config.Config) (runner.Task, error) {
 		return nil, errors.Wrap(err, "create metric request counter failed")
 	}
 
+	// logExporter, err := otlploghttp.New(ctx,
+	// 	otlploghttp.WithInsecure(),
+	// 	otlploghttp.WithEndpoint("localhost:43188"),
+	// )
+	// if err != nil {
+	// 	return nil, errors.Wrap(err, "create otlptracehttp exporter failed")
+	// }
+
+	// traceExporter, err := otlptracehttp.New(ctx,
+	// 	otlptracehttp.WithInsecure(),
+	// 	otlptracehttp.WithEndpoint("localhost:54318"),
+	// )
+	// if err != nil {
+	// 	log.Fatalf("无法创建 OTLP trace HTTP exporter: %v", err)
+	// }
+
 	server, err := httpserver.NewServer(ctx,
 		httpserver.WithPort(conf.Port),
 		httpserver.WithServiceName(conf.ServiceName),
@@ -60,6 +76,8 @@ func NewServer(ctx context.Context, conf *config.Config) (runner.Task, error) {
 			middleware.LoggingRequestWithoutHeader(),
 			middleware.LoggingResponseWithoutHeader(),
 		),
+		// httpserver.WithLogProcessor(logExporter),
+		// httpserver.WithTraceExporter(traceExporter),
 		httpserver.WithOpenAPInfo(openapi3.Info{
 			Version:     "1.0",
 			Description: "这是一个使用 Gin 和 OpenAPI 生成 API 文档的示例。",

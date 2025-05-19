@@ -93,6 +93,7 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 			logger.WithServiceName(conf.ServiceName),
 			logger.WithCaller(),
 			logger.WithTimestamp(),
+			// logger.WithOtlpEnabled(true),
 			logger.WithLevel(conf.Logger.Level),
 			//logger.WithLocalFsHook(filepath.Join(conf.Pwd, conf.Logger.Filename)),
 			logger.WithRotate(logger.RotateConfig{
