@@ -25,6 +25,7 @@ type Config struct {
 	Pulsar           *PulsarConfig `json:"pulsar" mapstructure:"pulsar"`
 	Kafka            *KafkaConfig  `json:"kafka" mapstructure:"kafka"`
 	Remote           *RemoteConfig `json:"remote" mapstructure:"remote"`
+	Wx               *WxConfig     `json:"wx" mapstructure:"wx"`
 }
 
 type PulsarConfig struct {
@@ -51,6 +52,12 @@ type LoggerConfig struct {
 
 type RemoteConfig struct {
 	UserCenterHost string `json:"user_center_host" mapstructure:"user_center_host"`
+}
+
+type WxConfig struct {
+	Host   string `json:"host" mapstructure:"host"`
+	AppId  string `json:"app_id" mapstructure:"app_id"`
+	Secret string `json:"secret" mapstructure:"secret"`
 }
 
 var gConfig *Config = &Config{}

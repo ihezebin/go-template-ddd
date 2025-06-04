@@ -31,3 +31,8 @@ filename = "log/go-template-ddd.log"
 #    address = "127.0.0.1:9092"
 #    topic = "go-template-ddd"
 #    partition = 0
+
+[wx]
+host = "https://api.weixin.qq.com"
+app_id = "wx004c4609b67bdbcf"
+secret = "4d8320c80160fb6656e908406d8e3101"

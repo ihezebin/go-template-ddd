@@ -183,5 +183,12 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 		}
 	}
 
+	// init wx
+	if wxConfig := conf.Wx; wxConfig != nil {
+		if err := remote.InitWX(wxConfig.Host, wxConfig.AppId, wxConfig.Secret); err != nil {
+			return errors.Wrap(err, "init wx client error")
+		}
+	}
+
 	return nil
 }
