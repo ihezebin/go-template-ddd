@@ -41,6 +41,11 @@ func InitMongoClient(ctx context.Context, dsn string) error {
 		return errors.Wrap(err, "mongo connect error")
 	}
 
+	err = client.Ping(ctx, nil)
+	if err != nil {
+		return errors.Wrap(err, "mongo ping error")
+	}
+
 	mongoClient = client
 	mongoDatabase = client.Database(dbName)
 

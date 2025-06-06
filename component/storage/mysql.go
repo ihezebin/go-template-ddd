@@ -41,11 +41,15 @@ func InitMySQLClient(ctx context.Context, dsn string) error {
 	if err != nil {
 		return errors.Wrap(err, "mysql connect error")
 	}
-
 	// https://gorm.io/docs/generic_interface.html#Connection-Pool
 	sqlDB, err := db.DB()
 	if err != nil {
 		return errors.Wrap(err, "mysql get sql db error")
+	}
+
+	err = sqlDB.Ping()
+	if err != nil {
+		return errors.Wrap(err, "mysql ping error")
 	}
 
 	sqlDB.SetConnMaxIdleTime(time.Minute * 30)
