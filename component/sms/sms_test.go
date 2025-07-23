@@ -10,7 +10,7 @@ import (
 )
 
 func TestSms(t *testing.T) {
-	conf, err := config.Load("./config/config.toml")
+	conf, err := config.Load("../../config/config.toml")
 	if err != nil {
 		t.Fatal(err)
 	}
