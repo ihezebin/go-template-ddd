@@ -21,8 +21,9 @@ filename = "log/go-template-ddd.log"
 # secret_id = "SecretId"
 # secret_key = "SecretKey"
 # region = "ap-guangzhou"
-# app_id = ""
-# sign_name = ""
+# app_id = "1400578890"
+# sign_name = "hezebin"
+# captcha_template_id = "11477481"
 #[redis]
 #    addrs = ["127.0.0.1:6379"]
 #    password = "root"

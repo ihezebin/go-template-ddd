@@ -5,11 +5,18 @@ import (
 	"testing"
 
 	"github.com/ihezebin/go-template-ddd/config"
+	"github.com/ihezebin/olympus/logger"
 	"github.com/ihezebin/olympus/sms/tencent"
 )
 
 func TestSms(t *testing.T) {
-	err := Init(config.SmsConfig{
+	conf, err := config.Load("./config/config.toml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	ctx := context.Background()
+	logger.Debugf(ctx, "load config: %+v", conf.String())
+	err = Init(config.SmsConfig{
 		Config: tencent.Config{
 			SecretId:  "SecretId",
 			SecretKey: "SecretKey",
