@@ -1,4 +1,4 @@
-package emailc
+package email
 
 import (
 	"github.com/ihezebin/olympus/email"

@@ -1,4 +1,4 @@
-package emailc
+package email
 
 import (
 	"context"

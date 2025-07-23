@@ -13,10 +13,11 @@ import (
 	"github.com/urfave/cli/v2"
 
 	"github.com/ihezebin/go-template-ddd/component/cache"
-	"github.com/ihezebin/go-template-ddd/component/emailc"
+	"github.com/ihezebin/go-template-ddd/component/email"
 	"github.com/ihezebin/go-template-ddd/component/oss"
 	"github.com/ihezebin/go-template-ddd/component/pubsub"
 	"github.com/ihezebin/go-template-ddd/component/remote"
+	"github.com/ihezebin/go-template-ddd/component/sms"
 	"github.com/ihezebin/go-template-ddd/component/storage"
 	"github.com/ihezebin/go-template-ddd/config"
 	"github.com/ihezebin/go-template-ddd/cron"
@@ -152,8 +153,15 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 
 	// init email
 	if conf.Email != nil {
-		if err := emailc.Init(*conf.Email); err != nil {
+		if err := email.Init(*conf.Email); err != nil {
 			return errors.Wrap(err, "init email client error")
+		}
+	}
+
+	// init sms
+	if conf.Sms != nil {
+		if err := sms.Init(*conf.Sms); err != nil {
+			return errors.Wrap(err, "init sms client error")
 		}
 	}
 

@@ -17,6 +17,12 @@ filename = "log/go-template-ddd.log"
 #    port=587
 #    username="xxx@qq.com"
 #    password="xxxxx"
+# [sms]
+# secret_id = "SecretId"
+# secret_key = "SecretKey"
+# region = "ap-guangzhou"
+# app_id = ""
+# sign_name = ""
 #[redis]
 #    addrs = ["127.0.0.1:6379"]
 #    password = "root"
