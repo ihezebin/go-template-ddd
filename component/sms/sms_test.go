@@ -23,7 +23,7 @@ func TestSms(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = gClient.SendCapatchMessage(context.Background(), "+8613518468111")
+	err = gClient.SendCapatchMessage(context.Background(), "13518468111")
 	if err != nil {
 		t.Fatal(err)
 	}
