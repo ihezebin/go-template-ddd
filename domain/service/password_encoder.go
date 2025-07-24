@@ -72,10 +72,10 @@ func (e *md5WithSaltPasswordEncoder) Encode(plainPwd string, salt string) (strin
 	return hex.EncodeToString(m5.Sum(nil)), nil
 }
 
-func (e *md5WithSaltPasswordEncoder) Verify(plainPwd, encodedPwd string, salt string) (bool, error) {
-	encodedPwd, err := e.Encode(plainPwd, salt)
+func (e *md5WithSaltPasswordEncoder) Verify(plainPwd string, encodedPwd string, salt string) (bool, error) {
+	newEncodedPwd, err := e.Encode(plainPwd, salt)
 	if err != nil {
 		return false, errors.Wrapf(err, "encode plain pwd error")
 	}
-	return encodedPwd == encodedPwd, nil
+	return newEncodedPwd == encodedPwd, nil
 }
