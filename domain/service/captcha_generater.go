@@ -6,9 +6,9 @@ import (
 	"regexp"
 	"strconv"
 	"time"
-	"valet/component/cache"
-	"valet/component/sms"
 
+	"github.com/ihezebin/go-template-ddd/component/cache"
+	"github.com/ihezebin/go-template-ddd/component/sms"
 	"github.com/ihezebin/olympus/random"
 	"github.com/pkg/errors"
 	"github.com/redis/go-redis/v9"
