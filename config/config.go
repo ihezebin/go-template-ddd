@@ -65,14 +65,14 @@ type WxConfig struct {
 }
 
 type SmsTencentConfig struct {
-	tencent.Config    `mapstructure:",squash"`
+	tencent.Config    `json:",squash" mapstructure:",squash"`
 	AppId             string `json:"app_id" mapstructure:"app_id"`
 	SignName          string `json:"sign_name" mapstructure:"sign_name"`
 	CaptchaTemplateId string `json:"captcha_template_id" mapstructure:"captcha_template_id"`
 }
 
 type SmsAliyunConfig struct {
-	aliyun.Config       `mapstructure:",squash"`
+	aliyun.Config       `json:",squash" mapstructure:",squash"`
 	SignName            string `json:"sign_name" mapstructure:"sign_name"`
 	CaptchaTemplateCode string `json:"captcha_template_code" mapstructure:"captcha_template_code"`
 }
