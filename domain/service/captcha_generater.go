@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"regexp"
-	"strconv"
 	"time"
 
 	"github.com/ihezebin/go-template-ddd/component/cache"
@@ -21,15 +20,15 @@ type CaptchaGenerater interface {
 
 type smsCaptchaGenerater struct {
 	redisCli       redis.UniversalClient
-	smsCli         *sms.SmsClient
+	smsCli         sms.SmsClient
 	timeout        time.Duration
 	frequencyLimit time.Duration
 }
 
-func NewSmsCaptchaGenerater(timeout time.Duration, frequencyLimit time.Duration) CaptchaGenerater {
+func NewSmsCaptchaGenerater(redisCli redis.UniversalClient, smsCli sms.SmsClient, timeout time.Duration, frequencyLimit time.Duration) CaptchaGenerater {
 	return &smsCaptchaGenerater{
 		redisCli:       cache.RedisCacheClient(),
-		smsCli:         sms.Client(),
+		smsCli:         sms.ClientTencent(),
 		timeout:        timeout,
 		frequencyLimit: frequencyLimit,
 	}
@@ -58,7 +57,7 @@ func (s *smsCaptchaGenerater) Generate(ctx context.Context, key string) (bool, s
 	}
 
 	captcha := random.DigitString(6)
-	err = s.smsCli.SendCapatchMessage(ctx, key, captcha, strconv.Itoa(int(s.timeout.Minutes())))
+	err = s.smsCli.SendCapatchMessage(ctx, key, captcha)
 	if err != nil {
 		return false, captcha, errors.Wrap(err, "send sms captcha failed")
 	}

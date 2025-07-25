@@ -17,13 +17,19 @@ filename = "log/go-template-ddd.log"
 #    port=587
 #    username="xxx@qq.com"
 #    password="xxxxx"
-# [sms]
+# [sms_tencent]
 # secret_id = "SecretId"
 # secret_key = "SecretKey"
 # region = "ap-guangzhou"
-# app_id = "1400578890"
-# sign_name = "hezebin"
-# captcha_template_id = "11477481"
+# app_id = "xxx"
+# sign_name = "xxx"
+# captcha_template_id = "xxxx"
+# [sms_aliyun]
+# access_key_id = "xxxx"
+# access_key_secret = "xxxxx"
+# endpoint = ""
+# sign_name = "xxx"
+# captcha_template_code = "xxxx"
 #[redis]
 #    addrs = ["127.0.0.1:6379"]
 #    password = "root"

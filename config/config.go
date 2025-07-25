@@ -7,27 +7,29 @@ import (
 	"github.com/ihezebin/olympus/config"
 	"github.com/ihezebin/olympus/email"
 	"github.com/ihezebin/olympus/logger"
+	"github.com/ihezebin/olympus/sms/aliyun"
 	"github.com/ihezebin/olympus/sms/tencent"
 	"github.com/pkg/errors"
 )
 
 type Config struct {
-	ServiceName      string        `json:"service_name" mapstructure:"service_name"`
-	Port             uint          `json:"port" mapstructure:"port"`
-	MongoDsn         string        `json:"mongo_dsn" mapstructure:"mongo_dsn"`
-	MysqlDsn         string        `json:"mysql_dsn" mapstructure:"mysql_dsn"`
-	ClickhouseDsn    string        `json:"clickhouse_dsn" mapstructure:"clickhouse_dsn"`
-	OSSDsn           string        `json:"oss_dsn" mapstructure:"oss_dsn"`
-	ElasticsearchUrl string        `json:"elasticsearch_url" mapstructure:"elasticsearch_url"`
-	Pwd              string        `json:"-" mapstructure:"-"`
-	Logger           *LoggerConfig `json:"logger" mapstructure:"logger"`
-	Redis            *RedisConfig  `json:"redis" mapstructure:"redis"`
-	Email            *email.Config `json:"email" mapstructure:"email"`
-	Sms              *SmsConfig    `json:"sms" mapstructure:"sms"`
-	Pulsar           *PulsarConfig `json:"pulsar" mapstructure:"pulsar"`
-	Kafka            *KafkaConfig  `json:"kafka" mapstructure:"kafka"`
-	Remote           *RemoteConfig `json:"remote" mapstructure:"remote"`
-	Wx               *WxConfig     `json:"wx" mapstructure:"wx"`
+	ServiceName      string            `json:"service_name" mapstructure:"service_name"`
+	Port             uint              `json:"port" mapstructure:"port"`
+	MongoDsn         string            `json:"mongo_dsn" mapstructure:"mongo_dsn"`
+	MysqlDsn         string            `json:"mysql_dsn" mapstructure:"mysql_dsn"`
+	ClickhouseDsn    string            `json:"clickhouse_dsn" mapstructure:"clickhouse_dsn"`
+	OSSDsn           string            `json:"oss_dsn" mapstructure:"oss_dsn"`
+	ElasticsearchUrl string            `json:"elasticsearch_url" mapstructure:"elasticsearch_url"`
+	Pwd              string            `json:"-" mapstructure:"-"`
+	Logger           *LoggerConfig     `json:"logger" mapstructure:"logger"`
+	Redis            *RedisConfig      `json:"redis" mapstructure:"redis"`
+	Email            *email.Config     `json:"email" mapstructure:"email"`
+	SmsTencent       *SmsTencentConfig `json:"sms_tencent" mapstructure:"sms_tencent"`
+	SmsAliyun        *SmsAliyunConfig  `json:"sms_aliyun" mapstructure:"sms_aliyun"`
+	Pulsar           *PulsarConfig     `json:"pulsar" mapstructure:"pulsar"`
+	Kafka            *KafkaConfig      `json:"kafka" mapstructure:"kafka"`
+	Remote           *RemoteConfig     `json:"remote" mapstructure:"remote"`
+	Wx               *WxConfig         `json:"wx" mapstructure:"wx"`
 }
 
 type PulsarConfig struct {
@@ -62,11 +64,17 @@ type WxConfig struct {
 	Secret string `json:"secret" mapstructure:"secret"`
 }
 
-type SmsConfig struct {
+type SmsTencentConfig struct {
 	tencent.Config    `mapstructure:",squash"`
 	AppId             string `json:"app_id" mapstructure:"app_id"`
 	SignName          string `json:"sign_name" mapstructure:"sign_name"`
 	CaptchaTemplateId string `json:"captcha_template_id" mapstructure:"captcha_template_id"`
+}
+
+type SmsAliyunConfig struct {
+	aliyun.Config       `mapstructure:",squash"`
+	SignName            string `json:"sign_name" mapstructure:"sign_name"`
+	CaptchaTemplateCode string `json:"captcha_template_code" mapstructure:"captcha_template_code"`
 }
 
 var gConfig *Config = &Config{}

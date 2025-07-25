@@ -159,9 +159,14 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 	}
 
 	// init sms
-	if conf.Sms != nil {
-		if err := sms.Init(*conf.Sms); err != nil {
-			return errors.Wrap(err, "init sms client error")
+	if conf.SmsTencent != nil {
+		if err := sms.InitTencent(*conf.SmsTencent); err != nil {
+			return errors.Wrap(err, "init sms tencent client error")
+		}
+	}
+	if conf.SmsAliyun != nil {
+		if err := sms.InitAliyun(*conf.SmsAliyun); err != nil {
+			return errors.Wrap(err, "init sms aliyun client error")
 		}
 	}
 
