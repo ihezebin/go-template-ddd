@@ -10,3 +10,13 @@ const (
 
 	UsernameAdmin = "hezebin"
 )
+
+const (
+	LoginCaptchaUsage    = "login"
+	RegisterCaptchaUsage = "register"
+)
+
+var AllowedCaptchaUsages = []string{
+	LoginCaptchaUsage,
+	RegisterCaptchaUsage,
+}

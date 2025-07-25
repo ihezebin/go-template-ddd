@@ -64,6 +64,12 @@ func Run(ctx context.Context) error {
 				return errors.Wrap(err, "init components error")
 			}
 
+			// init captcha generator
+			if redisCli, smsTencentCli := cache.RedisCacheClient(), sms.ClientTencent(); redisCli != nil && smsTencentCli != nil {
+				captchaGenerater := service.NewSmsCaptchaGenerater(redisCli, smsTencentCli, time.Minute*10, time.Second*60)
+				service.SetCaptchaGenerater(captchaGenerater)
+			}
+
 			return nil
 		},
 		Action: func(c *cli.Context) error {

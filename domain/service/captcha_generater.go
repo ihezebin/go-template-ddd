@@ -8,14 +8,15 @@ import (
 
 	"github.com/ihezebin/go-template-ddd/component/cache"
 	"github.com/ihezebin/go-template-ddd/component/sms"
+	"github.com/ihezebin/olympus/logger"
 	"github.com/ihezebin/olympus/random"
 	"github.com/pkg/errors"
 	"github.com/redis/go-redis/v9"
 )
 
 type CaptchaGenerater interface {
-	Generate(ctx context.Context, key string) (bool, string, error)
-	Verify(ctx context.Context, key, captcha string) (bool, error)
+	Generate(ctx context.Context, key string, usage string) (bool, string, int, error)
+	Verify(ctx context.Context, key, usage, captcha string) (bool, error)
 }
 
 type smsCaptchaGenerater struct {
@@ -23,6 +24,16 @@ type smsCaptchaGenerater struct {
 	smsCli         sms.SmsClient
 	timeout        time.Duration
 	frequencyLimit time.Duration
+}
+
+var globalCaptchaGenerater CaptchaGenerater
+
+func GetCaptchaGenerater() CaptchaGenerater {
+	return globalCaptchaGenerater
+}
+
+func SetCaptchaGenerater(generater CaptchaGenerater) {
+	globalCaptchaGenerater = generater
 }
 
 func NewSmsCaptchaGenerater(redisCli redis.UniversalClient, smsCli sms.SmsClient, timeout time.Duration, frequencyLimit time.Duration) CaptchaGenerater {
@@ -34,43 +45,45 @@ func NewSmsCaptchaGenerater(redisCli redis.UniversalClient, smsCli sms.SmsClient
 	}
 }
 
-func (s *smsCaptchaGenerater) key(key string) string {
-	return fmt.Sprintf("captcha:sms:%s", key)
+func (s *smsCaptchaGenerater) key(key string, usage string) string {
+	return fmt.Sprintf("captcha:sms:%s:%s", key, usage)
 }
 
-func (s *smsCaptchaGenerater) Generate(ctx context.Context, key string) (bool, string, error) {
-	redisKey := s.key(key)
+func (s *smsCaptchaGenerater) Generate(ctx context.Context, key string, usage string) (bool, string, int, error) {
+	redisKey := s.key(key, usage)
 	phone := key
 	// 校验手机号是否合法
 	re := regexp.MustCompile(`^1[3-9]\d{9}$`)
 	if !re.MatchString(phone) {
-		return false, "", errors.New("invalid phone number")
+		return false, "", 0, errors.New("invalid phone number")
 	}
 
 	// 校验频率是否ok
-	freqOk, err := s.isFrequencyOk(ctx, key)
+	freqOk, freq, err := s.isFrequencyOk(ctx, key)
 	if err != nil {
-		return false, "", errors.Wrap(err, "check frequency failed")
+		return false, "", 0, errors.Wrap(err, "check frequency failed")
 	}
 	if !freqOk {
-		return false, "", nil
+		return false, "", freq, nil
 	}
 
 	captcha := random.DigitString(6)
-	err = s.smsCli.SendCapatchMessage(ctx, key, captcha)
-	if err != nil {
-		return false, captcha, errors.Wrap(err, "send sms captcha failed")
-	}
-
+	go func() {
+		nCtx := context.Background()
+		err = s.smsCli.SendCapatchMessage(nCtx, key, captcha)
+		if err != nil {
+			logger.Errorf(nCtx, "send sms captcha failed, phone: %s, captcha: %s, err: %v", key, captcha, err)
+		}
+	}()
 	err = s.redisCli.SetNX(ctx, redisKey, captcha, s.timeout).Err()
 	if err != nil {
-		return false, captcha, errors.Wrap(err, "set captcha to redis failed")
+		return false, captcha, 0, errors.Wrap(err, "set captcha to redis failed")
 	}
-	return true, captcha, nil
+	return true, captcha, 0, nil
 }
 
-func (s *smsCaptchaGenerater) Verify(ctx context.Context, key, captcha string) (bool, error) {
-	redisKey := s.key(key)
+func (s *smsCaptchaGenerater) Verify(ctx context.Context, key, usage, captcha string) (bool, error) {
+	redisKey := s.key(key, usage)
 	redisCaptcha, err := s.redisCli.Get(ctx, redisKey).Result()
 	if err != nil {
 		if err == redis.Nil {
@@ -100,14 +113,29 @@ func (s *smsCaptchaGenerater) frequencyKey(key string) string {
 	return fmt.Sprintf("captcha:sms:frequency:%s", key)
 }
 
-func (s *smsCaptchaGenerater) isFrequencyOk(ctx context.Context, key string) (bool, error) {
+func (s *smsCaptchaGenerater) isFrequencyOk(ctx context.Context, key string) (bool, int, error) {
 	// 频率限制
 	freqKey := s.frequencyKey(key)
 	ok, err := s.redisCli.SetNX(ctx, freqKey, 0, s.frequencyLimit).Result()
 	if err != nil {
-		return false, errors.Wrap(err, "set frequency to redis failed")
+		return false, 0, errors.Wrap(err, "set frequency to redis failed")
 	}
-	return ok, nil
+	if !ok { // 频率限制未通过，则记录限制下的触发次数并增加限制时间
+		freq, err := s.redisCli.Get(ctx, freqKey).Int()
+		if err != nil {
+			return false, 0, errors.Wrap(err, "get frequency from redis failed")
+		}
+		err = s.redisCli.Expire(ctx, freqKey, s.frequencyLimit+time.Duration(freq*int(s.timeout))).Err()
+		if err != nil {
+			return false, 0, errors.Wrap(err, "expire frequency failed")
+		}
+		err = s.redisCli.Incr(ctx, freqKey).Err()
+		if err != nil {
+			return false, 0, errors.Wrap(err, "incr frequency failed")
+		}
+		return false, freq, nil
+	}
+	return true, 0, nil
 }
 
 func (s *smsCaptchaGenerater) delFrequency(ctx context.Context, key string) error {
