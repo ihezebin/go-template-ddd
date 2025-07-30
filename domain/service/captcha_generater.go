@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/ihezebin/go-template-ddd/component/cache"
+	"github.com/ihezebin/go-template-ddd/component/constant"
 	"github.com/ihezebin/go-template-ddd/component/sms"
 	"github.com/ihezebin/olympus/logger"
 	"github.com/ihezebin/olympus/random"
@@ -15,8 +16,8 @@ import (
 )
 
 type CaptchaGenerater interface {
-	Generate(ctx context.Context, key string, usage string) (bool, string, int, error)
-	Verify(ctx context.Context, key, usage, captcha string) (bool, error)
+	Generate(ctx context.Context, key string, usage constant.CaptchaUsageType) (bool, string, int, error)
+	Verify(ctx context.Context, key string, usage constant.CaptchaUsageType, captcha string) (bool, error)
 }
 
 type smsCaptchaGenerater struct {
@@ -45,11 +46,11 @@ func NewSmsCaptchaGenerater(redisCli redis.UniversalClient, smsCli sms.SmsClient
 	}
 }
 
-func (s *smsCaptchaGenerater) key(key string, usage string) string {
-	return fmt.Sprintf("captcha:sms:%s:%s", key, usage)
+func (s *smsCaptchaGenerater) key(key string, usage constant.CaptchaUsageType) string {
+	return fmt.Sprintf("captcha:sms:%s:%s", key, usage.String())
 }
 
-func (s *smsCaptchaGenerater) Generate(ctx context.Context, key string, usage string) (bool, string, int, error) {
+func (s *smsCaptchaGenerater) Generate(ctx context.Context, key string, usage constant.CaptchaUsageType) (bool, string, int, error) {
 	redisKey := s.key(key, usage)
 	phone := key
 	// 校验手机号是否合法
@@ -82,7 +83,7 @@ func (s *smsCaptchaGenerater) Generate(ctx context.Context, key string, usage st
 	return true, captcha, 0, nil
 }
 
-func (s *smsCaptchaGenerater) Verify(ctx context.Context, key, usage, captcha string) (bool, error) {
+func (s *smsCaptchaGenerater) Verify(ctx context.Context, key string, usage constant.CaptchaUsageType, captcha string) (bool, error) {
 	redisKey := s.key(key, usage)
 	redisCaptcha, err := s.redisCli.Get(ctx, redisKey).Result()
 	if err != nil {

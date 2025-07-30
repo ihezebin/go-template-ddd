@@ -11,12 +11,18 @@ const (
 	UsernameAdmin = "hezebin"
 )
 
+type CaptchaUsageType string
+
+func (c CaptchaUsageType) String() string {
+	return string(c)
+}
+
 const (
-	LoginCaptchaUsage    = "login"
-	RegisterCaptchaUsage = "register"
+	LoginCaptchaUsage    CaptchaUsageType = "login"
+	RegisterCaptchaUsage CaptchaUsageType = "register"
 )
 
-var AllowedCaptchaUsages = []string{
+var AllowedCaptchaUsages = []CaptchaUsageType{
 	LoginCaptchaUsage,
 	RegisterCaptchaUsage,
 }
