@@ -6,7 +6,6 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/ihezebin/go-template-ddd/component/cache"
 	"github.com/ihezebin/go-template-ddd/component/constant"
 	"github.com/ihezebin/go-template-ddd/component/sms"
 	"github.com/ihezebin/olympus/logger"
@@ -39,8 +38,8 @@ func SetCaptchaGenerater(generater CaptchaGenerater) {
 
 func NewSmsCaptchaGenerater(redisCli redis.UniversalClient, smsCli sms.SmsClient, timeout time.Duration, frequencyLimit time.Duration) CaptchaGenerater {
 	return &smsCaptchaGenerater{
-		redisCli:       cache.RedisCacheClient(),
-		smsCli:         sms.ClientTencent(),
+		redisCli:       redisCli,
+		smsCli:         smsCli,
 		timeout:        timeout,
 		frequencyLimit: frequencyLimit,
 	}
