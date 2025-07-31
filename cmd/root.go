@@ -65,8 +65,8 @@ func Run(ctx context.Context) error {
 			}
 
 			// init captcha generator
-			if redisCli, smsTencentCli := cache.RedisCacheClient(), sms.ClientTencent(); redisCli != nil && smsTencentCli != nil {
-				captchaGenerater := service.NewSmsCaptchaGenerater(redisCli, smsTencentCli, time.Minute*10, time.Second*60)
+			if redisCli, smsCli := cache.RedisCacheClient(), sms.ClientTencent(); redisCli != nil && smsCli != nil {
+				captchaGenerater := service.NewSmsCaptchaGenerater(redisCli, smsCli, time.Minute*10, time.Second*60)
 				service.SetCaptchaGenerater(captchaGenerater)
 			}
 

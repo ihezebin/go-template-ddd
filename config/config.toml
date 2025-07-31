@@ -45,6 +45,20 @@ filename = "log/go-template-ddd.log"
 #    topic = "go-template-ddd"
 #    partition = 0
 
+# [sms_tencent]
+# secret_id = "xxxx"
+# secret_key = "xxxxx"
+# region = "ap-guangzhou"
+# app_id = "xxxx"
+# sign_name = "xxx"
+# captcha_template_id = "xxx"
+
+# [sms_aliyun]
+# access_key_id = "xxx"
+# access_key_secret = "xxx"
+# sign_name = "xxx"
+# captcha_template_code = "xxx"
+
 [wx]
 host = "https://api.weixin.qq.com"
 app_id = "xxxxxxx"
