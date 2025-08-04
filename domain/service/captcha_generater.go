@@ -75,7 +75,7 @@ func (s *smsCaptchaGenerater) Generate(ctx context.Context, key string, usage co
 			logger.Errorf(nCtx, "send sms captcha failed, phone: %s, captcha: %s, err: %v", key, captcha, err)
 		}
 	}()
-	err = s.redisCli.SetNX(ctx, redisKey, captcha, s.timeout).Err()
+	err = s.redisCli.Set(ctx, redisKey, captcha, s.timeout).Err()
 	if err != nil {
 		return false, captcha, 0, errors.Wrap(err, "set captcha to redis failed")
 	}
