@@ -34,25 +34,27 @@ func (s *TokenService) Signed(ctx context.Context, owner string) (string, error)
 	return tokenStr, nil
 }
 
-func (s *TokenService) Verify(ctx context.Context, tokenStr string) (faked bool, expired bool, err error) {
+func (s *TokenService) Verify(ctx context.Context, tokenStr string) (payload *jwt.Payload, faked bool, expired bool, err error) {
 	token, err := jwt.Parse(tokenStr, s.secret)
 	if err != nil {
-		return false, false, errors.Wrap(err, "parse token err")
+		return nil, false, false, errors.Wrap(err, "parse token err")
 	}
+
+	payload = token.Payload()
 
 	faked, err = token.Faked()
 	if err != nil {
-		return false, false, errors.Wrap(err, "faked token err")
+		return payload, false, false, errors.Wrap(err, "faked token err")
 	}
 
 	if faked {
-		return true, false, nil
+		return payload, true, false, nil
 	}
 
 	expired = token.Expired()
 	if expired {
-		return false, true, nil
+		return payload, false, true, nil
 	}
 
-	return false, false, nil
+	return payload, false, false, nil
 }
