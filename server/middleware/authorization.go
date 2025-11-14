@@ -3,7 +3,6 @@ package middleware
 import (
 	"fmt"
 	"net/http"
-	"valet/component/constant"
 
 	"github.com/gin-gonic/gin"
 	"github.com/ihezebin/jwt"

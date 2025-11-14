@@ -18,11 +18,27 @@ func (c CaptchaUsageType) String() string {
 }
 
 const (
-	LoginCaptchaUsage    CaptchaUsageType = "login"
-	RegisterCaptchaUsage CaptchaUsageType = "register"
+	LoginCaptchaUsage          CaptchaUsageType = "login"
+	RegisterCaptchaUsage       CaptchaUsageType = "register"
+	ResetPasswordCaptchaUsage  CaptchaUsageType = "reset_password"
+	ModifyPasswordCaptchaUsage CaptchaUsageType = "modify_password"
 )
 
 var AllowedCaptchaUsages = []CaptchaUsageType{
 	LoginCaptchaUsage,
 	RegisterCaptchaUsage,
+	ResetPasswordCaptchaUsage,
+	ModifyPasswordCaptchaUsage,
 }
+
+type SortType string
+
+func (s SortType) String() string {
+	return string(s)
+}
+
+const (
+	SortTypeAsc       SortType = "asc"
+	SortTypeDesc      SortType = "desc"
+	SortTypeUndefined SortType = ""
+)
