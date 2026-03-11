@@ -11,6 +11,8 @@ import (
 	"github.com/ihezebin/olympus/runner"
 	"github.com/pkg/errors"
 	"github.com/urfave/cli/v2"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/trace"
 
 	"github.com/ihezebin/go-template-ddd/component/cache"
 	"github.com/ihezebin/go-template-ddd/component/email"
@@ -95,6 +97,18 @@ func Run(ctx context.Context) error {
 func initComponents(ctx context.Context, conf *config.Config) error {
 	// init logger
 	if conf.Logger != nil {
+		logger.DefaultGetTraceIdFunc = func(ctx context.Context) string {
+			spanCtx := trace.SpanContextFromContext(ctx)
+			if spanCtx.IsValid() {
+				return spanCtx.TraceID().String()
+			}
+			// 生成新的 trace_id
+			tr := otel.Tracer(conf.ServiceName)
+			ctx, span := tr.Start(ctx, "generate-new-trace-id")
+			defer span.End()
+			traceID := span.SpanContext().TraceID().String()
+			return traceID
+		}
 		logger.ResetLoggerWithOptions(
 			logger.WithLoggerType(logger.LoggerTypeZap),
 			logger.WithServiceName(conf.ServiceName),

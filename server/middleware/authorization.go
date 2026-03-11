@@ -8,6 +8,8 @@ import (
 	"github.com/ihezebin/jwt"
 	"github.com/ihezebin/olympus/httpserver"
 	"github.com/ihezebin/olympus/logger"
+
+	"github.com/ihezebin/go-template-ddd/component/constant"
 )
 
 var authPathMap = make(map[string]bool)
