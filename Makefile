@@ -11,10 +11,10 @@ DOCKER_PWD ?= $(HEZEBIN_DOCKER_PWD)
 DOCKER_TAG ?= $(DOCKER_REGISTRY)/hezebin/$(PROJECT_NAME):$(TAG)
 
 .PHONY: package
-package: tag clean
+package: tag build clean
 
-.PHONY: build
-tag: build
+.PHONY: tag
+tag: 
 	@echo "$(DOCKER_PWD)" | docker login --username "$(DOCKER_USER)" --password-stdin "$(DOCKER_REGISTRY)"
 	docker build --platform linux/amd64 --build-arg PROJECT_NAME=$(PROJECT_NAME) --build-arg TAG=$(TAG) -t $(DOCKER_TAG) -f Dockerfile .
 	docker push $(DOCKER_TAG)

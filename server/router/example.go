@@ -49,6 +49,12 @@ func (r *ExampleRouter) RegisterRoutes(router httpserver.Router) {
 		httpserver.WithOpenAPIDescription("录入账号、密码和邮箱地址"),
 	)
 
+	example.Kernel().POST("/kernel", func (c *gin.Context)  {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "hello",
+		})
+	})
+
 }
 func (r *ExampleRouter) Login(c *gin.Context, req dto.ExampleLoginReq) (*dto.ExampleLoginResp, error) {
 	ctx := c.Request.Context()
