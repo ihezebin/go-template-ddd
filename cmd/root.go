@@ -119,10 +119,10 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 			//logger.WithLocalFsHook(filepath.Join(conf.Pwd, conf.Logger.Filename)),
 			logger.WithRotate(logger.RotateConfig{
 				Path:               filepath.Join(conf.Pwd, conf.Logger.Filename),
-				MaxSizeKB:          1024 * 500, // 500 MB
-				MaxAge:             time.Hour * 24 * 7,
-				MaxRetainFileCount: 3,
-				Compress:           true,
+				MaxSizeKB:          1024 * 50,          // 单个文件超过约 50MB 就轮转：旧文件改名备份，再新建同名文件继续写
+				MaxAge:             time.Hour * 24 * 7, // 备份日志最多保留 7 天，超时删除
+				MaxRetainFileCount: 3,                  // 最多保留 3 个备份（不含当前正在写的那个）
+				Compress:           true,               // 轮转后的备份用 gzip 压缩（通常变成 .gz）
 			}),
 		)
 	}
