@@ -288,6 +288,8 @@ github.com/hashicorp/go-multierror v1.1.1/go.mod h1:iw975J/qwKPdAO1clOe2L8331t/9
 github.com/iancoleman/strcase v0.3.0/go.mod h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho=
 github.com/ihezebin/jwt v1.0.0 h1:0xebfM8yc92rRiJJq2cN+er6H0SM3TyXluqTv0OIcbY=
 github.com/ihezebin/jwt v1.0.0/go.mod h1:rXxHl6li03J6MrM0Vi0rmx/kqiK6gsr/SLp+Q/y4M6Y=
+github.com/ihezebin/jwt v1.0.1 h1:83Iux0uEjtmfMQIk4R7Cu8KUbv71lsy3Zxns3nWszXs=
+github.com/ihezebin/jwt v1.0.1/go.mod h1:V9XmEH2dEBvfvbdUkuHs4+38JtKJT3bk9pxUmL67uXI=
 github.com/ihezebin/olympus v1.0.20 h1:QMM1u+FyvxaMCFbml0h+2/bHB3Zbk7mA0YKUYzj2BBU=
 github.com/ihezebin/olympus v1.0.20/go.mod h1:dvVMyflLGRq3SUQbIDagot18vDaYUb8fOOJnu+QLmck=
 github.com/ihezebin/olympus v1.0.21 h1:r5OHNcjpxSkQf1n+TsNaQHDcAP5YiShko/dT9M9vfkw=
