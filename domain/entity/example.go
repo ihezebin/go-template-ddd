@@ -17,6 +17,10 @@ type Example struct {
 	//DeletedAt gorm.DeletedAt `json:"deleted_at,omitempty" bson:"deleted_at" gorm:"column:deleted_at"`
 }
 
+func (e *Example) CollectionName() string {
+	return "example"
+}
+
 var _ encoding.BinaryUnmarshaler = (*Example)(nil)
 
 // UnmarshalBinary Reids Scan use

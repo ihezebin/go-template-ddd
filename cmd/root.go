@@ -156,7 +156,7 @@ func initComponents(ctx context.Context, conf *config.Config) error {
 
 	// init repository
 	if conf.MysqlDsn != "" || conf.MongoDsn != "" {
-		repository.Init()
+		repository.InitInterfaceRepository()
 	}
 
 	// init pubsub
