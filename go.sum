@@ -300,6 +300,8 @@ github.com/ihezebin/olympus v1.0.24 h1:aglt9cQV0U5EYRpXJB9at/UJryog5LNwxn2YxPo5E
 github.com/ihezebin/olympus v1.0.24/go.mod h1:dvVMyflLGRq3SUQbIDagot18vDaYUb8fOOJnu+QLmck=
 github.com/ihezebin/olympus v1.0.25 h1:96hP2L4nwCv8E2Zgw1sVdJ2KZc/e0NM2YsSPCw4WMs4=
 github.com/ihezebin/olympus v1.0.25/go.mod h1:dvVMyflLGRq3SUQbIDagot18vDaYUb8fOOJnu+QLmck=
+github.com/ihezebin/olympus v1.0.30 h1:pPpBjcum1VC7aXi/58ENiUPO2NyVqsSrV7i3aauovYE=
+github.com/ihezebin/olympus v1.0.30/go.mod h1:dvVMyflLGRq3SUQbIDagot18vDaYUb8fOOJnu+QLmck=
 github.com/ihezebin/openapi v1.0.7 h1:SHG+NIBksXSCVoPJ4qZsK662w8SJqq6Vs0lgbWz7fc4=
 github.com/ihezebin/openapi v1.0.7/go.mod h1:XYYr1Iu7Ayt70XhcXvNRZPoieE4uAJmqkq27FRSVFiI=
 github.com/ihezebin/rotatelog v1.0.3 h1:CK9oKgi26IpqrUfQJVPjjh5rn1q4c1VlNdXUNJDa+84=

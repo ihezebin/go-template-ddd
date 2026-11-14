@@ -299,3 +299,25 @@ Now: cd test
 ```bash
 make package TAG=v1.0
 ```
+
+## 服务端配置变量
+
+服务端使用 Olympus v1.0.30，现有 `config.Load(path)` 默认支持配置项变量引用，JSON、TOML 均可使用，无需额外开关。例如：
+
+```toml
+service_name = "go-template-ddd"
+port = 8080
+
+[logger]
+level = "info"
+filename = "log/${service_name}.log"
+```
+
+加载后的日志路径为 `log/go-template-ddd.log`，修改 `service_name` 会同步改变引用它的字段。
+
+- `${key}` 引用配置项，`${logger.level}` 引用嵌套配置项；支持递归引用以及字符串、数字、布尔值。
+- 缺失变量、循环引用或引用对象、数组时，加载返回错误。
+- `$$` 表示字面量 `$`；需要原样保留 `${key}` 时写作 `$${key}`。
+- `${key}` 不读取操作系统环境变量。当前加载入口没有启用 `WithEnv()`；即使启用，环境变量也在引用解析之后覆盖字段，不会重新展开引用。
+
+示例日志文件名、MySQL 数据库名和 TOML 中注释的 Mongo、Pulsar、Kafka 示例使用服务名变量；JSON 的 Mongo 数据库 `example` 和 OSS 桶 `test` 保留原值。修改服务名可能改变数据库、主题或日志路径，不会迁移已有数据。含变量的部署配置需搭配升级后的服务镜像。
